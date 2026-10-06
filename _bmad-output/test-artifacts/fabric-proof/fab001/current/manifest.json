@@ -1,0 +1,371 @@
+{
+  "generated_at_utc": "2026-04-15T01:38:27+00:00",
+  "source_publication_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/platform/fabric/publication/current",
+  "output_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-proof/fab001/current",
+  "first_proof_target": {
+    "lakehouse_name": "lh_fab001_public_proof",
+    "semantic_model_name": "sm_fab001_supply_chain_decision",
+    "report_name": "rpt_fab001_supply_chain_decision",
+    "page_name": "Supply Chain Decision View"
+  },
+  "approved_refresh_timestamp_utc": "2026-04-14T23:59:00.000Z",
+  "bronze_tables": {
+    "dim_product": {
+      "rows": 140,
+      "path": "bronze/dim_product.csv",
+      "execution_mode": "transport_seed"
+    },
+    "dim_product_family": {
+      "rows": 5,
+      "path": "bronze/dim_product_family.csv",
+      "execution_mode": "transport_seed"
+    },
+    "dim_account": {
+      "rows": 96,
+      "path": "bronze/dim_account.csv",
+      "execution_mode": "transport_seed"
+    },
+    "dim_inventory_location": {
+      "rows": 16,
+      "path": "bronze/dim_inventory_location.csv",
+      "execution_mode": "transport_seed"
+    },
+    "fact_demand_line": {
+      "rows": 23476,
+      "path": "bronze/fact_demand_line.csv",
+      "execution_mode": "transport_seed"
+    },
+    "fact_inventory_inbound": {
+      "rows": 3696,
+      "path": "bronze/fact_inventory_inbound.csv",
+      "execution_mode": "transport_seed"
+    },
+    "fact_inventory_snapshot": {
+      "rows": 35868,
+      "path": "bronze/fact_inventory_snapshot.csv",
+      "execution_mode": "transport_seed"
+    },
+    "dim_service_region": {
+      "rows": 8,
+      "path": "bronze/dim_service_region.csv",
+      "execution_mode": "transport_seed"
+    },
+    "dim_supplier": {
+      "rows": 8,
+      "path": "bronze/dim_supplier.csv",
+      "execution_mode": "transport_seed"
+    },
+    "rule_supplier_product_lead_time": {
+      "rows": 196,
+      "path": "bronze/rule_supplier_product_lead_time.csv",
+      "execution_mode": "transport_seed"
+    },
+    "rule_location_transfer_lead_time": {
+      "rows": 240,
+      "path": "bronze/rule_location_transfer_lead_time.csv",
+      "execution_mode": "transport_seed"
+    },
+    "rule_location_service_lead_time": {
+      "rows": 96,
+      "path": "bronze/rule_location_service_lead_time.csv",
+      "execution_mode": "transport_seed"
+    },
+    "fact_supply_chain_decision_queue_line": {
+      "rows": 48,
+      "path": "bronze/fact_supply_chain_decision_queue_line.csv",
+      "execution_mode": "transport_seed"
+    },
+    "fact_logistics_decision_queue_line": {
+      "rows": 96,
+      "path": "bronze/fact_logistics_decision_queue_line.csv",
+      "execution_mode": "transport_seed"
+    },
+    "fact_purchase_order_line": {
+      "rows": 24,
+      "path": "bronze/fact_purchase_order_line.csv",
+      "execution_mode": "transport_seed"
+    },
+    "fact_purchase_order_status_history": {
+      "rows": 48,
+      "path": "bronze/fact_purchase_order_status_history.csv",
+      "execution_mode": "transport_seed"
+    },
+    "fact_inventory_movement_line": {
+      "rows": 16,
+      "path": "bronze/fact_inventory_movement_line.csv",
+      "execution_mode": "transport_seed"
+    },
+    "fact_sales_fulfillment_line": {
+      "rows": 23476,
+      "path": "bronze/fact_sales_fulfillment_line.csv",
+      "execution_mode": "transport_seed"
+    }
+  },
+  "financial_foundation_tables": {
+    "dim_pricing_context": {
+      "rows": 4,
+      "path": "financial-foundation/dim_pricing_context.csv",
+      "execution_mode": "repo_rule_derived_foundation"
+    },
+    "dim_cost_context": {
+      "rows": 5,
+      "path": "financial-foundation/dim_cost_context.csv",
+      "execution_mode": "repo_rule_derived_foundation"
+    },
+    "fact_cost_history": {
+      "rows": 990,
+      "path": "financial-foundation/fact_cost_history.csv",
+      "execution_mode": "repo_rule_derived_foundation"
+    },
+    "fact_price_list_history": {
+      "rows": 3960,
+      "path": "financial-foundation/fact_price_list_history.csv",
+      "execution_mode": "repo_rule_derived_foundation"
+    },
+    "fact_sales_realization": {
+      "rows": 4945,
+      "path": "financial-foundation/fact_sales_realization.csv",
+      "execution_mode": "repo_rule_derived_foundation"
+    }
+  },
+  "silver_tables": {
+    "slv_demand_line_enriched": {
+      "rows": 23476,
+      "path": "reference/silver/slv_demand_line_enriched.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    },
+    "slv_inventory_inbound_enriched": {
+      "rows": 3696,
+      "path": "reference/silver/slv_inventory_inbound_enriched.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    },
+    "slv_inventory_position_enriched": {
+      "rows": 35868,
+      "path": "reference/silver/slv_inventory_position_enriched.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    },
+    "slv_current_inventory_position": {
+      "rows": 196,
+      "path": "reference/silver/slv_current_inventory_position.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    }
+  },
+  "gold_tables": {
+    "gold_supply_chain_decision_summary": {
+      "rows": 1,
+      "path": "reference/gold/gold_supply_chain_decision_summary.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    },
+    "gold_supply_chain_action_queue": {
+      "rows": 8,
+      "path": "reference/gold/gold_supply_chain_action_queue.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    },
+    "gold_demand_support_account_pattern": {
+      "rows": 3,
+      "path": "reference/gold/gold_demand_support_account_pattern.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    },
+    "gold_demand_support_product_family": {
+      "rows": 4,
+      "path": "reference/gold/gold_demand_support_product_family.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    },
+    "gold_public_policy_reference": {
+      "rows": 140,
+      "path": "reference/gold/gold_public_policy_reference.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    },
+    "gold_supply_chain_decision_queue_summary": {
+      "rows": 2,
+      "path": "reference/gold/gold_supply_chain_decision_queue_summary.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    },
+    "gold_purchase_order_summary": {
+      "rows": 2,
+      "path": "reference/gold/gold_purchase_order_summary.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    },
+    "gold_logistics_decision_queue_summary": {
+      "rows": 6,
+      "path": "reference/gold/gold_logistics_decision_queue_summary.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    },
+    "gold_inventory_movement_summary": {
+      "rows": 2,
+      "path": "reference/gold/gold_inventory_movement_summary.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    },
+    "gold_sales_fulfillment_summary": {
+      "rows": 3,
+      "path": "reference/gold/gold_sales_fulfillment_summary.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    },
+    "gold_sales_dashboard_summary": {
+      "rows": 1,
+      "path": "reference/gold/gold_sales_dashboard_summary.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    },
+    "gold_inventory_location_action_summary": {
+      "rows": 19,
+      "path": "reference/gold/gold_inventory_location_action_summary.csv",
+      "execution_mode": "fabric_notebook_runtime",
+      "local_reference_only": true
+    }
+  },
+  "lakehouse": {
+    "status": "existing",
+    "item": {
+      "id": "06b073a8-8653-4691-829b-0690e06a9de4",
+      "type": "Lakehouse",
+      "displayName": "lh_fab001_public_proof",
+      "description": "Bounded Lakehouse for the Phase 3 public proof surface.",
+      "workspaceId": "c11ed225-3ffc-440b-8cdb-88d1f366a91b"
+    }
+  },
+  "runtime_execution": {
+    "authoritative_layer": "fabric_notebook",
+    "bronze_seed_root": "Files/fab001/current/bronze",
+    "financial_foundation_root": "Files/fab001/current/financial-foundation",
+    "bronze_realism_mode": "controlled_realism_minimal",
+    "local_reference_root": "reference",
+    "notebook_name": "nb_fab001_lakehouse_loader"
+  },
+  "notes": [
+    "Bronze is a bounded raw-like transport layer derived from the coherence-approved repo package.",
+    "Controlled realism in Bronze is intentionally minimal and recoverable so Silver can own cleanup and conformance inside Fabric.",
+    "Silver and Gold are derived inside Fabric by the loader notebook from Bronze seed tables.",
+    "Local Silver and Gold CSVs now exist only as bounded reference outputs for verification.",
+    "The semantic model should be built from these proof tables, not from Astro calculations.",
+    "Bounded financial foundation tables are also landed into the Lakehouse so Fabric and the public serving layer share the same rule-derived price, cost, and fulfilled-line realization basis."
+  ],
+  "medallion_contract": "05-compat/contracts/fab001_medallion_contract.json",
+  "core_visual_contract": "05-compat/contracts/fab001_core_visual_contract.json",
+  "core_visual_runbook": "05-compat/contracts/fab001_fabric_build_runbook.md",
+  "semantic_model_contract": "05-compat/contracts/fab001_semantic_model_contract.json",
+  "measure_pack": "05-compat/contracts/fab001_measure_pack.dax",
+  "onelake_bundle": {
+    "uploaded_files": 23,
+    "remote_root": "Files/fab001/current/bronze",
+    "sample_paths": [
+      "Files/fab001/current/bronze/dim_account.csv",
+      "Files/fab001/current/bronze/dim_inventory_location.csv",
+      "Files/fab001/current/bronze/dim_product.csv",
+      "Files/fab001/current/bronze/dim_product_family.csv",
+      "Files/fab001/current/bronze/dim_service_region.csv",
+      "Files/fab001/current/bronze/dim_supplier.csv",
+      "Files/fab001/current/bronze/fact_demand_line.csv",
+      "Files/fab001/current/bronze/fact_inventory_inbound.csv",
+      "Files/fab001/current/bronze/fact_inventory_movement_line.csv",
+      "Files/fab001/current/bronze/fact_inventory_snapshot.csv"
+    ]
+  },
+  "loader_notebook": {
+    "status": "updated_pending",
+    "item": {
+      "id": "3acff640-fc46-44de-a19a-6f9c074f5f43",
+      "type": "Notebook",
+      "displayName": "nb_fab001_lakehouse_loader",
+      "description": "Explicit-schema loader for the FAB001 bounded Fabric proof tables.",
+      "workspaceId": "c11ed225-3ffc-440b-8cdb-88d1f366a91b"
+    },
+    "operation": {
+      "status": "Succeeded",
+      "createdTimeUtc": "2026-04-15T01:39:49.6668863",
+      "lastUpdatedTimeUtc": "2026-04-15T01:39:50.0999249",
+      "percentComplete": 100,
+      "error": null
+    }
+  },
+  "loader_notebook_run": {
+    "status": "accepted",
+    "job_location": "https://api.fabric.microsoft.com/v1/workspaces/c11ed225-3ffc-440b-8cdb-88d1f366a91b/items/3acff640-fc46-44de-a19a-6f9c074f5f43/jobs/instances/8c8b1143-f874-432a-a555-c293b5afe3ea",
+    "job_status": {
+      "id": "8c8b1143-f874-432a-a555-c293b5afe3ea",
+      "itemId": "3acff640-fc46-44de-a19a-6f9c074f5f43",
+      "jobType": "RunNotebook",
+      "invokeType": "Manual",
+      "status": "Completed",
+      "failureReason": null,
+      "rootActivityId": "9b67525b-8b63-4e48-98db-2f550a82d342",
+      "startTimeUtc": "2026-04-15T01:39:54.2485642",
+      "endTimeUtc": "2026-04-15T01:43:18.1372177"
+    }
+  },
+  "lakehouse_tables": {
+    "count": 43,
+    "names": [
+      "dim_product",
+      "dim_product_family",
+      "dim_account",
+      "dim_inventory_location",
+      "fact_demand_line",
+      "fact_inventory_snapshot",
+      "slv_demand_line_enriched",
+      "slv_inventory_position_enriched",
+      "slv_current_inventory_position",
+      "gold_supply_chain_decision_summary",
+      "gold_supply_chain_action_queue",
+      "gold_demand_support_account_pattern",
+      "gold_demand_support_product_family",
+      "gold_public_policy_reference",
+      "fact_inventory_inbound",
+      "slv_inventory_inbound_enriched",
+      "ctrl_release_registry",
+      "ctrl_last_known_good",
+      "ctrl_runtime_job_history",
+      "ctrl_asset_refresh_history",
+      "fact_sales_realization",
+      "fact_price_list_history",
+      "fact_cost_history",
+      "dim_pricing_context",
+      "dim_cost_context",
+      "fact_supply_chain_decision_queue_line",
+      "rule_supplier_product_lead_time",
+      "rule_location_service_lead_time",
+      "gold_inventory_location_action_summary",
+      "gold_sales_dashboard_summary",
+      "gold_supply_chain_decision_queue_summary",
+      "fact_sales_fulfillment_line",
+      "gold_inventory_movement_summary",
+      "gold_sales_fulfillment_summary",
+      "fact_purchase_order_status_history",
+      "fact_purchase_order_line",
+      "dim_service_region",
+      "gold_purchase_order_summary",
+      "fact_logistics_decision_queue_line",
+      "dim_supplier",
+      "gold_logistics_decision_queue_summary",
+      "rule_location_transfer_lead_time",
+      "fact_inventory_movement_line"
+    ]
+  },
+  "semantic_model": {
+    "name": "sm_fab001_supply_chain_decision",
+    "id": "5ee1b0dd-daca-4c76-8316-06369d420278",
+    "status": "measure_pack_materialized",
+    "artifact_report": "_bmad-output/test-artifacts/fabric-proof/fab001/semantic-model-live/materialization-report.json"
+  },
+  "report": {
+    "name": "rpt_fab001_supply_chain_decision",
+    "id": "29e81270-9ca0-4739-8cd1-5571e935ecdd",
+    "page_name": "Supply Chain Decision View",
+    "status": "report_shell_materialized",
+    "artifact_report": "_bmad-output/test-artifacts/fabric-proof/fab001/report-live/report-shell-report.json"
+  }
+}

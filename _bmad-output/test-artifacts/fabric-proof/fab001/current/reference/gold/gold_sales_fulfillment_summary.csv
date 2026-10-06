@@ -1,0 +1,4 @@
+fulfillment_status_code,fulfillment_line_count,fulfilled_qty,backordered_qty,cogs_amount
+BACKORDERED,18531,0,242413,0.0
+DELIVERED,2755,40465,0,627624.4000000015
+SHIPPED,2190,17276,16780,326051.52000000176

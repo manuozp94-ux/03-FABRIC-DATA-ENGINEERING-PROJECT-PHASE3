@@ -1,0 +1,22 @@
+{
+  "report_type": "fab001_release_change_summary",
+  "recorded_at_utc": "2026-04-15T01:44:04.604Z",
+  "contract_reference": "platform/fabric/contracts/release-communications-contract.md",
+  "release_id": "rls_fab001_20260401t221500z",
+  "summary_scope": "baseline",
+  "title": "Baseline governed public release summary",
+  "why_this_release_mattered": "This release establishes the governed reviewer-facing summary after the public site moved to the bounded Fabric-derived serving extract.",
+  "what_changed": [
+    "Established release rls_fab001_20260401t221500z as the current governed public proof record.",
+    "Recorded the approved Bronze input package refresh at 2026-04-01T22:15:00.000Z.",
+    "Confirmed published proof status 'live_refresh_completed' with runtime reconciliation 'aligned'.",
+    "Activated the Fabric-derived serving extract as the current governed public source with serving-extract status 'produced_from_reference_gold'."
+  ],
+  "associated_release_identifier": "rls_fab001_20260401t221500z",
+  "previous_release_id": null,
+  "release_record_path": "_bmad-output/test-artifacts/release-ledger/releases/rls_fab001_20260401t221500z.json",
+  "operational_status_path": "_bmad-output/test-artifacts/release-ledger/current-operational-status.json",
+  "current_public_source_mode": "fabric_serving_extract",
+  "current_public_source_label": "Fabric serving extract",
+  "serving_extract_status": "produced_from_reference_gold"
+}

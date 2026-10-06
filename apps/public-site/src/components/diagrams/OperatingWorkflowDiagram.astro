@@ -1,0 +1,274 @@
+---
+import BilingualText from "../content/BilingualText.astro";
+
+const l = (en: string, es: string) => ({ en, es });
+
+const sourceInputs = [
+  l("Seed archetypes", "Arquetipos seed"),
+  l("Generation controls", "Controles de generación"),
+];
+
+const runtimeStages = [
+  l("Fabric Bronze", "Fabric Bronze"),
+  l("Fabric Silver", "Fabric Silver"),
+  l("Fabric Gold", "Fabric Gold"),
+];
+
+const extractBranch = [
+  l("Public serving extract", "Extracto público"),
+  l("Public site", "Sitio público"),
+];
+
+const reportBranch = [
+  l("Semantic model", "Modelo semántico"),
+  l("Report shell", "Report shell"),
+];
+---
+
+<figure class="workflow-diagram" aria-labelledby="operating-workflow-diagram-title">
+  <figcaption class="diagram-header">
+    <p class="eyebrow">
+      <BilingualText copy={l("Current governed workflow", "Flujo gobernado actual")} />
+    </p>
+    <h3 id="operating-workflow-diagram-title">
+      <BilingualText copy={l("How the package moves from design inputs to public proof", "Cómo se mueve el paquete desde los insumos de diseño hasta la prueba pública")} />
+    </h3>
+    <p class="diagram-intro">
+      <BilingualText copy={l("The workflow starts with designed inputs, passes through the approved package boundary, and then branches into the two public proof surfaces: the serving extract that feeds the site and the semantic layer that supports the Fabric report shell.", "El flujo parte de insumos diseñados, cruza el boundary del paquete aprobado y luego se bifurca hacia las dos superficies públicas de prueba: el serving extract que alimenta el sitio y la capa semántica que sostiene el report shell en Fabric.")} />
+    </p>
+  </figcaption>
+
+  <div class="workflow-canvas">
+    <div class="source-row" aria-label="Workflow inputs">
+      {
+        sourceInputs.map((step, index) => (
+          <>
+            <div class="node-card node-card--source">
+              <span class="node-label"><BilingualText copy={step} /></span>
+            </div>
+            {index < sourceInputs.length - 1 ? <span class="node-join" aria-hidden="true">+</span> : null}
+          </>
+        ))
+      }
+    </div>
+
+    <div class="flow-arrow" aria-hidden="true">↓</div>
+
+    <div class="node-card node-card--approved">
+      <span class="node-kicker">
+        <BilingualText copy={l("Governed package boundary", "Boundary del paquete gobernado")} />
+      </span>
+      <span class="node-title">
+        <BilingualText copy={l("Approved Bronze input", "Input Bronze aprobado")} />
+      </span>
+    </div>
+
+    <div class="flow-arrow" aria-hidden="true">↓</div>
+
+    <div class="runtime-lane" aria-label="Fabric runtime stages">
+      {
+        runtimeStages.map((step, index) => (
+          <>
+            <div class="node-card node-card--runtime">
+              <span class="node-label"><BilingualText copy={step} /></span>
+            </div>
+            {index < runtimeStages.length - 1 ? <span class="runtime-arrow" aria-hidden="true">→</span> : null}
+          </>
+        ))
+      }
+    </div>
+
+    <div class="flow-arrow" aria-hidden="true">↓</div>
+
+    <div class="branch-intro">
+      <BilingualText copy={l("Fabric Gold supports two public proof outputs", "Fabric Gold sostiene dos salidas públicas de prueba")} />
+    </div>
+
+    <div class="branch-grid">
+      <div class="branch-column">
+        <div class="node-card node-card--output">
+          <span class="node-kicker">
+            <BilingualText copy={l("Site-facing output", "Salida hacia el sitio")} />
+          </span>
+          <span class="node-title"><BilingualText copy={extractBranch[0]} /></span>
+        </div>
+        <div class="flow-arrow flow-arrow--branch" aria-hidden="true">↓</div>
+        <div class="node-card node-card--surface">
+          <span class="node-label"><BilingualText copy={extractBranch[1]} /></span>
+        </div>
+      </div>
+
+      <div class="branch-column">
+        <div class="node-card node-card--output">
+          <span class="node-kicker">
+            <BilingualText copy={l("Fabric-facing output", "Salida hacia Fabric")} />
+          </span>
+          <span class="node-title"><BilingualText copy={reportBranch[0]} /></span>
+        </div>
+        <div class="flow-arrow flow-arrow--branch" aria-hidden="true">↓</div>
+        <div class="node-card node-card--surface">
+          <span class="node-label"><BilingualText copy={reportBranch[1]} /></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</figure>
+
+<style>
+  .workflow-diagram {
+    margin: 0;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(20, 27, 45, 0.12);
+    background:
+      radial-gradient(circle at top left, rgba(248, 217, 92, 0.18), transparent 34%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 247, 242, 0.96));
+    box-shadow: 0 16px 40px rgba(20, 27, 45, 0.08);
+  }
+
+  .diagram-header {
+    display: grid;
+    gap: 0.55rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .diagram-header h3 {
+    margin: 0;
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    line-height: 1.2;
+  }
+
+  .diagram-intro {
+    margin: 0;
+    max-width: 70ch;
+    color: rgba(20, 27, 45, 0.78);
+    line-height: 1.6;
+  }
+
+  .workflow-canvas {
+    display: grid;
+    gap: 0.95rem;
+  }
+
+  .source-row,
+  .runtime-lane {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+  }
+
+  .branch-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .branch-column {
+    display: grid;
+    justify-items: center;
+    gap: 0.7rem;
+    padding: 1rem;
+    border-radius: 1.2rem;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(20, 27, 45, 0.08);
+  }
+
+  .node-card {
+    display: grid;
+    gap: 0.28rem;
+    min-width: 11rem;
+    padding: 0.95rem 1.1rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(20, 27, 45, 0.14);
+    background: #fff;
+    text-align: center;
+  }
+
+  .node-card--source {
+    background: rgba(255, 250, 236, 0.96);
+  }
+
+  .node-card--approved {
+    justify-self: center;
+    background: rgba(233, 243, 255, 0.92);
+  }
+
+  .node-card--runtime {
+    background: rgba(239, 247, 242, 0.96);
+  }
+
+  .node-card--output {
+    width: 100%;
+    background: rgba(251, 246, 231, 0.96);
+  }
+
+  .node-card--surface {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.96);
+  }
+
+  .node-kicker {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(20, 27, 45, 0.58);
+  }
+
+  .node-title,
+  .node-label {
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: rgba(20, 27, 45, 0.92);
+  }
+
+  .node-join,
+  .runtime-arrow,
+  .flow-arrow {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: rgba(20, 27, 45, 0.55);
+  }
+
+  .flow-arrow {
+    justify-self: center;
+  }
+
+  .branch-intro {
+    justify-self: center;
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(20, 27, 45, 0.06);
+    color: rgba(20, 27, 45, 0.7);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  @media (max-width: 720px) {
+    .workflow-diagram {
+      padding: 1.15rem;
+    }
+
+    .branch-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .node-card,
+    .branch-column {
+      width: 100%;
+    }
+
+    .source-row,
+    .runtime-lane {
+      flex-direction: column;
+    }
+
+    .node-join,
+    .runtime-arrow {
+      transform: rotate(90deg);
+    }
+  }
+</style>

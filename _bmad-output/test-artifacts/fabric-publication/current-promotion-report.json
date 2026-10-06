@@ -1,0 +1,45 @@
+{
+  "promotion_status": "promoted_to_current",
+  "promoted_at_utc": "2026-04-15T01:33:27.625Z",
+  "representative_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-representative/current",
+  "current_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/platform/fabric/publication/current",
+  "seed_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/platform/fabric/publication/seed",
+  "mirror_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/apps/public-site/src/data/publication/current",
+  "coherence_report_path": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-representative/representative-coherence-report.json",
+  "coherence_identity": {
+    "representative_source_version": "curated_publication_r2__representative_market_r1",
+    "generation_rule_version": "representative_market_controls_r1",
+    "scenario_reference": "platform/fabric/contracts/logic-first-scenario-parameter-sets.md",
+    "controlled_realism_matrix_reference": "platform/fabric/contracts/controlled-realism-test-matrix.md",
+    "coherence_rule_version": "representative_coherence_r1",
+    "market_report_path": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-representative/representative-market-report.json"
+  },
+  "promoted_counts": {
+    "dim_account": 96,
+    "dim_inventory_location": 16,
+    "dim_product": 140,
+    "dim_product_family": 5,
+    "dim_service_region": 8,
+    "dim_supplier": 8,
+    "fact_demand_line": 23476,
+    "fact_inventory_inbound": 3696,
+    "fact_inventory_movement_line": 16,
+    "fact_inventory_snapshot": 35868,
+    "fact_logistics_decision_queue_line": 96,
+    "fact_purchase_order_line": 24,
+    "fact_purchase_order_status_history": 48,
+    "fact_sales_fulfillment_line": 23476,
+    "fact_supply_chain_decision_queue_line": 48,
+    "rule_location_service_lead_time": 96,
+    "rule_location_transfer_lead_time": 240,
+    "rule_supplier_product_lead_time": 196
+  },
+  "seed_bootstrapped": false,
+  "legacy_current_reclassified_as": "seed_archetype_source",
+  "public_surfaces_aligned": [
+    "platform/fabric/publication/current",
+    "apps/public-site/src/data/publication/current",
+    "tests/publication/exploration/publication-explorer.ipynb",
+    "platform/fabric/automation/run-fab001-stabilized-proof-refresh.mjs"
+  ]
+}

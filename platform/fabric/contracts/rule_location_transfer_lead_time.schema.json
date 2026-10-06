@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "rule_location_transfer_lead_time",
+  "description": "Governed origin-destination transfer rule used to plan bounded inventory movements.",
+  "type": "array",
+  "x-grain": "One row per origin location, destination location, and movement mode rule.",
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "location_transfer_lead_time_rule_sk",
+        "origin_inventory_location_sk",
+        "destination_inventory_location_sk",
+        "transfer_mode_code",
+        "transfer_lead_time_days",
+        "effective_start_date",
+        "effective_end_date",
+        "rule_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "location_transfer_lead_time_rule_sk": {
+          "type": "string",
+          "pattern": "^LTLT_RULE_[A-F0-9]{12}$"
+        },
+        "origin_inventory_location_sk": {
+          "type": "string",
+          "pattern": "^LOC_SK_[A-F0-9]{12}$"
+        },
+        "destination_inventory_location_sk": {
+          "type": "string",
+          "pattern": "^LOC_SK_[A-F0-9]{12}$"
+        },
+        "transfer_mode_code": {
+          "type": "string",
+          "enum": [
+            "STANDARD_TRANSFER",
+            "EXPEDITED_TRANSFER",
+            "THIRD_PARTY_TRANSFER",
+            "CONTROLLED_TRANSFER",
+            "UNKNOWN"
+          ]
+        },
+        "transfer_lead_time_days": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "transit_buffer_days": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "effective_start_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "effective_end_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "rule_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
+

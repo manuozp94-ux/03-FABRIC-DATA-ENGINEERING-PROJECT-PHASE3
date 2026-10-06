@@ -1,0 +1,24 @@
+[
+  {
+    "product_sk": "PRD_SK_472703C8E51E",
+    "inventory_location_sk": "LOC_SK_2C813F33AAC1",
+    "planned_receipt_date": "2026-04-04",
+    "expected_release_date": "2026-04-06",
+    "receipt_flow_type": "TRANSFER_IN",
+    "pending_qty": 3,
+    "state_version": "logic_first_controls_r1",
+    "source_file_version": "curated_publication_r2",
+    "load_timestamp_utc": "2026-04-04T06:46:21.467Z"
+  },
+  {
+    "product_sk": "PRD_SK_FF434259E2DF",
+    "inventory_location_sk": "LOC_SK_C2FF28F79326",
+    "planned_receipt_date": "2026-04-04",
+    "expected_release_date": "2026-04-06",
+    "receipt_flow_type": "SUPPLIER_RECEIPT",
+    "pending_qty": 60,
+    "state_version": "logic_first_controls_r1",
+    "source_file_version": "curated_publication_r2",
+    "load_timestamp_utc": "2026-04-04T06:46:21.467Z"
+  }
+]

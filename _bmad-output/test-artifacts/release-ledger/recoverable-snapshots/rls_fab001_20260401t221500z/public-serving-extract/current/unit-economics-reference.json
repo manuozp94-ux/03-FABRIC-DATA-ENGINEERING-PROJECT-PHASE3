@@ -1,0 +1,72 @@
+[
+  {
+    "product_family_code": "SMALL_PART",
+    "product_family_label": "Small Parts",
+    "product_count": 42,
+    "unit_cost_min": 14,
+    "unit_cost_max": 14,
+    "standard_price_min": 23,
+    "standard_price_max": 23,
+    "demand_value_proxy": 3874770,
+    "open_demand_value_proxy": 3059712,
+    "gross_margin_proxy": 1239777,
+    "current_inventory_exposure": 898110,
+    "implied_margin_rate_proxy": 0.31996144287273826
+  },
+  {
+    "product_family_code": "BULKY_ITEM",
+    "product_family_label": "Bulky Items",
+    "product_count": 30,
+    "unit_cost_min": 40,
+    "unit_cost_max": 40,
+    "standard_price_min": 66,
+    "standard_price_max": 66,
+    "demand_value_proxy": 1764092,
+    "open_demand_value_proxy": 1517912,
+    "gross_margin_proxy": 529232,
+    "current_inventory_exposure": 3080,
+    "implied_margin_rate_proxy": 0.30000249420098274
+  },
+  {
+    "product_family_code": "KIT_ASSEMBLY",
+    "product_family_label": "Kit Assemblies",
+    "product_count": 32,
+    "unit_cost_min": 40,
+    "unit_cost_max": 40,
+    "standard_price_min": 66,
+    "standard_price_max": 66,
+    "demand_value_proxy": 1647278,
+    "open_demand_value_proxy": 1445034,
+    "gross_margin_proxy": 478242,
+    "current_inventory_exposure": 2294,
+    "implied_margin_rate_proxy": 0.2903225806451613
+  },
+  {
+    "product_family_code": "CONTROLLED_ITEM",
+    "product_family_label": "Controlled Items",
+    "product_count": 28,
+    "unit_cost_min": 65,
+    "unit_cost_max": 65,
+    "standard_price_min": 107,
+    "standard_price_max": 107,
+    "demand_value_proxy": 1289968,
+    "open_demand_value_proxy": 1161948,
+    "gross_margin_proxy": 367452,
+    "current_inventory_exposure": 37407,
+    "implied_margin_rate_proxy": 0.28485357776316933
+  },
+  {
+    "product_family_code": "UNCLASSIFIED",
+    "product_family_label": "Unclassified Items",
+    "product_count": 8,
+    "unit_cost_min": 8,
+    "unit_cost_max": 8,
+    "standard_price_min": 13,
+    "standard_price_max": 13,
+    "demand_value_proxy": 3432,
+    "open_demand_value_proxy": 0,
+    "gross_margin_proxy": 883,
+    "current_inventory_exposure": 15192,
+    "implied_margin_rate_proxy": 0.2572843822843823
+  }
+]

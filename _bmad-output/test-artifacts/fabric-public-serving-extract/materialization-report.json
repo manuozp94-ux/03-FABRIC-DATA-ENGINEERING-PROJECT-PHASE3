@@ -1,0 +1,122 @@
+{
+  "report_type": "fab001_public_serving_extract_materialization",
+  "recorded_at_utc": "2026-04-15T01:44:04.122Z",
+  "contract_reference": "platform/fabric/contracts/public-serving-extract-contract.md",
+  "release_id": "rls_fab001_20260401t221500z",
+  "status": "produced_from_reference_gold",
+  "produced": true,
+  "active_public_source_mode": "fabric_serving_extract",
+  "target_public_source_mode": "fabric_serving_extract",
+  "active_reference": "apps/public-site/src/data/public-serving/current",
+  "note": "The public site now consumes a bounded Fabric-derived serving extract mirrored into the site repo from governed Gold-reference artifacts.",
+  "materialization_report_path": "_bmad-output/test-artifacts/fabric-public-serving-extract/materialization-report.json",
+  "extract_dir": "_bmad-output/test-artifacts/fabric-public-serving-extract/current",
+  "site_mirror_dir": "apps/public-site/src/data/public-serving/current",
+  "source_gold_reference_dir": "_bmad-output/test-artifacts/fabric-proof/fab001/current/reference/gold",
+  "approved_bronze_input_dir": "platform/fabric/publication/current",
+  "financial_foundation_dir": "_bmad-output/test-artifacts/fabric-financial/current",
+  "files": [
+    {
+      "filename": "decision-summary.json",
+      "row_count": 1,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/decision-summary.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/decision-summary.json"
+    },
+    {
+      "filename": "action-queue.json",
+      "row_count": 8,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/action-queue.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/action-queue.json"
+    },
+    {
+      "filename": "demand-support-account-pattern.json",
+      "row_count": 3,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/demand-support-account-pattern.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/demand-support-account-pattern.json"
+    },
+    {
+      "filename": "demand-support-product-family.json",
+      "row_count": 4,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/demand-support-product-family.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/demand-support-product-family.json"
+    },
+    {
+      "filename": "financial-summary.json",
+      "row_count": 1,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/financial-summary.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/financial-summary.json"
+    },
+    {
+      "filename": "monthly-financial-trend.json",
+      "row_count": 7,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/monthly-financial-trend.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/monthly-financial-trend.json"
+    },
+    {
+      "filename": "operating-loop-summary.json",
+      "row_count": 1,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/operating-loop-summary.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/operating-loop-summary.json"
+    },
+    {
+      "filename": "supply-chain-decision-queue-summary.json",
+      "row_count": 2,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/supply-chain-decision-queue-summary.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/supply-chain-decision-queue-summary.json"
+    },
+    {
+      "filename": "purchase-order-summary.json",
+      "row_count": 2,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/purchase-order-summary.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/purchase-order-summary.json"
+    },
+    {
+      "filename": "logistics-decision-queue-summary.json",
+      "row_count": 6,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/logistics-decision-queue-summary.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/logistics-decision-queue-summary.json"
+    },
+    {
+      "filename": "inventory-movement-summary.json",
+      "row_count": 2,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/inventory-movement-summary.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/inventory-movement-summary.json"
+    },
+    {
+      "filename": "sales-fulfillment-summary.json",
+      "row_count": 3,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/sales-fulfillment-summary.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/sales-fulfillment-summary.json"
+    },
+    {
+      "filename": "sales-dashboard-summary.json",
+      "row_count": 1,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/sales-dashboard-summary.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/sales-dashboard-summary.json"
+    },
+    {
+      "filename": "inventory-location-action-summary.json",
+      "row_count": 19,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/inventory-location-action-summary.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/inventory-location-action-summary.json"
+    },
+    {
+      "filename": "public-policy-reference.json",
+      "row_count": 5,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/public-policy-reference.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/public-policy-reference.json"
+    },
+    {
+      "filename": "source-slice-summary.json",
+      "row_count": 1,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/source-slice-summary.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/source-slice-summary.json"
+    },
+    {
+      "filename": "unit-economics-reference.json",
+      "row_count": 5,
+      "path": "_bmad-output/test-artifacts/fabric-public-serving-extract/current/unit-economics-reference.json",
+      "site_path": "apps/public-site/src/data/public-serving/current/unit-economics-reference.json"
+    }
+  ]
+}

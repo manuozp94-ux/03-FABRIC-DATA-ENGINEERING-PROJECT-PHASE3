@@ -1,0 +1,145 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BilingualText from "../components/content/BilingualText.astro";
+
+const l = (en: string, es: string) => ({ en, es });
+
+const retainedData = [
+  l("Name and professional contact details that a visitor chooses to share in an existing outreach channel.", "Nombre y datos profesionales de contacto que un visitante decida compartir en un canal de outreach ya existente."),
+  l("Role, company, or context details that help qualify a conversation.", "Datos de rol, empresa o contexto que ayuden a calificar una conversación."),
+  l("Basic technical logs needed to keep the site available and secure.", "Logs técnicos básicos necesarios para mantener el sitio disponible y seguro."),
+];
+
+const handlingRules = [
+  l("Phase 1 does not include a custom contact form or reusable contact database inside the site.", "La Fase 1 no incluye un formulario personalizado de contacto ni una base reutilizable de contactos dentro del sitio."),
+  l("If you reach out, the message should stay in the same inbox or professional channel where the conversation already started.", "Si escribes, el mensaje debe quedarse en el mismo inbox o canal profesional donde ya empezó la conversación."),
+  l("The site is intended for professional review, not for collecting sensitive personal information.", "El sitio está pensado para revisión profesional, no para recolectar información personal sensible."),
+];
+---
+
+<Layout
+  title={l("Privacy | Manuel A. Orozco", "Privacidad | Manuel A. Orozco")}
+  description={l("A minimal privacy and contact-handling notice for this public professional portfolio.", "Un aviso mínimo de privacidad y manejo de contacto para este portafolio profesional público.")}
+  routeLabel={l("Privacy", "Privacidad")}
+  routePurpose={l("Explain the minimum privacy posture used for public professional conversations tied to the site.", "Explica la postura mínima de privacidad usada para conversaciones profesionales públicas ligadas al sitio.")}
+  pageHeading={l("A minimal privacy notice for this public professional release.", "Un aviso mínimo de privacidad para este release profesional público.")}
+>
+  <section class="panel-grid" aria-label="Privacy summary">
+    <article class="panel panel--primary">
+      <p class="eyebrow"><BilingualText copy={l("Launch scope", "Alcance del lanzamiento")} /></p>
+      <h2><BilingualText copy={l("This site is meant for professional review, not for broad personal-data collection.", "Este sitio está pensado para revisión profesional, no para recolección amplia de datos personales.")} /></h2>
+      <p>
+        <BilingualText copy={l("The public release keeps contact handling intentionally small. The site does not run a Phase 1 contact form, does not maintain a custom marketing database, and does not ask visitors to submit more information than is needed to continue a professional conversation.", "El release público mantiene deliberadamente pequeño el manejo de contacto. El sitio no corre un formulario de contacto en Fase 1, no mantiene una base personalizada de marketing y no pide a visitantes más información de la necesaria para continuar una conversación profesional.")} />
+      </p>
+    </article>
+
+    <article class="panel">
+      <p class="eyebrow"><BilingualText copy={l("What may be seen", "Qué puede verse")} /></p>
+      <h2><BilingualText copy={l("Minimal information only", "Solo información mínima")} /></h2>
+      <ul class="signal-list">
+        {retainedData.map((item) => <li><BilingualText copy={item} /></li>)}
+      </ul>
+    </article>
+  </section>
+
+  <section class="panel-grid panel-grid--split" aria-label="Contact handling rules">
+    <article class="panel">
+      <p class="eyebrow"><BilingualText copy={l("Contact handling", "Manejo de contacto")} /></p>
+      <h2><BilingualText copy={l("How outreach is handled in Phase 1", "Cómo se maneja el outreach en Fase 1")} /></h2>
+      <ul class="signal-list">
+        {handlingRules.map((item) => <li><BilingualText copy={item} /></li>)}
+      </ul>
+    </article>
+
+    <article class="panel panel--muted">
+      <p class="eyebrow"><BilingualText copy={l("What this notice is not", "Qué no es este aviso")} /></p>
+      <h2><BilingualText copy={l("This is a launch-level notice", "Este es un aviso de nivel lanzamiento")} /></h2>
+      <p>
+        <BilingualText copy={l("This page is intentionally short. If the site later adds direct forms, analytics tooling, or a broader commercial workflow, this notice should be expanded and reviewed against the active site setup.", "Esta página es intencionalmente breve. Si después el sitio agrega formularios directos, tooling analítico o un workflow comercial más amplio, este aviso deberá ampliarse y revisarse contra el setup activo del sitio.")} />
+      </p>
+      <div class="cta-row">
+        <a class="cta-link" href="/contact"><BilingualText copy={l("Back to contact", "Volver a contacto")} /></a>
+        <a class="cta-link" href="/terms"><BilingualText copy={l("Read terms", "Leer términos")} /></a>
+      </div>
+    </article>
+  </section>
+</Layout>
+
+<style>
+  .panel-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .panel {
+    padding: 1.2rem;
+    border-radius: 22px;
+    background: rgba(255, 253, 248, 0.92);
+    border: 1px solid rgba(30, 38, 48, 0.1);
+  }
+
+  .panel--primary {
+    background:
+      linear-gradient(135deg, rgba(13, 116, 100, 0.12), transparent 72%),
+      rgba(255, 253, 248, 0.96);
+  }
+
+  .panel--muted {
+    background: rgba(13, 116, 100, 0.08);
+  }
+
+  .eyebrow {
+    margin: 0 0 0.5rem;
+    color: #0d7464;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .panel h2 {
+    margin: 0 0 0.7rem;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    line-height: 1.2;
+  }
+
+  .panel p,
+  .signal-list {
+    margin: 0;
+    color: #5c6a79;
+    line-height: 1.65;
+  }
+
+  .signal-list {
+    padding-left: 1.2rem;
+  }
+
+  .signal-list li + li {
+    margin-top: 0.45rem;
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 1rem;
+  }
+
+  .cta-link {
+    color: #1e2630;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .cta-link:hover,
+  .cta-link:focus-visible {
+    color: #0d7464;
+  }
+
+  @media (min-width: 760px) {
+    .panel-grid--split,
+    .panel-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

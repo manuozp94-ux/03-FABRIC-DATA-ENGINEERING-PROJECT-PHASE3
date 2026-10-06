@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dim_product_family",
+  "description": "Derived publication-safe product family dimension for the bounded MVP slice.",
+  "type": "array",
+  "x-grain": "One row per derived product family used in the publication-safe product dimension.",
+  "x-allowed_fallbacks": [
+    "UNCLASSIFIED"
+  ],
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "product_family_code",
+        "product_family_name",
+        "family_description",
+        "storage_profile",
+        "handling_profile",
+        "synthetic_margin_band_code",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "product_family_code": {
+          "type": "string",
+          "enum": [
+            "STANDARD_COMPONENT",
+            "KIT_ASSEMBLY",
+            "SMALL_PART",
+            "BULKY_ITEM",
+            "CONTROLLED_ITEM",
+            "UNCLASSIFIED"
+          ]
+        },
+        "product_family_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "family_description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "storage_profile": {
+          "type": "string",
+          "minLength": 1
+        },
+        "handling_profile": {
+          "type": "string",
+          "minLength": 1
+        },
+        "synthetic_margin_band_code": {
+          "type": "string",
+          "pattern": "^BAND_M[0-9]$"
+        },
+        "record_source_family": {
+          "type": "string",
+          "enum": [
+            "classification_reference_domain"
+          ]
+        },
+        "source_file_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_status": {
+          "type": "string",
+          "enum": [
+            "derived-active"
+          ]
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,189 @@
+---
+import BilingualText from "../content/BilingualText.astro";
+
+const apiPath = "/api/powerbi/embed-config.json";
+---
+
+<article class="panel panel--muted proof-host" data-bounded-powerbi-proof data-api-path={apiPath}>
+  <div class="proof-meta">
+    <p class="eyebrow"><BilingualText copy={{ en: "Bounded Power BI / Fabric proof", es: "Prueba acotada de Power BI / Fabric" }} /></p>
+    <h3><BilingualText copy={{ en: "Live proof report embedded from the Fabric proof workspace", es: "Reporte live de prueba embebido desde el workspace de prueba en Fabric" }} /></h3>
+    <p>
+      <BilingualText copy={{ en: "This embed uses the current saved report shell in Fabric. It proves the hosting path, semantic-model handoff, and publication-safe wiring now, even before the richer Desktop-authored layout pass.", es: "Este embed usa el report shell actualmente guardado en Fabric. Prueba el hosting path, el handoff del modelo semántico y el cableado publication-safe incluso antes de un layout más rico autorado en Desktop." }} />
+    </p>
+  </div>
+
+  <div
+    class="proof-status"
+    data-proof-status
+    data-loading-en="Loading bounded proof..."
+    data-loading-es="Cargando prueba acotada..."
+    data-sdk-error-en="Power BI client SDK did not load."
+    data-sdk-error-es="No cargó el SDK cliente de Power BI."
+    data-config-error-en="Embed configuration is unavailable."
+    data-config-error-es="La configuración del embed no está disponible."
+    data-fallback-error-en="Failed to load bounded proof."
+    data-fallback-error-es="No se pudo cargar la prueba acotada."
+  >
+    Loading bounded proof...
+  </div>
+
+  <div class="proof-frame">
+    <div class="proof-embed" data-proof-container aria-label="Embedded bounded Power BI proof"></div>
+  </div>
+
+  <p class="proof-footnote">
+    <BilingualText copy={{ en: "If the embed cannot load, the route still stays honest about the state of the proof and offers a direct report link when available.", es: "Si el embed no puede cargar, la ruta sigue siendo honesta sobre el estado de la prueba y ofrece un enlace directo al reporte cuando está disponible." }} />
+    <a href="#" data-proof-link hidden>
+      <BilingualText copy={{ en: "Open the report directly", es: "Abrir el reporte directamente" }} />
+    </a>
+  </p>
+</article>
+
+<script src="https://cdn.jsdelivr.net/npm/powerbi-client@2.23.1/dist/powerbi.min.js"></script>
+<script is:inline>
+  (() => {
+    const root = document.querySelector("[data-bounded-powerbi-proof]");
+    if (!root) return;
+
+    const statusNode = root.querySelector("[data-proof-status]");
+    const container = root.querySelector("[data-proof-container]");
+    const linkNode = root.querySelector("[data-proof-link]");
+    const apiPath = root.getAttribute("data-api-path") || "/api/powerbi/embed-config.json";
+
+    const getLanguage = () => document.documentElement.dataset.lang === "es" ? "es" : "en";
+    const getStatusMessage = (key, fallback) => {
+      if (!statusNode) return fallback;
+      const lang = getLanguage();
+      return statusNode.dataset[`${key}${lang === "es" ? "Es" : "En"}`] || fallback;
+    };
+
+    const setStatus = (message, isError = false) => {
+      if (!statusNode) return;
+      statusNode.textContent = message;
+      statusNode.dataset.state = isError ? "error" : "ready";
+    };
+
+    const showLink = (href) => {
+      if (!linkNode || !href) return;
+      linkNode.hidden = false;
+      linkNode.href = href;
+    };
+
+    const load = async () => {
+      try {
+        const response = await fetch(apiPath, { headers: { Accept: "application/json" } });
+        const payload = await response.json();
+
+        if (!response.ok) {
+          showLink(payload.webUrl);
+          throw new Error(payload.message || getStatusMessage("configError", "Embed configuration is unavailable."));
+        }
+
+        showLink(payload.webUrl);
+
+        const client = window["powerbi-client"];
+        const powerbi = window["powerbi"];
+        const models = client?.models;
+        if (!powerbi?.embed || !models) {
+          throw new Error(getStatusMessage("sdkError", "Power BI client SDK did not load."));
+        }
+        powerbi.reset(container);
+
+        const embedConfig = {
+          type: "report",
+          id: payload.reportId,
+          embedUrl: payload.embedUrl,
+          accessToken: payload.accessToken,
+          tokenType: models.TokenType.Embed,
+          permissions: models.Permissions.Read,
+          settings: {
+            panes: {
+              filters: { visible: false, expanded: false },
+              pageNavigation: { visible: false },
+            },
+            navContentPaneEnabled: false,
+            background: models.BackgroundType.Transparent,
+          },
+        };
+
+        const report = powerbi.embed(container, embedConfig);
+        report.on("loaded", () => {
+          setStatus(`${payload.artifactLabel}: ${payload.reportName}`);
+        });
+        report.on("error", (event) => {
+          const detail = event?.detail?.message || "Power BI embed error.";
+          setStatus(detail, true);
+        });
+      } catch (error) {
+        const message = error instanceof Error ? error.message : getStatusMessage("fallbackError", "Failed to load bounded proof.");
+        setStatus(message, true);
+      }
+    };
+
+    if (statusNode) {
+      statusNode.textContent = getStatusMessage("loading", "Loading bounded proof...");
+    }
+
+    load();
+  })();
+</script>
+
+<style>
+  .proof-host {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .proof-meta {
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .proof-status {
+    padding: 0.8rem 1rem;
+    border-radius: 16px;
+    background: rgba(13, 116, 100, 0.08);
+    color: #1e2630;
+    font-weight: 700;
+  }
+
+  .proof-status[data-state="error"] {
+    background: rgba(162, 42, 42, 0.08);
+    color: #7a1d1d;
+  }
+
+  .proof-frame {
+    padding: 0.75rem;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(30, 38, 48, 0.08);
+  }
+
+  .proof-embed {
+    min-height: 680px;
+    width: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    background:
+      linear-gradient(135deg, rgba(13, 116, 100, 0.08), transparent 58%),
+      rgba(247, 244, 236, 0.72);
+  }
+
+  .proof-footnote {
+    color: #5c6a79;
+    line-height: 1.65;
+  }
+
+  .proof-footnote a {
+    margin-left: 0.45rem;
+    color: #0d7464;
+    font-weight: 700;
+  }
+
+  @media (max-width: 720px) {
+    .proof-embed {
+      min-height: 560px;
+    }
+  }
+</style>

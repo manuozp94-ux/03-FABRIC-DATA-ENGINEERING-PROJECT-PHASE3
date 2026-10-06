@@ -1,0 +1,394 @@
+table slv_current_inventory_position
+	lineageTag: 0b4f641d-c7f5-4340-bcc5-b27fb636684b
+	sourceLineageTag: [dbo].[slv_current_inventory_position]
+
+	measure 'Available Qty' = SUM('slv_current_inventory_position'[available_qty])
+		formatString: #,0
+		lineageTag: b31ce94f-f49f-44b2-bf23-a95eb3f3546a
+
+	measure 'Ready Positions' = CALCULATE(COUNTROWS('slv_current_inventory_position'), 'slv_current_inventory_position'[readiness_flag] = "READY")
+		formatString: #,0
+		lineageTag: 08bf351d-5c97-4f84-a7d8-11621cfb1bfd
+
+	measure 'Current Positions' = COUNTROWS('slv_current_inventory_position')
+		formatString: #,0
+		lineageTag: e65bfa99-df8f-421e-933f-536b1dfc5d8b
+
+	measure 'Service Readiness Rate' = DIVIDE([Ready Positions], [Current Positions])
+		formatString: 0.0%
+		lineageTag: 7e87f393-486d-4972-9b05-93d7fab11cf8
+
+	measure 'Inventory Exposure' = SUM('slv_current_inventory_position'[inventory_value_proxy])
+		formatString: $#,0
+		lineageTag: 6edcba13-d3ca-4ceb-a129-68953a1ebe6e
+
+	measure 'Open-Demand Coverage' = DIVIDE([Available Qty], [Open Demand Qty])
+		formatString: 0.0%
+		lineageTag: d3995424-881e-4638-8efa-e51eedc7c914
+
+	measure 'Active Action Count' = CALCULATE(COUNTROWS('slv_current_inventory_position'), 'slv_current_inventory_position'[action_status] <> "HOLD")
+		formatString: #,0
+		lineageTag: df7f4e35-bfd5-47f5-b733-d93f56926fb0
+
+	measure 'Latest Approved Refresh' = MAX('slv_current_inventory_position'[load_timestamp_utc])
+		formatString: yyyy-mm-dd hh:mm
+		lineageTag: ebcf57de-b5a1-4468-9a46-4d075f0def00
+
+	column inventory_snapshot_sk
+		dataType: string
+		lineageTag: 22886e93-9b3d-4eb3-8219-6b820569b368
+		sourceLineageTag: inventory_snapshot_sk
+		summarizeBy: none
+		sourceColumn: inventory_snapshot_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_sk
+		dataType: string
+		lineageTag: edb2e4fa-b51a-4aee-a4fc-624dfd7b1383
+		sourceLineageTag: product_sk
+		summarizeBy: none
+		sourceColumn: product_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column inventory_location_sk
+		dataType: string
+		lineageTag: 475d1675-df9f-442d-8ca0-beddbd5f55a9
+		sourceLineageTag: inventory_location_sk
+		summarizeBy: none
+		sourceColumn: inventory_location_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column snapshot_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 07893046-920f-4d44-9c0d-182715116bf6
+		sourceLineageTag: snapshot_date
+		summarizeBy: none
+		sourceColumn: snapshot_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column on_hand_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: b383a959-9c19-41a9-b08f-621e6d8a4c90
+		sourceLineageTag: on_hand_qty
+		summarizeBy: sum
+		sourceColumn: on_hand_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column available_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 194b0b78-e616-48c7-a9d5-0e00ee3b0628
+		sourceLineageTag: available_qty
+		summarizeBy: sum
+		sourceColumn: available_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column inventory_status_code
+		dataType: string
+		lineageTag: 051a3107-a426-4cf1-9595-ab745fb7564c
+		sourceLineageTag: inventory_status_code
+		summarizeBy: none
+		sourceColumn: inventory_status_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column reserved_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: e2225b48-b33a-41c4-aa20-2c4a4da64933
+		sourceLineageTag: reserved_qty
+		summarizeBy: sum
+		sourceColumn: reserved_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column in_transit_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 0ff62a1a-9972-4fab-ab90-8aff081446a0
+		sourceLineageTag: in_transit_qty
+		summarizeBy: sum
+		sourceColumn: in_transit_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column inventory_value_proxy
+		dataType: int64
+		formatString: 0
+		lineageTag: 81cd8e18-62a3-47f8-a720-47675ebfa9f5
+		sourceLineageTag: inventory_value_proxy
+		summarizeBy: sum
+		sourceColumn: inventory_value_proxy
+
+		annotation SummarizationSetBy = Automatic
+
+	column node_value_concentration_band
+		dataType: string
+		lineageTag: eb30eb3b-5f6a-423d-9474-08d473f6ea7f
+		sourceLineageTag: node_value_concentration_band
+		summarizeBy: none
+		sourceColumn: node_value_concentration_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column readiness_flag
+		dataType: string
+		lineageTag: e3094135-a145-45c0-ae3e-0741e954b2f7
+		sourceLineageTag: readiness_flag
+		summarizeBy: none
+		sourceColumn: readiness_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column record_source_family
+		dataType: string
+		lineageTag: e5658756-0408-4350-8365-72353a7e689d
+		sourceLineageTag: record_source_family
+		summarizeBy: none
+		sourceColumn: record_source_family
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_file_version
+		dataType: string
+		lineageTag: 63c0039d-dc7c-4608-843e-bba394757ca9
+		sourceLineageTag: source_file_version
+		summarizeBy: none
+		sourceColumn: source_file_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column record_status
+		dataType: string
+		lineageTag: 2f19b802-5722-42b5-b450-234e3d4a1abd
+		sourceLineageTag: record_status
+		summarizeBy: none
+		sourceColumn: record_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column publication_safety_flag
+		dataType: string
+		lineageTag: 538be60f-ad14-4ffc-b9af-ee5780c3860c
+		sourceLineageTag: publication_safety_flag
+		summarizeBy: none
+		sourceColumn: publication_safety_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column load_timestamp_utc
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 465a86e9-ca2a-44f9-86e5-d0aff32b3280
+		sourceLineageTag: load_timestamp_utc
+		summarizeBy: none
+		sourceColumn: load_timestamp_utc
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_current_snapshot
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a16176d4-ca59-4bf1-b01a-36fb530e0733
+		sourceLineageTag: is_current_snapshot
+		summarizeBy: none
+		sourceColumn: is_current_snapshot
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_status
+		dataType: string
+		lineageTag: 03d49fed-f19d-4e7a-8d5c-66f840a83f22
+		sourceLineageTag: action_status
+		summarizeBy: none
+		sourceColumn: action_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_service_level_band
+		dataType: string
+		lineageTag: 9482a6a6-f8d3-4399-a561-b2e397be7ead
+		sourceLineageTag: target_service_level_band
+		summarizeBy: none
+		sourceColumn: target_service_level_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column coverage_target_band
+		dataType: string
+		lineageTag: edf0feb5-c518-422f-8857-3b26668432f0
+		sourceLineageTag: coverage_target_band
+		summarizeBy: none
+		sourceColumn: coverage_target_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_code
+		dataType: string
+		lineageTag: 652596a0-3a4d-412c-aee8-80c4fc234d36
+		sourceLineageTag: product_code
+		summarizeBy: none
+		sourceColumn: product_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		lineageTag: 3aace836-4124-4508-a33f-fbe8b673e715
+		sourceLineageTag: product_name
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_family_code
+		dataType: string
+		lineageTag: 98004551-19cb-4509-95db-8a5527c9f6fa
+		sourceLineageTag: product_family_code
+		summarizeBy: none
+		sourceColumn: product_family_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_family_name
+		dataType: string
+		lineageTag: 063c057c-10be-4c3b-86ca-7bdff897ffa1
+		sourceLineageTag: product_family_name
+		summarizeBy: none
+		sourceColumn: product_family_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column inventory_policy_class
+		dataType: string
+		lineageTag: d98b23a0-a693-494b-aa33-6f79f2685329
+		sourceLineageTag: inventory_policy_class
+		summarizeBy: none
+		sourceColumn: inventory_policy_class
+
+		annotation SummarizationSetBy = Automatic
+
+	column lead_time_band
+		dataType: string
+		lineageTag: 377b6291-67c8-4523-bb40-4fb6ac30fda0
+		sourceLineageTag: lead_time_band
+		summarizeBy: none
+		sourceColumn: lead_time_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column criticality_band
+		dataType: string
+		lineageTag: 45fa63a6-e9ca-4c09-824c-cdbbba8a6832
+		sourceLineageTag: criticality_band
+		summarizeBy: none
+		sourceColumn: criticality_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_profile
+		dataType: string
+		lineageTag: 394f22ae-9617-4943-8d6a-79cbce95ca12
+		sourceLineageTag: service_profile
+		summarizeBy: none
+		sourceColumn: service_profile
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_code
+		dataType: string
+		lineageTag: 3d70b219-bb5b-4af6-95da-7e3fadbf7017
+		sourceLineageTag: site_code
+		summarizeBy: none
+		sourceColumn: site_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_code
+		dataType: string
+		lineageTag: f5841ad2-13c1-4a46-ae9f-06ec7425f1eb
+		sourceLineageTag: location_code
+		summarizeBy: none
+		sourceColumn: location_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_name
+		dataType: string
+		lineageTag: 8b7448d0-6254-4269-9358-eb51a39512ff
+		sourceLineageTag: location_name
+		summarizeBy: none
+		sourceColumn: location_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column node_type_code
+		dataType: string
+		lineageTag: 74cdfbf8-e3ec-4cf7-9de1-269f9c063957
+		sourceLineageTag: node_type_code
+		summarizeBy: none
+		sourceColumn: node_type_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column logistics_area_code
+		dataType: string
+		lineageTag: a4bd3771-7f5c-44de-bc14-4dce71990149
+		sourceLineageTag: logistics_area_code
+		summarizeBy: none
+		sourceColumn: logistics_area_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_role_description
+		dataType: string
+		lineageTag: 10fd9350-7f20-437e-bed9-539cfd0df551
+		sourceLineageTag: location_role_description
+		summarizeBy: none
+		sourceColumn: location_role_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column network_open_demand_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 2637dff2-32aa-4890-b65b-11bae8d12592
+		sourceLineageTag: network_open_demand_qty
+		summarizeBy: sum
+		sourceColumn: network_open_demand_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column network_open_demand_value_proxy
+		dataType: int64
+		formatString: 0
+		lineageTag: a5c12084-4db7-4ae0-92e2-4450e3865ec4
+		sourceLineageTag: network_open_demand_value_proxy
+		summarizeBy: sum
+		sourceColumn: network_open_demand_value_proxy
+
+		annotation SummarizationSetBy = Automatic
+
+	measure 'On Hand Qty' = SUM('slv_current_inventory_position'[on_hand_qty])
+		formatString: #,0
+
+	measure 'Reserved Qty' = SUM('slv_current_inventory_position'[reserved_qty])
+		formatString: #,0
+
+	measure 'In Transit Qty' = SUM('slv_current_inventory_position'[in_transit_qty])
+		formatString: #,0
+
+	partition slv_current_inventory_position = entity
+		mode: directLake
+		source
+			entityName: slv_current_inventory_position
+			expressionSource: 'DirectLake - lh_fab001_public_proof'
+

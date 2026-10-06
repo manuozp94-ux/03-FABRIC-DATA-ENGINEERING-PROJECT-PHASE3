@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fact_demand_line",
+  "description": "Public-safe demand fact for the bounded MVP slice.",
+  "type": "array",
+  "x-grain": "One row per public demand-line occurrence.",
+  "x-date_semantics": {
+    "event_date": "Demand-related business event date.",
+    "requested_delivery_date": "Requested delivery commitment date for the public demand-line occurrence.",
+    "promise_date": "Optional promised delivery date when a bounded source value exists."
+  },
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "demand_line_sk",
+        "product_sk",
+        "account_sk",
+        "event_date",
+        "requested_delivery_date",
+        "demand_status_code",
+        "demand_qty",
+        "delivered_qty",
+        "open_qty",
+        "record_source_family",
+        "source_file_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "demand_line_sk": {
+          "type": "string",
+          "pattern": "^DMD_SK_[A-F0-9]{12}$"
+        },
+        "product_sk": {
+          "type": "string",
+          "pattern": "^PRD_SK_[A-F0-9]{12}$"
+        },
+        "account_sk": {
+          "type": "string",
+          "pattern": "^ACC_SK_[A-F0-9]{12}$"
+        },
+        "event_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "requested_delivery_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "promise_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "demand_status_code": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "PARTIALLY_FULFILLED",
+            "FULFILLED",
+            "CANCELLED",
+            "UNKNOWN"
+          ]
+        },
+        "demand_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "delivered_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "open_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "order_group_code": {
+          "type": "string",
+          "pattern": "^ORDER_GROUP_[A-F0-9]{6}$"
+        },
+        "priority_code": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH",
+            "UNKNOWN"
+          ]
+        },
+        "demand_value_proxy": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gross_margin_proxy": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "record_source_family": {
+          "type": "string",
+          "enum": [
+            "sales_activity_domain"
+          ]
+        },
+        "source_file_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "unknown"
+          ]
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "archetype_inventory_location_sk": "LOC_SK_C2FF28F79326",
+    "node_type_code": "TRANSIT_NODE",
+    "logistics_area_code": "LOG_AREA_AE2AC1",
+    "location_role_description": "Transit-oriented handoff area that preserves movement timing without exposing raw dock labels.",
+    "source_file_version": "curated_publication_r2__representative_market_r1",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "archetype_inventory_location_sk": "LOC_SK_21C722851CD6",
+    "node_type_code": "FLOOR_AREA",
+    "logistics_area_code": "LOG_AREA_41B951",
+    "location_role_description": "Floor storage area used for overflow-ready or non-racked operational staging.",
+    "source_file_version": "curated_publication_r2__representative_market_r1",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "archetype_inventory_location_sk": "LOC_SK_D19217D02A23",
+    "node_type_code": "INTERNAL_WAREHOUSE",
+    "logistics_area_code": "LOG_AREA_F53693",
+    "location_role_description": "Primary internal storage and picking area within the governed readiness model.",
+    "source_file_version": "curated_publication_r2__representative_market_r1",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "archetype_inventory_location_sk": "LOC_SK_F1414AB4CF3E",
+    "node_type_code": "RESTRICTED_AREA",
+    "logistics_area_code": "LOG_AREA_12959E",
+    "location_role_description": "Restricted inventory area that preserves controlled-access behavior in a publication-safe form.",
+    "source_file_version": "curated_publication_r2__representative_market_r1",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "archetype_inventory_location_sk": "LOC_SK_2C813F33AAC1",
+    "node_type_code": "THIRD_PARTY_NODE",
+    "logistics_area_code": "LOG_AREA_8E4C34",
+    "location_role_description": "External logistics partner node used to preserve service behavior without exposing partner identity.",
+    "source_file_version": "curated_publication_r2__representative_market_r1",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "archetype_inventory_location_sk": "LOC_SK_AB4A93D581D5",
+    "node_type_code": "UNKNOWN",
+    "logistics_area_code": "UNKNOWN",
+    "location_role_description": "Fallback inventory node used when the bounded source record does not safely resolve to a known node type.",
+    "source_file_version": "curated_publication_r2__representative_market_r1",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "archetype_inventory_location_sk": "LOC_SK_7C768C73507C",
+    "node_type_code": "OVERFLOW_AREA",
+    "logistics_area_code": "LOG_AREA_3634A0",
+    "location_role_description": "Overflow inventory area used when stock exceeds standard storage placement.",
+    "source_file_version": "curated_publication_r2__representative_market_r1",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  }
+]

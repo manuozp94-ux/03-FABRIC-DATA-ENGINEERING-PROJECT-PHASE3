@@ -1,0 +1,26 @@
+[
+  {
+    "account_pattern_class": "RECURRING_SERVICE",
+    "account_pattern_label": "Field Service",
+    "customer_group": "Field Service",
+    "open_qty": 170015,
+    "open_value": 4448744,
+    "open_value_share": 0.5807578588605394
+  },
+  {
+    "account_pattern_class": "PROJECT_BASED",
+    "account_pattern_label": "Project Delivery",
+    "customer_group": "Project Delivery",
+    "open_qty": 46050,
+    "open_value": 1927578,
+    "open_value_share": 0.25163418530414
+  },
+  {
+    "account_pattern_class": "PARTNER_CHANNEL",
+    "account_pattern_label": "Channel Support",
+    "customer_group": "Channel Support",
+    "open_qty": 43128,
+    "open_value": 1283917,
+    "open_value_share": 0.16760795583532054
+  }
+]

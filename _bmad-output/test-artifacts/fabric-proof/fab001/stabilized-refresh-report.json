@@ -1,0 +1,264 @@
+{
+  "run_type": "fab001_stabilized_proof_refresh",
+  "refresh_status": "live_refresh_completed",
+  "publication_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-representative/current",
+  "coherence_report_path": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-representative/representative-coherence-report.json",
+  "coherence_identity": {
+    "representative_source_version": "curated_publication_r2__representative_market_r1",
+    "generation_rule_version": "representative_market_controls_r1",
+    "scenario_reference": "platform/fabric/contracts/logic-first-scenario-parameter-sets.md",
+    "controlled_realism_matrix_reference": "platform/fabric/contracts/controlled-realism-test-matrix.md",
+    "coherence_rule_version": "representative_coherence_r1",
+    "market_report_path": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-representative/representative-market-report.json"
+  },
+  "skip_live": false,
+  "live_steps_executed": true,
+  "completed_at_utc": "2026-04-01T20:16:32.516Z",
+  "steps": [
+    {
+      "command": "python3 05-compat/scripts/land_fab001_lakehouse_tables.py --publication-dir _bmad-output/test-artifacts/fabric-representative/current --output-dir _bmad-output/test-artifacts/fabric-proof/fab001/current --upload-bundle --create-loader-notebook --run-loader-notebook",
+      "status": "completed"
+    },
+    {
+      "command": "python3 05-compat/scripts/materialize_fab001_semantic_model.py --output-dir _bmad-output/test-artifacts/fabric-proof/fab001/semantic-model-live",
+      "status": "completed"
+    },
+    {
+      "command": "python3 05-compat/scripts/materialize_fab001_report_shell.py --output-dir _bmad-output/test-artifacts/fabric-proof/fab001/report-live",
+      "status": "completed"
+    }
+  ],
+  "manifest": {
+    "generated_at_utc": "2026-04-01T20:02:53+00:00",
+    "source_publication_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-representative/current",
+    "output_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-proof/fab001/current",
+    "first_proof_target": {
+      "lakehouse_name": "lh_fab001_public_proof",
+      "semantic_model_name": "sm_fab001_supply_chain_decision",
+      "report_name": "rpt_fab001_supply_chain_decision",
+      "page_name": "Supply Chain Decision View"
+    },
+    "approved_refresh_timestamp_utc": "2026-04-01T22:15:00.000Z",
+    "bronze_tables": {
+      "dim_product": {
+        "rows": 140,
+        "path": "bronze/dim_product.csv"
+      },
+      "dim_product_family": {
+        "rows": 5,
+        "path": "bronze/dim_product_family.csv"
+      },
+      "dim_account": {
+        "rows": 96,
+        "path": "bronze/dim_account.csv"
+      },
+      "dim_inventory_location": {
+        "rows": 16,
+        "path": "bronze/dim_inventory_location.csv"
+      },
+      "fact_demand_line": {
+        "rows": 23476,
+        "path": "bronze/fact_demand_line.csv"
+      },
+      "fact_inventory_inbound": {
+        "rows": 3696,
+        "path": "bronze/fact_inventory_inbound.csv"
+      },
+      "fact_inventory_snapshot": {
+        "rows": 35868,
+        "path": "bronze/fact_inventory_snapshot.csv"
+      }
+    },
+    "silver_tables": {
+      "slv_demand_line_enriched": {
+        "rows": 23476,
+        "path": "silver/slv_demand_line_enriched.csv"
+      },
+      "slv_inventory_inbound_enriched": {
+        "rows": 3696,
+        "path": "silver/slv_inventory_inbound_enriched.csv"
+      },
+      "slv_inventory_position_enriched": {
+        "rows": 35868,
+        "path": "silver/slv_inventory_position_enriched.csv"
+      },
+      "slv_current_inventory_position": {
+        "rows": 196,
+        "path": "silver/slv_current_inventory_position.csv"
+      }
+    },
+    "gold_tables": {
+      "gold_supply_chain_decision_summary": {
+        "rows": 1,
+        "path": "gold/gold_supply_chain_decision_summary.csv"
+      },
+      "gold_supply_chain_action_queue": {
+        "rows": 8,
+        "path": "gold/gold_supply_chain_action_queue.csv"
+      },
+      "gold_demand_support_account_pattern": {
+        "rows": 3,
+        "path": "gold/gold_demand_support_account_pattern.csv"
+      },
+      "gold_demand_support_product_family": {
+        "rows": 4,
+        "path": "gold/gold_demand_support_product_family.csv"
+      },
+      "gold_public_policy_reference": {
+        "rows": 140,
+        "path": "gold/gold_public_policy_reference.csv"
+      }
+    },
+    "lakehouse": {
+      "status": "existing",
+      "item": {
+        "id": "06b073a8-8653-4691-829b-0690e06a9de4",
+        "type": "Lakehouse",
+        "displayName": "lh_fab001_public_proof",
+        "description": "Bounded Lakehouse for the Phase 3 public proof surface.",
+        "workspaceId": "c11ed225-3ffc-440b-8cdb-88d1f366a91b"
+      }
+    },
+    "notes": [
+      "Bronze is the landed copy of the approved public package.",
+      "Silver is the conformed analytical prep layer for the bounded Fabric proof.",
+      "Gold is the bounded serving layer for the Supply Chain Decision View.",
+      "The semantic model should be built from these proof tables, not from Astro calculations."
+    ],
+    "medallion_contract": "05-compat/contracts/fab001_medallion_contract.json",
+    "core_visual_contract": "05-compat/contracts/fab001_core_visual_contract.json",
+    "core_visual_runbook": "05-compat/contracts/fab001_fabric_build_runbook.md",
+    "semantic_model_contract": "05-compat/contracts/fab001_semantic_model_contract.json",
+    "measure_pack": "05-compat/contracts/fab001_measure_pack.dax",
+    "onelake_bundle": {
+      "uploaded_files": 17,
+      "remote_root": "Files/fab001/current",
+      "sample_paths": [
+        "Files/fab001/current/bronze/dim_account.csv",
+        "Files/fab001/current/bronze/dim_inventory_location.csv",
+        "Files/fab001/current/bronze/dim_product.csv",
+        "Files/fab001/current/bronze/dim_product_family.csv",
+        "Files/fab001/current/bronze/fact_demand_line.csv",
+        "Files/fab001/current/bronze/fact_inventory_inbound.csv",
+        "Files/fab001/current/bronze/fact_inventory_snapshot.csv",
+        "Files/fab001/current/gold/gold_demand_support_account_pattern.csv",
+        "Files/fab001/current/gold/gold_demand_support_product_family.csv",
+        "Files/fab001/current/gold/gold_public_policy_reference.csv"
+      ]
+    },
+    "loader_notebook": {
+      "status": "updated_pending",
+      "item": {
+        "id": "3acff640-fc46-44de-a19a-6f9c074f5f43",
+        "type": "Notebook",
+        "displayName": "nb_fab001_lakehouse_loader",
+        "description": "Explicit-schema loader for the FAB001 bounded Fabric proof tables.",
+        "workspaceId": "c11ed225-3ffc-440b-8cdb-88d1f366a91b"
+      },
+      "operation": {
+        "status": "Succeeded",
+        "createdTimeUtc": "2026-04-01T20:03:42.4813012",
+        "lastUpdatedTimeUtc": "2026-04-01T20:03:43.2271203",
+        "percentComplete": 100,
+        "error": null
+      }
+    },
+    "loader_notebook_run": {
+      "status": "accepted",
+      "job_location": "https://api.fabric.microsoft.com/v1/workspaces/c11ed225-3ffc-440b-8cdb-88d1f366a91b/items/3acff640-fc46-44de-a19a-6f9c074f5f43/jobs/instances/e85abd07-de4d-412a-8b74-aa65b3429cc2",
+      "job_status": {
+        "id": "e85abd07-de4d-412a-8b74-aa65b3429cc2",
+        "itemId": "3acff640-fc46-44de-a19a-6f9c074f5f43",
+        "jobType": "RunNotebook",
+        "invokeType": "Manual",
+        "status": "Completed",
+        "failureReason": null,
+        "rootActivityId": "c4b24f14-3bfb-4dc2-b11c-5e9c85d4d90d",
+        "startTimeUtc": "2026-04-01T20:03:52.7856604",
+        "endTimeUtc": "2026-04-01T20:08:11.075382"
+      }
+    },
+    "lakehouse_tables": {
+      "count": 16,
+      "names": [
+        "dim_product",
+        "dim_product_family",
+        "dim_account",
+        "dim_inventory_location",
+        "fact_demand_line",
+        "fact_inventory_snapshot",
+        "slv_demand_line_enriched",
+        "slv_inventory_position_enriched",
+        "slv_current_inventory_position",
+        "gold_supply_chain_decision_summary",
+        "gold_supply_chain_action_queue",
+        "gold_demand_support_account_pattern",
+        "gold_demand_support_product_family",
+        "gold_public_policy_reference",
+        "fact_inventory_inbound",
+        "slv_inventory_inbound_enriched"
+      ]
+    },
+    "semantic_model": {
+      "name": "sm_fab001_supply_chain_decision",
+      "id": "5ee1b0dd-daca-4c76-8316-06369d420278",
+      "status": "measure_pack_materialized",
+      "artifact_report": "_bmad-output/test-artifacts/fabric-proof/fab001/semantic-model-live/materialization-report.json"
+    },
+    "report": {
+      "name": "rpt_fab001_supply_chain_decision",
+      "id": "29e81270-9ca0-4739-8cd1-5571e935ecdd",
+      "page_name": "Supply Chain Decision View",
+      "status": "report_shell_materialized",
+      "artifact_report": "_bmad-output/test-artifacts/fabric-proof/fab001/report-live/report-shell-report.json"
+    }
+  },
+  "semantic_model_report": {
+    "semantic_model": {
+      "id": "5ee1b0dd-daca-4c76-8316-06369d420278",
+      "type": "SemanticModel",
+      "displayName": "sm_fab001_supply_chain_decision",
+      "description": "",
+      "workspaceId": "c11ed225-3ffc-440b-8cdb-88d1f366a91b"
+    },
+    "patched_measures": [
+      "Open Demand Qty",
+      "Open Demand Lines",
+      "Open Demand Value Proxy",
+      "Available Qty",
+      "Ready Positions",
+      "Current Positions",
+      "Service Readiness Rate",
+      "Inventory Exposure",
+      "Open-Demand Coverage",
+      "Active Action Count",
+      "Latest Approved Refresh"
+    ],
+    "updated_at_utc": "2026-04-01T20:12:38Z",
+    "update_result": {
+      "status": "Succeeded",
+      "createdTimeUtc": "2026-04-01T20:10:33.2860282",
+      "lastUpdatedTimeUtc": "2026-04-01T20:10:35.8020442",
+      "percentComplete": 100,
+      "error": null
+    }
+  },
+  "report_shell_report": {
+    "report": {
+      "id": "29e81270-9ca0-4739-8cd1-5571e935ecdd",
+      "type": "Report",
+      "displayName": "rpt_fab001_supply_chain_decision",
+      "description": "",
+      "workspaceId": "c11ed225-3ffc-440b-8cdb-88d1f366a91b"
+    },
+    "page_name": "Supply Chain Decision View",
+    "updated_at_utc": "2026-04-01T20:12:38Z",
+    "update_result": {
+      "status": "Succeeded",
+      "createdTimeUtc": "2026-04-01T20:10:33.1018414",
+      "lastUpdatedTimeUtc": "2026-04-01T20:10:33.6742649",
+      "percentComplete": 100,
+      "error": null
+    }
+  }
+}

@@ -1,0 +1,701 @@
+{
+  "schema_version": "2026-04-15",
+  "semantic_model": {
+    "name": "sm_fab001_supply_chain_decision",
+    "source_type": "lakehouse",
+    "source_item_name": "lh_fab001_public_proof",
+    "edit_mode": "desktop_or_service_table_sync_required_before_full_measure_patch",
+    "default_semantic_model_assumed": false,
+    "manual_sync_required": true,
+    "purpose": "Bounded three-view operating-loop semantic proof for Sales, Supply Chain, and Inventory Decision Support."
+  },
+  "tables": [
+    {
+      "name": "dim_product",
+      "source_layer": "bronze",
+      "source_object": "dim_product",
+      "hidden": false
+    },
+    {
+      "name": "dim_product_family",
+      "source_layer": "bronze",
+      "source_object": "dim_product_family",
+      "hidden": false
+    },
+    {
+      "name": "dim_account",
+      "source_layer": "bronze",
+      "source_object": "dim_account",
+      "hidden": false
+    },
+    {
+      "name": "dim_inventory_location",
+      "source_layer": "bronze",
+      "source_object": "dim_inventory_location",
+      "hidden": false
+    },
+    {
+      "name": "dim_service_region",
+      "source_layer": "bronze",
+      "source_object": "dim_service_region",
+      "hidden": false
+    },
+    {
+      "name": "dim_supplier",
+      "source_layer": "bronze",
+      "source_object": "dim_supplier",
+      "hidden": false
+    },
+    {
+      "name": "slv_demand_line_enriched",
+      "source_layer": "silver",
+      "source_object": "slv_demand_line_enriched",
+      "hidden": false
+    },
+    {
+      "name": "slv_current_inventory_position",
+      "source_layer": "silver",
+      "source_object": "slv_current_inventory_position",
+      "hidden": false
+    },
+    {
+      "name": "slv_inventory_inbound_enriched",
+      "source_layer": "silver",
+      "source_object": "slv_inventory_inbound_enriched",
+      "hidden": true
+    },
+    {
+      "name": "slv_inventory_position_enriched",
+      "source_layer": "silver",
+      "source_object": "slv_inventory_position_enriched",
+      "hidden": true
+    },
+    {
+      "name": "fact_sales_realization",
+      "source_layer": "financial_foundation",
+      "source_object": "fact_sales_realization",
+      "hidden": false
+    },
+    {
+      "name": "fact_sales_fulfillment_line",
+      "source_layer": "bronze",
+      "source_object": "fact_sales_fulfillment_line",
+      "hidden": false
+    },
+    {
+      "name": "fact_supply_chain_decision_queue_line",
+      "source_layer": "bronze",
+      "source_object": "fact_supply_chain_decision_queue_line",
+      "hidden": false
+    },
+    {
+      "name": "fact_purchase_order_line",
+      "source_layer": "bronze",
+      "source_object": "fact_purchase_order_line",
+      "hidden": false
+    },
+    {
+      "name": "fact_purchase_order_status_history",
+      "source_layer": "bronze",
+      "source_object": "fact_purchase_order_status_history",
+      "hidden": true
+    },
+    {
+      "name": "fact_logistics_decision_queue_line",
+      "source_layer": "bronze",
+      "source_object": "fact_logistics_decision_queue_line",
+      "hidden": false
+    },
+    {
+      "name": "fact_inventory_movement_line",
+      "source_layer": "bronze",
+      "source_object": "fact_inventory_movement_line",
+      "hidden": false
+    },
+    {
+      "name": "rule_supplier_product_lead_time",
+      "source_layer": "bronze",
+      "source_object": "rule_supplier_product_lead_time",
+      "hidden": true
+    },
+    {
+      "name": "rule_location_transfer_lead_time",
+      "source_layer": "bronze",
+      "source_object": "rule_location_transfer_lead_time",
+      "hidden": true
+    },
+    {
+      "name": "rule_location_service_lead_time",
+      "source_layer": "bronze",
+      "source_object": "rule_location_service_lead_time",
+      "hidden": true
+    },
+    {
+      "name": "gold_sales_dashboard_summary",
+      "source_layer": "gold",
+      "source_object": "gold_sales_dashboard_summary",
+      "hidden": true
+    },
+    {
+      "name": "gold_supply_chain_decision_summary",
+      "source_layer": "gold",
+      "source_object": "gold_supply_chain_decision_summary",
+      "hidden": true
+    },
+    {
+      "name": "gold_supply_chain_action_queue",
+      "source_layer": "gold",
+      "source_object": "gold_supply_chain_action_queue",
+      "hidden": false
+    },
+    {
+      "name": "gold_supply_chain_decision_queue_summary",
+      "source_layer": "gold",
+      "source_object": "gold_supply_chain_decision_queue_summary",
+      "hidden": false
+    },
+    {
+      "name": "gold_purchase_order_summary",
+      "source_layer": "gold",
+      "source_object": "gold_purchase_order_summary",
+      "hidden": false
+    },
+    {
+      "name": "gold_inventory_location_action_summary",
+      "source_layer": "gold",
+      "source_object": "gold_inventory_location_action_summary",
+      "hidden": false
+    },
+    {
+      "name": "gold_logistics_decision_queue_summary",
+      "source_layer": "gold",
+      "source_object": "gold_logistics_decision_queue_summary",
+      "hidden": false
+    },
+    {
+      "name": "gold_inventory_movement_summary",
+      "source_layer": "gold",
+      "source_object": "gold_inventory_movement_summary",
+      "hidden": false
+    },
+    {
+      "name": "gold_sales_fulfillment_summary",
+      "source_layer": "gold",
+      "source_object": "gold_sales_fulfillment_summary",
+      "hidden": false
+    },
+    {
+      "name": "gold_demand_support_account_pattern",
+      "source_layer": "gold",
+      "source_object": "gold_demand_support_account_pattern",
+      "hidden": false
+    },
+    {
+      "name": "gold_demand_support_product_family",
+      "source_layer": "gold",
+      "source_object": "gold_demand_support_product_family",
+      "hidden": false
+    },
+    {
+      "name": "gold_public_policy_reference",
+      "source_layer": "gold",
+      "source_object": "gold_public_policy_reference",
+      "hidden": false
+    }
+  ],
+  "relationships": [
+    {
+      "from_table": "dim_product_family",
+      "from_column": "product_family_code",
+      "to_table": "dim_product",
+      "to_column": "product_family_code",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    },
+    {
+      "from_table": "dim_product",
+      "from_column": "product_sk",
+      "to_table": "slv_demand_line_enriched",
+      "to_column": "product_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    },
+    {
+      "from_table": "dim_product",
+      "from_column": "product_sk",
+      "to_table": "slv_current_inventory_position",
+      "to_column": "product_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    },
+    {
+      "from_table": "dim_product",
+      "from_column": "product_sk",
+      "to_table": "fact_sales_realization",
+      "to_column": "product_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    },
+    {
+      "from_table": "dim_product",
+      "from_column": "product_sk",
+      "to_table": "fact_sales_fulfillment_line",
+      "to_column": "product_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    },
+    {
+      "from_table": "dim_product",
+      "from_column": "product_sk",
+      "to_table": "fact_supply_chain_decision_queue_line",
+      "to_column": "product_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    },
+    {
+      "from_table": "dim_product",
+      "from_column": "product_sk",
+      "to_table": "fact_purchase_order_line",
+      "to_column": "product_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    },
+    {
+      "from_table": "dim_product",
+      "from_column": "product_sk",
+      "to_table": "fact_logistics_decision_queue_line",
+      "to_column": "product_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    },
+    {
+      "from_table": "dim_product",
+      "from_column": "product_sk",
+      "to_table": "fact_inventory_movement_line",
+      "to_column": "product_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    },
+    {
+      "from_table": "dim_account",
+      "from_column": "account_sk",
+      "to_table": "slv_demand_line_enriched",
+      "to_column": "account_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    },
+    {
+      "from_table": "dim_account",
+      "from_column": "account_sk",
+      "to_table": "fact_sales_realization",
+      "to_column": "account_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    },
+    {
+      "from_table": "dim_account",
+      "from_column": "account_sk",
+      "to_table": "fact_sales_fulfillment_line",
+      "to_column": "account_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    },
+    {
+      "from_table": "dim_inventory_location",
+      "from_column": "inventory_location_sk",
+      "to_table": "slv_current_inventory_position",
+      "to_column": "inventory_location_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    },
+    {
+      "from_table": "dim_inventory_location",
+      "from_column": "inventory_location_sk",
+      "to_table": "fact_sales_fulfillment_line",
+      "to_column": "fulfillment_inventory_location_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true,
+      "role": "fulfillment_location"
+    },
+    {
+      "from_table": "dim_inventory_location",
+      "from_column": "inventory_location_sk",
+      "to_table": "fact_supply_chain_decision_queue_line",
+      "to_column": "receiving_inventory_location_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true,
+      "role": "receiving_location"
+    },
+    {
+      "from_table": "dim_inventory_location",
+      "from_column": "inventory_location_sk",
+      "to_table": "fact_purchase_order_line",
+      "to_column": "receiving_inventory_location_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true,
+      "role": "receiving_location"
+    },
+    {
+      "from_table": "dim_inventory_location",
+      "from_column": "inventory_location_sk",
+      "to_table": "fact_logistics_decision_queue_line",
+      "to_column": "origin_inventory_location_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true,
+      "role": "origin_location"
+    },
+    {
+      "from_table": "dim_inventory_location",
+      "from_column": "inventory_location_sk",
+      "to_table": "fact_logistics_decision_queue_line",
+      "to_column": "destination_inventory_location_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": false,
+      "role": "destination_location"
+    },
+    {
+      "from_table": "dim_inventory_location",
+      "from_column": "inventory_location_sk",
+      "to_table": "fact_inventory_movement_line",
+      "to_column": "origin_inventory_location_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true,
+      "role": "origin_location"
+    },
+    {
+      "from_table": "dim_inventory_location",
+      "from_column": "inventory_location_sk",
+      "to_table": "fact_inventory_movement_line",
+      "to_column": "destination_inventory_location_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": false,
+      "role": "destination_location"
+    },
+    {
+      "from_table": "dim_supplier",
+      "from_column": "supplier_sk",
+      "to_table": "fact_supply_chain_decision_queue_line",
+      "to_column": "supplier_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    },
+    {
+      "from_table": "dim_supplier",
+      "from_column": "supplier_sk",
+      "to_table": "fact_purchase_order_line",
+      "to_column": "supplier_sk",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    },
+    {
+      "from_table": "dim_service_region",
+      "from_column": "service_region_code",
+      "to_table": "dim_supplier",
+      "to_column": "service_region_code",
+      "cardinality": "one-to-many",
+      "cross_filter_direction": "single",
+      "active": true
+    }
+  ],
+  "dashboard_views": [
+    {
+      "name": "Sales Dashboard",
+      "primary_tables": [
+        "fact_sales_realization",
+        "fact_sales_fulfillment_line",
+        "slv_demand_line_enriched",
+        "gold_sales_dashboard_summary"
+      ]
+    },
+    {
+      "name": "Supply Chain Decision Support",
+      "primary_tables": [
+        "fact_supply_chain_decision_queue_line",
+        "fact_purchase_order_line",
+        "gold_supply_chain_decision_queue_summary",
+        "gold_purchase_order_summary"
+      ]
+    },
+    {
+      "name": "Inventory Decision Support",
+      "primary_tables": [
+        "slv_current_inventory_position",
+        "fact_logistics_decision_queue_line",
+        "fact_inventory_movement_line",
+        "fact_sales_fulfillment_line",
+        "gold_inventory_location_action_summary"
+      ]
+    }
+  ],
+  "measures": [
+    {
+      "name": "Open Demand Qty",
+      "table": "slv_demand_line_enriched",
+      "expression": "CALCULATE(SUM('slv_demand_line_enriched'[open_qty]))",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Open Demand Lines",
+      "table": "slv_demand_line_enriched",
+      "expression": "CALCULATE(COUNTROWS('slv_demand_line_enriched'), 'slv_demand_line_enriched'[is_open] = TRUE())",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Open Demand Value Proxy",
+      "table": "slv_demand_line_enriched",
+      "expression": "CALCULATE(SUM('slv_demand_line_enriched'[demand_value_proxy]), 'slv_demand_line_enriched'[is_open] = TRUE())",
+      "format_string": "$#,0"
+    },
+    {
+      "name": "Demand Value Proxy",
+      "table": "slv_demand_line_enriched",
+      "expression": "SUM('slv_demand_line_enriched'[demand_value_proxy])",
+      "format_string": "$#,0"
+    },
+    {
+      "name": "Available Qty",
+      "table": "slv_current_inventory_position",
+      "expression": "SUM('slv_current_inventory_position'[available_qty])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "On Hand Qty",
+      "table": "slv_current_inventory_position",
+      "expression": "SUM('slv_current_inventory_position'[on_hand_qty])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Reserved Qty",
+      "table": "slv_current_inventory_position",
+      "expression": "SUM('slv_current_inventory_position'[reserved_qty])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "In Transit Qty",
+      "table": "slv_current_inventory_position",
+      "expression": "SUM('slv_current_inventory_position'[in_transit_qty])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Ready Positions",
+      "table": "slv_current_inventory_position",
+      "expression": "CALCULATE(COUNTROWS('slv_current_inventory_position'), 'slv_current_inventory_position'[readiness_flag] = \"READY\")",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Current Positions",
+      "table": "slv_current_inventory_position",
+      "expression": "COUNTROWS('slv_current_inventory_position')",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Service Readiness Rate",
+      "table": "slv_current_inventory_position",
+      "expression": "DIVIDE([Ready Positions], [Current Positions])",
+      "format_string": "0.0%"
+    },
+    {
+      "name": "Inventory Exposure",
+      "table": "slv_current_inventory_position",
+      "expression": "SUM('slv_current_inventory_position'[inventory_value_proxy])",
+      "format_string": "$#,0"
+    },
+    {
+      "name": "Open-Demand Coverage",
+      "table": "slv_current_inventory_position",
+      "expression": "DIVIDE([Available Qty], [Open Demand Qty])",
+      "format_string": "0.0%"
+    },
+    {
+      "name": "Active Action Count",
+      "table": "slv_current_inventory_position",
+      "expression": "CALCULATE(COUNTROWS('slv_current_inventory_position'), 'slv_current_inventory_position'[action_status] <> \"HOLD\")",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Latest Approved Refresh",
+      "table": "slv_current_inventory_position",
+      "expression": "MAX('slv_current_inventory_position'[load_timestamp_utc])",
+      "format_string": "yyyy-mm-dd hh:mm"
+    },
+    {
+      "name": "Realized Revenue",
+      "table": "fact_sales_realization",
+      "expression": "SUM('fact_sales_realization'[net_revenue_amount])",
+      "format_string": "$#,0"
+    },
+    {
+      "name": "Realized COGS",
+      "table": "fact_sales_realization",
+      "expression": "SUM('fact_sales_realization'[cogs_amount])",
+      "format_string": "$#,0"
+    },
+    {
+      "name": "Realized Gross Margin",
+      "table": "fact_sales_realization",
+      "expression": "SUM('fact_sales_realization'[gross_margin_amount])",
+      "format_string": "$#,0"
+    },
+    {
+      "name": "Realized Margin Rate",
+      "table": "fact_sales_realization",
+      "expression": "DIVIDE([Realized Gross Margin], [Realized Revenue])",
+      "format_string": "0.0%"
+    },
+    {
+      "name": "Fulfilled Qty",
+      "table": "fact_sales_realization",
+      "expression": "SUM('fact_sales_realization'[fulfilled_qty])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Average Revenue per Account",
+      "table": "fact_sales_realization",
+      "expression": "DIVIDE([Realized Revenue], DISTINCTCOUNT('fact_sales_realization'[account_sk]))",
+      "format_string": "$#,0"
+    },
+    {
+      "name": "Backordered Qty",
+      "table": "fact_sales_fulfillment_line",
+      "expression": "SUM('fact_sales_fulfillment_line'[backordered_qty])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Fulfillment Line Count",
+      "table": "fact_sales_fulfillment_line",
+      "expression": "COUNTROWS('fact_sales_fulfillment_line')",
+      "format_string": "#,0"
+    },
+    {
+      "name": "SC Recommended Qty",
+      "table": "fact_supply_chain_decision_queue_line",
+      "expression": "SUM('fact_supply_chain_decision_queue_line'[recommended_qty])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "SC Approved Qty",
+      "table": "fact_supply_chain_decision_queue_line",
+      "expression": "SUM('fact_supply_chain_decision_queue_line'[approved_qty])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "SC Decision Cost Amount",
+      "table": "fact_supply_chain_decision_queue_line",
+      "expression": "SUM('fact_supply_chain_decision_queue_line'[cost_amount_usd])",
+      "format_string": "$#,0"
+    },
+    {
+      "name": "Approved SC Decisions",
+      "table": "fact_supply_chain_decision_queue_line",
+      "expression": "CALCULATE(DISTINCTCOUNT('fact_supply_chain_decision_queue_line'[supply_chain_decision_line_sk]), 'fact_supply_chain_decision_queue_line'[recommendation_status_code] = \"APPROVED\")",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Purchase Ordered Qty",
+      "table": "fact_purchase_order_line",
+      "expression": "SUM('fact_purchase_order_line'[ordered_qty])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Purchase Received Qty",
+      "table": "fact_purchase_order_line",
+      "expression": "SUM('fact_purchase_order_line'[received_qty])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Open Purchase Qty",
+      "table": "fact_purchase_order_line",
+      "expression": "SUM('fact_purchase_order_line'[open_qty])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Purchase Cost Amount",
+      "table": "fact_purchase_order_line",
+      "expression": "SUM('fact_purchase_order_line'[purchase_cost_amount_usd])",
+      "format_string": "$#,0"
+    },
+    {
+      "name": "Purchase Order Lines",
+      "table": "fact_purchase_order_line",
+      "expression": "COUNTROWS('fact_purchase_order_line')",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Executed Purchase Decisions",
+      "table": "fact_purchase_order_line",
+      "expression": "DISTINCTCOUNT('fact_purchase_order_line'[supply_chain_decision_line_sk])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Queue-to-PO Traceability Rate",
+      "table": "fact_purchase_order_line",
+      "expression": "DIVIDE([Executed Purchase Decisions], [Approved SC Decisions])",
+      "format_string": "0.0%"
+    },
+    {
+      "name": "Logistics Recommended Qty",
+      "table": "fact_logistics_decision_queue_line",
+      "expression": "SUM('fact_logistics_decision_queue_line'[recommended_qty])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Logistics Approved Qty",
+      "table": "fact_logistics_decision_queue_line",
+      "expression": "SUM('fact_logistics_decision_queue_line'[approved_qty])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Active Logistics Action Count",
+      "table": "fact_logistics_decision_queue_line",
+      "expression": "COUNTROWS('fact_logistics_decision_queue_line')",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Movement Qty",
+      "table": "fact_inventory_movement_line",
+      "expression": "SUM('fact_inventory_movement_line'[movement_qty])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Movement In Transit Qty",
+      "table": "fact_inventory_movement_line",
+      "expression": "SUM('fact_inventory_movement_line'[in_transit_qty])",
+      "format_string": "#,0"
+    },
+    {
+      "name": "Movement Cost Amount",
+      "table": "fact_inventory_movement_line",
+      "expression": "SUM('fact_inventory_movement_line'[movement_cost_amount_usd])",
+      "format_string": "$#,0"
+    }
+  ],
+  "report_assumptions": [
+    "The semantic model is built from the bounded proof tables, not from Astro calculations.",
+    "Sales metrics use bounded rule-derived realized sales, not invoice-source finance.",
+    "Supply-chain metrics separate recommendation queues from executed purchase-order facts.",
+    "Inventory metrics use current-position Silver plus bounded logistics and fulfillment event facts.",
+    "Full live measure patching requires the live semantic model to sync the new Lakehouse tables first."
+  ]
+}

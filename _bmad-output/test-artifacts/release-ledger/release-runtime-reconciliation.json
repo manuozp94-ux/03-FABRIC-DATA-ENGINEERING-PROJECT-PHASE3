@@ -1,0 +1,89 @@
+{
+  "release_id": "rls_fab001_20260401t221500z",
+  "reconciled_at_utc": "2026-04-15T01:44:04.451Z",
+  "repo_side": {
+    "current_release_id": "rls_fab001_20260401t221500z",
+    "last_known_good_release_id": "rls_fab001_20260401t221500z",
+    "release_record_path": "_bmad-output/test-artifacts/release-ledger/releases/rls_fab001_20260401t221500z.json",
+    "current_release_path": "_bmad-output/test-artifacts/release-ledger/current-release.json",
+    "last_known_good_path": "_bmad-output/test-artifacts/release-ledger/last-known-good-release.json"
+  },
+  "fabric_side": {
+    "ctrl_release_registry": {
+      "release_id": "rls_fab001_20260401t221500z",
+      "release_state": "runtime_active",
+      "release_record_path": "_bmad-output/test-artifacts/release-ledger/releases/rls_fab001_20260401t221500z.json",
+      "publication_dir": "platform/fabric/publication/current",
+      "pipeline_item_id": "preview-pipeline-id",
+      "pipeline_name": "pl_fab001_runtime_orchestration",
+      "pipeline_run_id": "preview-pipeline-run-id",
+      "pipeline_run_status": "Completed",
+      "notebook_item_id": "preview-loader-notebook-id",
+      "notebook_name": "RunFabricProofNotebook",
+      "notebook_run_status": "Completed",
+      "public_source_mode": "fabric_serving_extract",
+      "serving_extract_status": "produced_from_reference_gold",
+      "recorded_at_utc": "2026-04-15T01:44:04+00:00"
+    },
+    "ctrl_last_known_good": {
+      "active_release_id": "rls_fab001_20260401t221500z",
+      "last_known_good_release_id": "rls_fab001_20260401t221500z",
+      "active_pipeline_run_id": "preview-pipeline-run-id",
+      "active_pipeline_status": "Completed",
+      "public_source_mode": "fabric_serving_extract",
+      "updated_at_utc": "2026-04-15T01:44:04+00:00",
+      "recovery_note": "Repo-side approval remains authoritative; Fabric runtime governance mirrors the active and last-known-good pointers."
+    },
+    "visible_runtime_tables": [
+      "ctrl_asset_refresh_history",
+      "ctrl_last_known_good",
+      "ctrl_release_registry",
+      "ctrl_runtime_job_history"
+    ]
+  },
+  "public_source": {
+    "active_mode": "fabric_serving_extract",
+    "target_mode": "fabric_serving_extract",
+    "serving_extract_status": "produced_from_reference_gold",
+    "serving_extract_asset": {
+      "asset_type": "public_serving_extract",
+      "asset_name": "fab001_public_serving_extract",
+      "asset_id": "",
+      "status": "produced_from_reference_gold",
+      "refresh_record_path": "_bmad-output/test-artifacts/fabric-public-serving-extract/materialization-report.json",
+      "related_release_id": "rls_fab001_20260401t221500z",
+      "public_source_mode": "fabric_serving_extract",
+      "recorded_at_utc": "2026-04-15T01:44:04+00:00"
+    }
+  },
+  "runtime_execution": {
+    "mode": "pipeline_notebook_activity_preview",
+    "pipeline_run_id": "preview-pipeline-run-id",
+    "pipeline_status": "Completed",
+    "effective_notebook_run_id": "preview-activity-run-id",
+    "effective_notebook_status": "Completed",
+    "governance_notebook_run_id": "61e8dfc3-dd92-42ef-b229-df082c1186af",
+    "governance_notebook_status": "Completed"
+  },
+  "alignment": {
+    "current_release_id_match": true,
+    "active_release_id_match": true,
+    "last_known_good_release_id_match": true,
+    "visible_runtime_tables_match": true,
+    "public_source_mode_match": true,
+    "serving_extract_status_match": true,
+    "public_serving_asset_mode_match": true,
+    "status": "aligned"
+  },
+  "recovery_inputs": {
+    "semantic_refresh_record_path": "_bmad-output/test-artifacts/fabric-proof/fab001/semantic-model-live/materialization-report.json",
+    "report_shell_refresh_record_path": "_bmad-output/test-artifacts/fabric-proof/fab001/report-live/report-shell-report.json",
+    "serving_extract_record_path": "_bmad-output/test-artifacts/fabric-public-serving-extract/materialization-report.json",
+    "runtime_table_names": [
+      "ctrl_asset_refresh_history",
+      "ctrl_last_known_good",
+      "ctrl_release_registry",
+      "ctrl_runtime_job_history"
+    ]
+  }
+}

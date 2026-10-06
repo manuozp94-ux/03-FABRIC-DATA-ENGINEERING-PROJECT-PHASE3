@@ -1,0 +1,162 @@
+// Semantic model: sm_fab001_supply_chain_decision
+// Source item: lh_fab001_public_proof
+
+// Table: slv_demand_line_enriched
+MEASURE 'slv_demand_line_enriched'[Open Demand Qty] = CALCULATE(SUM('slv_demand_line_enriched'[open_qty]))
+FORMAT_STRING = "#,0"
+
+// Table: slv_demand_line_enriched
+MEASURE 'slv_demand_line_enriched'[Open Demand Lines] = CALCULATE(COUNTROWS('slv_demand_line_enriched'), 'slv_demand_line_enriched'[is_open] = TRUE())
+FORMAT_STRING = "#,0"
+
+// Table: slv_demand_line_enriched
+MEASURE 'slv_demand_line_enriched'[Open Demand Value Proxy] = CALCULATE(SUM('slv_demand_line_enriched'[demand_value_proxy]), 'slv_demand_line_enriched'[is_open] = TRUE())
+FORMAT_STRING = "$#,0"
+
+// Table: slv_demand_line_enriched
+MEASURE 'slv_demand_line_enriched'[Demand Value Proxy] = SUM('slv_demand_line_enriched'[demand_value_proxy])
+FORMAT_STRING = "$#,0"
+
+// Table: slv_current_inventory_position
+MEASURE 'slv_current_inventory_position'[Available Qty] = SUM('slv_current_inventory_position'[available_qty])
+FORMAT_STRING = "#,0"
+
+// Table: slv_current_inventory_position
+MEASURE 'slv_current_inventory_position'[On Hand Qty] = SUM('slv_current_inventory_position'[on_hand_qty])
+FORMAT_STRING = "#,0"
+
+// Table: slv_current_inventory_position
+MEASURE 'slv_current_inventory_position'[Reserved Qty] = SUM('slv_current_inventory_position'[reserved_qty])
+FORMAT_STRING = "#,0"
+
+// Table: slv_current_inventory_position
+MEASURE 'slv_current_inventory_position'[In Transit Qty] = SUM('slv_current_inventory_position'[in_transit_qty])
+FORMAT_STRING = "#,0"
+
+// Table: slv_current_inventory_position
+MEASURE 'slv_current_inventory_position'[Ready Positions] = CALCULATE(COUNTROWS('slv_current_inventory_position'), 'slv_current_inventory_position'[readiness_flag] = "READY")
+FORMAT_STRING = "#,0"
+
+// Table: slv_current_inventory_position
+MEASURE 'slv_current_inventory_position'[Current Positions] = COUNTROWS('slv_current_inventory_position')
+FORMAT_STRING = "#,0"
+
+// Table: slv_current_inventory_position
+MEASURE 'slv_current_inventory_position'[Service Readiness Rate] = DIVIDE([Ready Positions], [Current Positions])
+FORMAT_STRING = "0.0%"
+
+// Table: slv_current_inventory_position
+MEASURE 'slv_current_inventory_position'[Inventory Exposure] = SUM('slv_current_inventory_position'[inventory_value_proxy])
+FORMAT_STRING = "$#,0"
+
+// Table: slv_current_inventory_position
+MEASURE 'slv_current_inventory_position'[Open-Demand Coverage] = DIVIDE([Available Qty], [Open Demand Qty])
+FORMAT_STRING = "0.0%"
+
+// Table: slv_current_inventory_position
+MEASURE 'slv_current_inventory_position'[Active Action Count] = CALCULATE(COUNTROWS('slv_current_inventory_position'), 'slv_current_inventory_position'[action_status] <> "HOLD")
+FORMAT_STRING = "#,0"
+
+// Table: slv_current_inventory_position
+MEASURE 'slv_current_inventory_position'[Latest Approved Refresh] = MAX('slv_current_inventory_position'[load_timestamp_utc])
+FORMAT_STRING = "yyyy-mm-dd hh:mm"
+
+// Table: fact_sales_realization
+MEASURE 'fact_sales_realization'[Realized Revenue] = SUM('fact_sales_realization'[net_revenue_amount])
+FORMAT_STRING = "$#,0"
+
+// Table: fact_sales_realization
+MEASURE 'fact_sales_realization'[Realized COGS] = SUM('fact_sales_realization'[cogs_amount])
+FORMAT_STRING = "$#,0"
+
+// Table: fact_sales_realization
+MEASURE 'fact_sales_realization'[Realized Gross Margin] = SUM('fact_sales_realization'[gross_margin_amount])
+FORMAT_STRING = "$#,0"
+
+// Table: fact_sales_realization
+MEASURE 'fact_sales_realization'[Realized Margin Rate] = DIVIDE([Realized Gross Margin], [Realized Revenue])
+FORMAT_STRING = "0.0%"
+
+// Table: fact_sales_realization
+MEASURE 'fact_sales_realization'[Fulfilled Qty] = SUM('fact_sales_realization'[fulfilled_qty])
+FORMAT_STRING = "#,0"
+
+// Table: fact_sales_realization
+MEASURE 'fact_sales_realization'[Average Revenue per Account] = DIVIDE([Realized Revenue], DISTINCTCOUNT('fact_sales_realization'[account_sk]))
+FORMAT_STRING = "$#,0"
+
+// Table: fact_sales_fulfillment_line
+MEASURE 'fact_sales_fulfillment_line'[Backordered Qty] = SUM('fact_sales_fulfillment_line'[backordered_qty])
+FORMAT_STRING = "#,0"
+
+// Table: fact_sales_fulfillment_line
+MEASURE 'fact_sales_fulfillment_line'[Fulfillment Line Count] = COUNTROWS('fact_sales_fulfillment_line')
+FORMAT_STRING = "#,0"
+
+// Table: fact_supply_chain_decision_queue_line
+MEASURE 'fact_supply_chain_decision_queue_line'[SC Recommended Qty] = SUM('fact_supply_chain_decision_queue_line'[recommended_qty])
+FORMAT_STRING = "#,0"
+
+// Table: fact_supply_chain_decision_queue_line
+MEASURE 'fact_supply_chain_decision_queue_line'[SC Approved Qty] = SUM('fact_supply_chain_decision_queue_line'[approved_qty])
+FORMAT_STRING = "#,0"
+
+// Table: fact_supply_chain_decision_queue_line
+MEASURE 'fact_supply_chain_decision_queue_line'[SC Decision Cost Amount] = SUM('fact_supply_chain_decision_queue_line'[cost_amount_usd])
+FORMAT_STRING = "$#,0"
+
+// Table: fact_supply_chain_decision_queue_line
+MEASURE 'fact_supply_chain_decision_queue_line'[Approved SC Decisions] = CALCULATE(DISTINCTCOUNT('fact_supply_chain_decision_queue_line'[supply_chain_decision_line_sk]), 'fact_supply_chain_decision_queue_line'[recommendation_status_code] = "APPROVED")
+FORMAT_STRING = "#,0"
+
+// Table: fact_purchase_order_line
+MEASURE 'fact_purchase_order_line'[Purchase Ordered Qty] = SUM('fact_purchase_order_line'[ordered_qty])
+FORMAT_STRING = "#,0"
+
+// Table: fact_purchase_order_line
+MEASURE 'fact_purchase_order_line'[Purchase Received Qty] = SUM('fact_purchase_order_line'[received_qty])
+FORMAT_STRING = "#,0"
+
+// Table: fact_purchase_order_line
+MEASURE 'fact_purchase_order_line'[Open Purchase Qty] = SUM('fact_purchase_order_line'[open_qty])
+FORMAT_STRING = "#,0"
+
+// Table: fact_purchase_order_line
+MEASURE 'fact_purchase_order_line'[Purchase Cost Amount] = SUM('fact_purchase_order_line'[purchase_cost_amount_usd])
+FORMAT_STRING = "$#,0"
+
+// Table: fact_purchase_order_line
+MEASURE 'fact_purchase_order_line'[Purchase Order Lines] = COUNTROWS('fact_purchase_order_line')
+FORMAT_STRING = "#,0"
+
+// Table: fact_purchase_order_line
+MEASURE 'fact_purchase_order_line'[Executed Purchase Decisions] = DISTINCTCOUNT('fact_purchase_order_line'[supply_chain_decision_line_sk])
+FORMAT_STRING = "#,0"
+
+// Table: fact_purchase_order_line
+MEASURE 'fact_purchase_order_line'[Queue-to-PO Traceability Rate] = DIVIDE([Executed Purchase Decisions], [Approved SC Decisions])
+FORMAT_STRING = "0.0%"
+
+// Table: fact_logistics_decision_queue_line
+MEASURE 'fact_logistics_decision_queue_line'[Logistics Recommended Qty] = SUM('fact_logistics_decision_queue_line'[recommended_qty])
+FORMAT_STRING = "#,0"
+
+// Table: fact_logistics_decision_queue_line
+MEASURE 'fact_logistics_decision_queue_line'[Logistics Approved Qty] = SUM('fact_logistics_decision_queue_line'[approved_qty])
+FORMAT_STRING = "#,0"
+
+// Table: fact_logistics_decision_queue_line
+MEASURE 'fact_logistics_decision_queue_line'[Active Logistics Action Count] = COUNTROWS('fact_logistics_decision_queue_line')
+FORMAT_STRING = "#,0"
+
+// Table: fact_inventory_movement_line
+MEASURE 'fact_inventory_movement_line'[Movement Qty] = SUM('fact_inventory_movement_line'[movement_qty])
+FORMAT_STRING = "#,0"
+
+// Table: fact_inventory_movement_line
+MEASURE 'fact_inventory_movement_line'[Movement In Transit Qty] = SUM('fact_inventory_movement_line'[in_transit_qty])
+FORMAT_STRING = "#,0"
+
+// Table: fact_inventory_movement_line
+MEASURE 'fact_inventory_movement_line'[Movement Cost Amount] = SUM('fact_inventory_movement_line'[movement_cost_amount_usd])
+FORMAT_STRING = "$#,0"

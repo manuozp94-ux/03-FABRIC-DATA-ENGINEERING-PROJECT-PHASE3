@@ -1,0 +1,57 @@
+[
+  {
+    "cost_context_sk": "CCT_SK_1295D01E2ADC",
+    "replenishment_posture_code": "REPLENISH_CONTROLLED",
+    "supply_node_class": "CONTROLLED_ACCESS_NETWORK",
+    "valuation_method_code": "STANDARD",
+    "procurement_profile_code": "CONTROLLED_PROCUREMENT",
+    "currency_code": "USD",
+    "foundation_version": "financial_foundation_r1",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "cost_context_sk": "CCT_SK_114D8A4E67ED",
+    "replenishment_posture_code": "REPLENISH_COORDINATED",
+    "supply_node_class": "COORDINATED_NETWORK",
+    "valuation_method_code": "STANDARD",
+    "procurement_profile_code": "COORDINATED_SUPPLY",
+    "currency_code": "USD",
+    "foundation_version": "financial_foundation_r1",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "cost_context_sk": "CCT_SK_B903D69B7DF6",
+    "replenishment_posture_code": "REPLENISH_DENSE",
+    "supply_node_class": "DENSE_PICK_NETWORK",
+    "valuation_method_code": "STANDARD",
+    "procurement_profile_code": "FAST_MOVING_PROCUREMENT",
+    "currency_code": "USD",
+    "foundation_version": "financial_foundation_r1",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "cost_context_sk": "CCT_SK_44987E89600D",
+    "replenishment_posture_code": "REPLENISH_PALLET",
+    "supply_node_class": "BULK_STORAGE_NETWORK",
+    "valuation_method_code": "STANDARD",
+    "procurement_profile_code": "BULK_PROCUREMENT",
+    "currency_code": "USD",
+    "foundation_version": "financial_foundation_r1",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "cost_context_sk": "CCT_SK_78B115F13C71",
+    "replenishment_posture_code": "REPLENISH_STANDARD",
+    "supply_node_class": "STANDARD_NETWORK",
+    "valuation_method_code": "STANDARD",
+    "procurement_profile_code": "CORE_PROCUREMENT",
+    "currency_code": "USD",
+    "foundation_version": "financial_foundation_r1",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  }
+]

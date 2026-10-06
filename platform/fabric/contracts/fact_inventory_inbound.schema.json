@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fact_inventory_inbound",
+  "description": "Publication-safe approved inventory inbound fact for the bounded MVP slice.",
+  "type": "array",
+  "x-grain": "One row per approved inbound receipt event at product-location grain.",
+  "x-date_semantics": {
+    "receipt_date": "Approved inbound receipt date for the public product-location occurrence."
+  },
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "inventory_inbound_sk",
+        "product_sk",
+        "inventory_location_sk",
+        "receipt_date",
+        "receipt_qty",
+        "receipt_flow_type",
+        "record_source_family",
+        "source_file_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "inventory_inbound_sk": {
+          "type": "string",
+          "pattern": "^INB_SK_[A-F0-9]{12}$"
+        },
+        "product_sk": {
+          "type": "string",
+          "pattern": "^PRD_SK_[A-F0-9]{12}$"
+        },
+        "inventory_location_sk": {
+          "type": "string",
+          "pattern": "^LOC_SK_[A-F0-9]{12}$"
+        },
+        "receipt_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "receipt_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "receipt_flow_type": {
+          "type": "string",
+          "enum": [
+            "SUPPLIER_RECEIPT",
+            "TRANSFER_IN",
+            "KIT_COMPLETION",
+            "RETURN_TO_STOCK",
+            "UNKNOWN"
+          ]
+        },
+        "receipt_value_proxy": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "record_source_family": {
+          "type": "string",
+          "enum": [
+            "inventory_receipt_domain"
+          ]
+        },
+        "source_file_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "unknown"
+          ]
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "entity_scope_code": "ACCOUNT_PRODUCT",
+    "entity_key": "ACC_SK_292243E9233B|PRD_SK_472703C8E51E",
+    "shock_profile_code": "TEMPORARY_DEMAND_DROP",
+    "shock_start_date": "2026-04-04",
+    "shock_end_date": "2026-05-04",
+    "recovery_end_date": "2026-06-03",
+    "cooldown_end_date": "2026-07-03",
+    "state_version": "logic_first_controls_r1",
+    "source_file_version": "curated_publication_r2",
+    "load_timestamp_utc": "2026-04-04T06:46:21.467Z"
+  },
+  {
+    "entity_scope_code": "ACCOUNT_PRODUCT",
+    "entity_key": "ACC_SK_292243E9233B|PRD_SK_D0D660876261",
+    "shock_profile_code": "TEMPORARY_DEMAND_DROP",
+    "shock_start_date": "2026-04-04",
+    "shock_end_date": "2026-05-04",
+    "recovery_end_date": "2026-06-03",
+    "cooldown_end_date": "2026-07-03",
+    "state_version": "logic_first_controls_r1",
+    "source_file_version": "curated_publication_r2",
+    "load_timestamp_utc": "2026-04-04T06:46:21.467Z"
+  },
+  {
+    "entity_scope_code": "ACCOUNT_PRODUCT",
+    "entity_key": "ACC_SK_B2EB9328A375|PRD_SK_FF434259E2DF",
+    "shock_profile_code": "TEMPORARY_DEMAND_DROP",
+    "shock_start_date": "2026-04-04",
+    "shock_end_date": "2026-05-04",
+    "recovery_end_date": "2026-06-03",
+    "cooldown_end_date": "2026-07-03",
+    "state_version": "logic_first_controls_r1",
+    "source_file_version": "curated_publication_r2",
+    "load_timestamp_utc": "2026-04-04T06:46:21.467Z"
+  },
+  {
+    "entity_scope_code": "ACCOUNT_PRODUCT",
+    "entity_key": "ACC_SK_C3B16196D437|PRD_SK_ECD30101B19A",
+    "shock_profile_code": "TEMPORARY_DEMAND_DROP",
+    "shock_start_date": "2026-04-04",
+    "shock_end_date": "2026-05-04",
+    "recovery_end_date": "2026-06-03",
+    "cooldown_end_date": "2026-07-03",
+    "state_version": "logic_first_controls_r1",
+    "source_file_version": "curated_publication_r2",
+    "load_timestamp_utc": "2026-04-04T06:46:21.467Z"
+  },
+  {
+    "entity_scope_code": "ACCOUNT_PRODUCT",
+    "entity_key": "ACC_SK_D6B138DC3D66|PRD_SK_F88E35D07FD9",
+    "shock_profile_code": "TEMPORARY_DEMAND_DROP",
+    "shock_start_date": "2026-04-04",
+    "shock_end_date": "2026-05-04",
+    "recovery_end_date": "2026-06-03",
+    "cooldown_end_date": "2026-07-03",
+    "state_version": "logic_first_controls_r1",
+    "source_file_version": "curated_publication_r2",
+    "load_timestamp_utc": "2026-04-04T06:46:21.467Z"
+  },
+  {
+    "entity_scope_code": "PRODUCT_LOCATION",
+    "entity_key": "PRD_SK_D0D660876261|LOC_SK_F1414AB4CF3E",
+    "shock_profile_code": "SUPPLY_TIGHTNESS",
+    "shock_start_date": "2026-04-04",
+    "shock_end_date": "2026-05-04",
+    "recovery_end_date": "2026-07-03",
+    "cooldown_end_date": "2026-08-02",
+    "state_version": "logic_first_controls_r1",
+    "source_file_version": "curated_publication_r2",
+    "load_timestamp_utc": "2026-04-04T06:46:21.467Z"
+  },
+  {
+    "entity_scope_code": "PRODUCT_LOCATION",
+    "entity_key": "PRD_SK_FF434259E2DF|LOC_SK_C2FF28F79326",
+    "shock_profile_code": "SUPPLY_TIGHTNESS",
+    "shock_start_date": "2026-04-04",
+    "shock_end_date": "2026-05-04",
+    "recovery_end_date": "2026-07-03",
+    "cooldown_end_date": "2026-07-03",
+    "state_version": "logic_first_controls_r1",
+    "source_file_version": "curated_publication_r2",
+    "load_timestamp_utc": "2026-04-04T06:46:21.467Z"
+  }
+]

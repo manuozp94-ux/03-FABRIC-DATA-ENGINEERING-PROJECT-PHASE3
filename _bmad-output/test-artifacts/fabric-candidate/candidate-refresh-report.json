@@ -1,0 +1,46 @@
+{
+  "run_type": "controlled_candidate_refresh",
+  "promoted": false,
+  "candidate_status": "validated_not_promoted",
+  "source_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/tests/publication/fixtures/source-safe",
+  "approved_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/platform/fabric/publication/current",
+  "controls_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-candidate/internal-controls/current",
+  "output_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-candidate/current",
+  "report_path": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-candidate/candidate-refresh-report.json",
+  "build_report_path": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-candidate/controlled-candidate-refresh-report.json",
+  "load_timestamp_utc": "2026-04-01T20:00:00.000Z",
+  "validation_passed": true,
+  "blocking_failure_count": 0,
+  "blocking_reason_summary": null,
+  "diagnostics": [],
+  "validation_errors": [],
+  "row_counts": {
+    "dim_account": 4,
+    "dim_product": 5,
+    "dim_inventory_location": 7,
+    "fact_inventory_inbound": 9,
+    "fact_demand_line": 144,
+    "fact_inventory_snapshot": 21,
+    "dim_product_family": 5
+  },
+  "generated_row_counts": {
+    "fact_demand_line": 10,
+    "fact_inventory_inbound": 2,
+    "fact_inventory_snapshot": 14
+  },
+  "generated_metadata": {
+    "generated_source_version": "curated_publication_r2__logic_first_controls_r1",
+    "generated_dates": [
+      "2026-04-02",
+      "2026-04-03"
+    ],
+    "new_demand_rows": 10,
+    "new_inbound_rows": 2,
+    "new_snapshot_rows": 14
+  },
+  "active_baseline": {
+    "current_package_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/platform/fabric/publication/current",
+    "public_mirror_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/apps/public-site/src/data/publication/current",
+    "preserved": true
+  }
+}

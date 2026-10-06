@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dim_account",
+  "description": "Public-safe abstracted account dimension for the bounded MVP slice.",
+  "type": "array",
+  "x-grain": "One row per public-safe account entity in MVP scope.",
+  "x-allowed_fallbacks": [
+    "UNKNOWN"
+  ],
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "account_sk",
+        "account_code",
+        "account_name",
+        "customer_group",
+        "account_pattern_class",
+        "service_network_code",
+        "fulfillment_context_code",
+        "record_source_family",
+        "source_file_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "account_sk": {
+          "type": "string",
+          "pattern": "^ACC_SK_[A-F0-9]{12}$"
+        },
+        "account_code": {
+          "type": "string",
+          "pattern": "^ACC-[A-F0-9]{6}$"
+        },
+        "account_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "customer_group": {
+          "type": "string",
+          "enum": [
+            "Field Service",
+            "Project Delivery",
+            "Channel Support",
+            "Legacy Coverage"
+          ]
+        },
+        "account_pattern_class": {
+          "type": "string",
+          "enum": [
+            "RECURRING_SERVICE",
+            "PROJECT_BASED",
+            "PARTNER_CHANNEL",
+            "UNKNOWN"
+          ]
+        },
+        "service_network_code": {
+          "type": "string",
+          "pattern": "^(SERVICE_NETWORK_[A-F0-9]{6}|UNKNOWN)$"
+        },
+        "fulfillment_context_code": {
+          "type": "string",
+          "enum": [
+            "DIRECT_SERVICE",
+            "PARTNER_ROUTED",
+            "THIRD_PARTY_ROUTED",
+            "UNKNOWN"
+          ]
+        },
+        "record_source_family": {
+          "type": "string",
+          "enum": [
+            "account_reference_domain"
+          ]
+        },
+        "source_file_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "unknown"
+          ]
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

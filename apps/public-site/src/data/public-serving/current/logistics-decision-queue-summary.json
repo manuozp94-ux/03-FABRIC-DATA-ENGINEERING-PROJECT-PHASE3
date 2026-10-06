@@ -1,0 +1,68 @@
+[
+  {
+    "queue_domain": "logistics",
+    "decision_type_code": "FINAL_SALE_FULFILLMENT",
+    "recommendation_status_code": "APPROVED",
+    "decision_reason_code": "FULFILL_OPEN_DEMAND",
+    "recommendation_count": 45,
+    "recommended_qty": 551,
+    "approved_qty": 551,
+    "recommended_cost_amount_usd": 10646.240000000002,
+    "approved_cost_amount_usd": 10646.240000000002
+  },
+  {
+    "queue_domain": "logistics",
+    "decision_type_code": "FINAL_SALE_FULFILLMENT",
+    "recommendation_status_code": "APPROVED",
+    "decision_reason_code": "SERVICE_LEAD_TIME_RISK",
+    "recommendation_count": 3,
+    "recommended_qty": 33,
+    "approved_qty": 33,
+    "recommended_cost_amount_usd": 599.76,
+    "approved_cost_amount_usd": 599.76
+  },
+  {
+    "queue_domain": "logistics",
+    "decision_type_code": "FINAL_SALE_FULFILLMENT",
+    "recommendation_status_code": "RECOMMENDED",
+    "decision_reason_code": "FULFILL_OPEN_DEMAND",
+    "recommendation_count": 22,
+    "recommended_qty": 292,
+    "approved_qty": 0,
+    "recommended_cost_amount_usd": 5311.6,
+    "approved_cost_amount_usd": 0
+  },
+  {
+    "queue_domain": "logistics",
+    "decision_type_code": "FINAL_SALE_FULFILLMENT",
+    "recommendation_status_code": "RECOMMENDED",
+    "decision_reason_code": "SERVICE_LEAD_TIME_RISK",
+    "recommendation_count": 2,
+    "recommended_qty": 64,
+    "approved_qty": 0,
+    "recommended_cost_amount_usd": 783.36,
+    "approved_cost_amount_usd": 0
+  },
+  {
+    "queue_domain": "logistics",
+    "decision_type_code": "INVENTORY_TRANSFER",
+    "recommendation_status_code": "APPROVED",
+    "decision_reason_code": "TRANSFER_BALANCE",
+    "recommendation_count": 16,
+    "recommended_qty": 2749,
+    "approved_qty": 2749,
+    "recommended_cost_amount_usd": 33647.76,
+    "approved_cost_amount_usd": 33647.76
+  },
+  {
+    "queue_domain": "logistics",
+    "decision_type_code": "INVENTORY_TRANSFER",
+    "recommendation_status_code": "RECOMMENDED",
+    "decision_reason_code": "TRANSFER_BALANCE",
+    "recommendation_count": 8,
+    "recommended_qty": 1359,
+    "approved_qty": 0,
+    "recommended_cost_amount_usd": 16634.16,
+    "approved_cost_amount_usd": 0
+  }
+]

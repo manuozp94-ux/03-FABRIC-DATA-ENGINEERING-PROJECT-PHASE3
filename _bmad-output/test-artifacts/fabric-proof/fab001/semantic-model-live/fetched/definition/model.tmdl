@@ -1,0 +1,23 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["DirectLake - lh_fab001_public_proof"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","WebModelingEdit","DaxQueryView_Desktop"]
+
+ref table gold_supply_chain_action_queue
+ref table gold_supply_chain_decision_summary
+ref table slv_current_inventory_position
+ref table slv_demand_line_enriched
+ref table dim_product
+ref table dim_account
+ref table dim_product_family
+ref table dim_inventory_location
+

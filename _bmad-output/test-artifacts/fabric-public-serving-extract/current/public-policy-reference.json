@@ -1,0 +1,47 @@
+[
+  {
+    "inventory_policy_class": "STAGE_AND_COORDINATE",
+    "inventory_policy_label": "Stage And Coordinate",
+    "criticality_band": "ELEVATED",
+    "target_service_level_band": "HIGH",
+    "coverage_target_band": "SHORT",
+    "lead_time_band": "LONG",
+    "service_profile": "PROJECT_SERVICE"
+  },
+  {
+    "inventory_policy_class": "PALLET_BUFFER",
+    "inventory_policy_label": "Pallet Buffer",
+    "criticality_band": "ELEVATED",
+    "target_service_level_band": "HIGH",
+    "coverage_target_band": "BUFFERED",
+    "lead_time_band": "MEDIUM",
+    "service_profile": "BULK_SERVICE"
+  },
+  {
+    "inventory_policy_class": "HIGH_DENSITY_BIN",
+    "inventory_policy_label": "High Density Bin",
+    "criticality_band": "BASELINE",
+    "target_service_level_band": "STANDARD",
+    "coverage_target_band": "SHORT",
+    "lead_time_band": "SHORT",
+    "service_profile": "DENSE_PICK_SERVICE"
+  },
+  {
+    "inventory_policy_class": "CONTROLLED_STOCK",
+    "inventory_policy_label": "Controlled Stock",
+    "criticality_band": "HIGH",
+    "target_service_level_band": "HIGH",
+    "coverage_target_band": "CONTROLLED",
+    "lead_time_band": "LONG",
+    "service_profile": "CONTROLLED_SERVICE"
+  },
+  {
+    "inventory_policy_class": "UNKNOWN",
+    "inventory_policy_label": "Unknown",
+    "criticality_band": "UNKNOWN",
+    "target_service_level_band": "MONITOR",
+    "coverage_target_band": "MONITOR",
+    "lead_time_band": "UNKNOWN",
+    "service_profile": "UNKNOWN"
+  }
+]

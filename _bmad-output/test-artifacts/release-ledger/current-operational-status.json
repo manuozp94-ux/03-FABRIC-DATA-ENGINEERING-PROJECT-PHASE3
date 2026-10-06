@@ -1,0 +1,52 @@
+{
+  "report_type": "fab001_operational_status",
+  "recorded_at_utc": "2026-04-15T01:44:04.604Z",
+  "contract_reference": "platform/fabric/contracts/release-communications-contract.md",
+  "release_id": "rls_fab001_20260401t221500z",
+  "current_release_state": "published_approved",
+  "overall_status": "healthy_published",
+  "overall_status_label": "Healthy Published",
+  "last_successful_refresh_utc": "2026-04-15T01:44:04+00:00",
+  "release_proof_refresh_completed_at_utc": "2026-04-01T20:16:32.516Z",
+  "latest_live_runtime_refresh_utc": "2026-04-15T01:44:04+00:00",
+  "approved_input_refresh_timestamp_utc": "2026-04-01T22:15:00.000Z",
+  "last_approved_release_recorded_at_utc": "2026-04-15T01:44:04.451Z",
+  "refresh_evidence": {
+    "active_source": "latest_live_runtime_refresh",
+    "active_source_label": "Latest live runtime refresh",
+    "runtime_pipeline_report_path": "_bmad-output/test-artifacts/fabric-proof/fab001/runtime-governance/runtime-pipeline-report.json"
+  },
+  "validation_status": {
+    "coherence_promotion_status": "coherence_approved",
+    "proof_refresh_status": "live_refresh_completed",
+    "runtime_reconciliation_status": "aligned",
+    "runtime_traceability_complete": true
+  },
+  "freshness": {
+    "status": "current",
+    "status_label": "Current",
+    "age_days": 0,
+    "warning_after_days": 7,
+    "stale_after_days": 14
+  },
+  "public_source": {
+    "active_mode": "fabric_serving_extract",
+    "active_label": "Fabric serving extract",
+    "active_reference": "apps/public-site/src/data/public-serving/current",
+    "target_mode": "fabric_serving_extract",
+    "target_label": "Fabric serving extract",
+    "target_reference": "apps/public-site/src/data/public-serving/current",
+    "serving_extract_status": "produced_from_reference_gold",
+    "serving_extract_status_label": "Produced From Reference Gold",
+    "note": "The public site is consuming a Fabric-derived serving extract reconciled against the latest recorded Fabric runtime refresh."
+  },
+  "public_routes": [
+    "/",
+    "/case-study",
+    "/technical-method",
+    "/contact"
+  ],
+  "release_record_path": "_bmad-output/test-artifacts/release-ledger/releases/rls_fab001_20260401t221500z.json",
+  "current_release_pointer_path": "_bmad-output/test-artifacts/release-ledger/current-release.json",
+  "summary_note": "This status report is a governed mirror of approved release context plus the latest reconciled Fabric runtime evidence. It is not a request-time live operational feed."
+}

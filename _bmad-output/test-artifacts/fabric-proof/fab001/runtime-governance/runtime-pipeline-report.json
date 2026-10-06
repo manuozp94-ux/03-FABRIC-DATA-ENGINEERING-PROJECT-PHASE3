@@ -1,0 +1,68 @@
+{
+  "pipeline": {
+    "id": "preview-pipeline-id",
+    "displayName": "pl_fab001_runtime_orchestration"
+  },
+  "loader_notebook": {
+    "id": "preview-loader-notebook-id",
+    "displayName": "nb_fab001_lakehouse_loader"
+  },
+  "pipeline_job": {
+    "id": "preview-pipeline-run-id",
+    "status": "Completed",
+    "startTimeUtc": "2026-04-15T01:44:04+00:00",
+    "endTimeUtc": "2026-04-15T01:44:04+00:00",
+    "failureReason": null
+  },
+  "pipeline_activity_runs": [
+    {
+      "activityName": "RunFabricProofNotebook",
+      "activityRunId": "preview-activity-run-id",
+      "status": "Completed",
+      "activityRunStart": "2026-04-15T01:44:04+00:00",
+      "activityRunEnd": "2026-04-15T01:44:04+00:00"
+    }
+  ],
+  "recorded_at_utc": "2026-04-15T01:44:04+00:00",
+  "pipeline_status": "Completed",
+  "runtime_execution_mode": "pipeline_notebook_activity_preview",
+  "runtime_sequence": [
+    {
+      "stage": "approved_bronze_input",
+      "description": "Repo-side approval has already promoted the bounded raw-like Bronze input package."
+    },
+    {
+      "stage": "fabric_bronze_landing",
+      "description": "Fabric lands the approved Bronze input from OneLake Files into Delta tables."
+    },
+    {
+      "stage": "fabric_silver_conformance",
+      "description": "The loader notebook cleans, normalizes, and conforms the Bronze input inside Fabric Silver."
+    },
+    {
+      "stage": "fabric_gold_serving",
+      "description": "The loader notebook derives bounded Gold serving tables downstream of Silver."
+    },
+    {
+      "stage": "public_serving_extract_status",
+      "description": "Runtime governance records whether a bounded Fabric public serving extract was produced."
+    },
+    {
+      "stage": "runtime_governance_capture",
+      "description": "The governance notebook materializes control-table evidence inside the Lakehouse."
+    }
+  ],
+  "public_serving_extract": {
+    "status": "produced_from_reference_gold",
+    "produced": true,
+    "active_public_source_mode": "fabric_serving_extract",
+    "target_public_source_mode": "fabric_serving_extract",
+    "active_reference": "apps/public-site/src/data/public-serving/current",
+    "artifact_path": "_bmad-output/test-artifacts/fabric-public-serving-extract/materialization-report.json",
+    "note": "The public site now consumes a bounded Fabric-derived serving extract mirrored into the site repo from governed Gold-reference artifacts."
+  },
+  "report_type": "fab001_runtime_pipeline",
+  "mode": "preview_only",
+  "pipeline_definition_path": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-proof/fab001/runtime-governance/pipeline-definition.json",
+  "control_root": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-proof/fab001/runtime-governance/current"
+}

@@ -1,0 +1,62 @@
+# generated: 2026-04-15T00:00:00-0600
+# last_updated: 2026-04-15T00:00:00-0600
+# project: FABRIC_PLATFORM_DEV_BMAD_V2_OPERATING_LOOP
+# project_key: V2
+# tracking_system: file-system
+# story_location: "_bmad-output/implementation-artifacts"
+#
+# V2 Trello mapping:
+# - Canonical planning epics are v2.1-v2.6.
+# - Trello mirror uses Epic 8-Epic 13 to continue the completed Epic 1-Epic 7 history.
+# - Local repo artifacts remain source of truth; Trello is visibility only.
+
+generated: 2026-04-15T00:00:00-0600
+last_updated: 2026-04-15T00:00:00-0600
+project: FABRIC_PLATFORM_DEV_BMAD_V2_OPERATING_LOOP
+project_key: V2
+tracking_system: file-system
+story_location: "_bmad-output/implementation-artifacts"
+
+development_status:
+  epic-8: done
+  8-1-publish-rebaseline-planning-pack: done
+  8-2-update-current-state-documentation-spine: done
+  8-3-define-oversight-cadence-and-decision-log: done
+  epic-8-retrospective: optional
+
+  epic-9: backlog
+  9-1-validate-queue-to-execution-traceability: backlog
+  9-2-validate-lead-time-rules: backlog
+  9-3-decide-inventory-snapshot-reconciliation-scope: backlog
+  9-4-add-inventory-conservation-validation: backlog
+  epic-9-retrospective: optional
+
+  epic-10: in-progress
+  10-1-sync-missing-tables-into-semantic-model: in-progress
+  10-2-apply-full-measure-pack: backlog
+  10-3-author-sales-dashboard-page: backlog
+  10-4-author-supply-chain-decision-support-page: backlog
+  10-5-author-inventory-decision-support-page: backlog
+  10-6-configure-dashboard-access-path: backlog
+  epic-10-retrospective: optional
+
+  epic-11: backlog
+  11-1-update-case-study-around-operating-loop: backlog
+  11-2-update-technical-method-with-current-fabric-state: backlog
+  11-3-add-dashboard-request-access-cta: backlog
+  11-4-build-demo-walkthrough-page-or-section: backlog
+  epic-11-retrospective: optional
+
+  epic-12: backlog
+  12-1-decide-repo-packaging-strategy: backlog
+  12-2-create-public-exposure-checklist: backlog
+  12-3-prepare-phase-readme-files: backlog
+  12-4-run-public-release-validation: backlog
+  epic-12-retrospective: optional
+
+  epic-13: backlog
+  13-1-create-demo-script: backlog
+  13-2-create-reviewer-map: backlog
+  13-3-create-defense-qa: backlog
+  13-4-final-smoke-review: backlog
+  epic-13-retrospective: optional

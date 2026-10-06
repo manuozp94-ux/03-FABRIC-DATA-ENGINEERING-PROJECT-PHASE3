@@ -1,0 +1,3 @@
+movement_status_code,movement_type_code,movement_count,movement_qty,shipped_qty,received_qty,in_transit_qty,movement_cost_amount_usd
+IN_TRANSIT,INVENTORY_TRANSFER,10,1727,1727,0,1727,21138.479999999996
+RECEIVED,INVENTORY_TRANSFER,6,1022,1022,1022,0,12509.28

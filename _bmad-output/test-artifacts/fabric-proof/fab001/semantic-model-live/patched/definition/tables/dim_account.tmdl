@@ -1,0 +1,110 @@
+table dim_account
+	lineageTag: 36c8f1df-9cba-42e8-b622-15b76dd226fc
+	sourceLineageTag: [dbo].[dim_account]
+
+	column account_sk
+		dataType: string
+		lineageTag: d68e6da0-4fab-4c60-9e47-dd16ff210882
+		sourceLineageTag: account_sk
+		summarizeBy: none
+		sourceColumn: account_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_code
+		dataType: string
+		lineageTag: 1a3c2647-898c-4c58-a9a0-042343ee32c3
+		sourceLineageTag: account_code
+		summarizeBy: none
+		sourceColumn: account_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_name
+		dataType: string
+		lineageTag: 4c4fa5c2-5d81-46ff-9e57-d87ce2d0765c
+		sourceLineageTag: account_name
+		summarizeBy: none
+		sourceColumn: account_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_pattern_class
+		dataType: string
+		lineageTag: aac860df-2ab5-4489-9a85-350db7f70202
+		sourceLineageTag: account_pattern_class
+		summarizeBy: none
+		sourceColumn: account_pattern_class
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_network_code
+		dataType: string
+		lineageTag: 90f41122-eec5-4897-94ab-c113f369b7d2
+		sourceLineageTag: service_network_code
+		summarizeBy: none
+		sourceColumn: service_network_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column fulfillment_context_code
+		dataType: string
+		lineageTag: 2b5110d0-6a77-4fe0-8079-49aad8c3a36a
+		sourceLineageTag: fulfillment_context_code
+		summarizeBy: none
+		sourceColumn: fulfillment_context_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column record_source_family
+		dataType: string
+		lineageTag: 9ffbcfd3-14d4-4db5-bdf6-043d08a61764
+		sourceLineageTag: record_source_family
+		summarizeBy: none
+		sourceColumn: record_source_family
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_file_version
+		dataType: string
+		lineageTag: 5086640d-eddd-40e7-9fe4-f41630a0cb5c
+		sourceLineageTag: source_file_version
+		summarizeBy: none
+		sourceColumn: source_file_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column record_status
+		dataType: string
+		lineageTag: a4315986-4b74-49be-a60b-b50469843260
+		sourceLineageTag: record_status
+		summarizeBy: none
+		sourceColumn: record_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column publication_safety_flag
+		dataType: string
+		lineageTag: a58541e1-029a-44a4-ac8a-eaa5f4afa9da
+		sourceLineageTag: publication_safety_flag
+		summarizeBy: none
+		sourceColumn: publication_safety_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column load_timestamp_utc
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6bc57a70-75df-4206-b6eb-7f1755166076
+		sourceLineageTag: load_timestamp_utc
+		summarizeBy: none
+		sourceColumn: load_timestamp_utc
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_account = entity
+		mode: directLake
+		source
+			entityName: dim_account
+			expressionSource: 'DirectLake - lh_fab001_public_proof'
+

@@ -1,0 +1,10 @@
+[
+  {
+    "fulfilled_qty": 57741,
+    "backordered_qty": 259193,
+    "open_demand_qty": 259193,
+    "demand_value_proxy": 8579540,
+    "cogs_amount": 953675.92,
+    "fulfillment_line_count": 23476
+  }
+]

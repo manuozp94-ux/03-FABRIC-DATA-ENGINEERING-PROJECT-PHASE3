@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "rule_location_service_lead_time",
+  "description": "Governed fulfillment-location service rule used to plan sales fulfillment lead times.",
+  "type": "array",
+  "x-grain": "One row per fulfillment location, service region, and optional account service rule.",
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "location_service_lead_time_rule_sk",
+        "fulfillment_inventory_location_sk",
+        "service_region_code",
+        "service_lead_time_days",
+        "service_priority_code",
+        "effective_start_date",
+        "effective_end_date",
+        "rule_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "location_service_lead_time_rule_sk": {
+          "type": "string",
+          "pattern": "^LSLT_RULE_[A-F0-9]{12}$"
+        },
+        "fulfillment_inventory_location_sk": {
+          "type": "string",
+          "pattern": "^LOC_SK_[A-F0-9]{12}$"
+        },
+        "service_region_code": {
+          "type": "string",
+          "pattern": "^(REGION_[A-F0-9]{6}|UNKNOWN)$"
+        },
+        "account_sk": {
+          "type": "string",
+          "pattern": "^ACC_SK_[A-F0-9]{12}$"
+        },
+        "service_lead_time_days": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "service_priority_code": {
+          "type": "string",
+          "enum": [
+            "PRIMARY",
+            "SECONDARY",
+            "BACKUP",
+            "UNKNOWN"
+          ]
+        },
+        "effective_start_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "effective_end_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "rule_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
+

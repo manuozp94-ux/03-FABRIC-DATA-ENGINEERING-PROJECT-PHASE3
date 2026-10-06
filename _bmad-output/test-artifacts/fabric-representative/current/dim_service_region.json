@@ -1,0 +1,82 @@
+[
+  {
+    "service_region_code": "REGION_D9B539",
+    "service_region_label": "North Corridor",
+    "service_region_class": "LOGISTICS_SERVICE_REGION",
+    "record_source_family": "service_region_reference_domain",
+    "source_file_version": "curated_publication_r2__representative_market_r1__operating_loop_v1",
+    "record_status": "active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "service_region_code": "REGION_2D772A",
+    "service_region_label": "Harbor Line",
+    "service_region_class": "COMMERCIAL_SERVICE_REGION",
+    "record_source_family": "service_region_reference_domain",
+    "source_file_version": "curated_publication_r2__representative_market_r1__operating_loop_v1",
+    "record_status": "active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "service_region_code": "REGION_5A5067",
+    "service_region_label": "Metro East",
+    "service_region_class": "COMMERCIAL_SERVICE_REGION",
+    "record_source_family": "service_region_reference_domain",
+    "source_file_version": "curated_publication_r2__representative_market_r1__operating_loop_v1",
+    "record_status": "active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "service_region_code": "REGION_7F06C5",
+    "service_region_label": "Central Ridge",
+    "service_region_class": "LOGISTICS_SERVICE_REGION",
+    "record_source_family": "service_region_reference_domain",
+    "source_file_version": "curated_publication_r2__representative_market_r1__operating_loop_v1",
+    "record_status": "active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "service_region_code": "REGION_B7603E",
+    "service_region_label": "South Gate",
+    "service_region_class": "COMMERCIAL_SERVICE_REGION",
+    "record_source_family": "service_region_reference_domain",
+    "source_file_version": "curated_publication_r2__representative_market_r1__operating_loop_v1",
+    "record_status": "active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "service_region_code": "REGION_B1593C",
+    "service_region_label": "West Junction",
+    "service_region_class": "COMMERCIAL_SERVICE_REGION",
+    "record_source_family": "service_region_reference_domain",
+    "source_file_version": "curated_publication_r2__representative_market_r1__operating_loop_v1",
+    "record_status": "active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "service_region_code": "REGION_A74466",
+    "service_region_label": "River Bend",
+    "service_region_class": "LOGISTICS_SERVICE_REGION",
+    "record_source_family": "service_region_reference_domain",
+    "source_file_version": "curated_publication_r2__representative_market_r1__operating_loop_v1",
+    "record_status": "active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "service_region_code": "REGION_E6430C",
+    "service_region_label": "Summit Point",
+    "service_region_class": "COMMERCIAL_SERVICE_REGION",
+    "record_source_family": "service_region_reference_domain",
+    "source_file_version": "curated_publication_r2__representative_market_r1__operating_loop_v1",
+    "record_status": "active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  }
+]

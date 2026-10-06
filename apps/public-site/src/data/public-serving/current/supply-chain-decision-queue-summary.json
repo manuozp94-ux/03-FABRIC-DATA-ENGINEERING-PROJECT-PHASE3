@@ -1,0 +1,24 @@
+[
+  {
+    "queue_domain": "supply_chain",
+    "decision_type_code": "PURCHASE_ORDER",
+    "recommendation_status_code": "APPROVED",
+    "decision_reason_code": "OPEN_DEMAND_PRESSURE",
+    "recommendation_count": 24,
+    "recommended_qty": 158310,
+    "approved_qty": 158310,
+    "recommended_cost_amount_usd": 1937714.4000000001,
+    "approved_cost_amount_usd": 1937714.4000000001
+  },
+  {
+    "queue_domain": "supply_chain",
+    "decision_type_code": "PURCHASE_ORDER",
+    "recommendation_status_code": "RECOMMENDED",
+    "decision_reason_code": "OPEN_DEMAND_PRESSURE",
+    "recommendation_count": 24,
+    "recommended_qty": 90100,
+    "approved_qty": 0,
+    "recommended_cost_amount_usd": 1102824.0000000002,
+    "approved_cost_amount_usd": 0
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "report_type": "fab001_public_serving_operating_loop_summary",
+  "loop_status": "materialized_bounded_proof_v1",
+  "decision_to_execution_boundary": "Recommendations are separate from purchase-order, movement, and fulfillment execution facts.",
+  "operating_loop_table_count": 11,
+  "operating_loop_total_rows": 24256,
+  "operating_loop_tables": [
+    {
+      "table_name": "dim_service_region",
+      "row_count": 8
+    },
+    {
+      "table_name": "dim_supplier",
+      "row_count": 8
+    },
+    {
+      "table_name": "rule_supplier_product_lead_time",
+      "row_count": 196
+    },
+    {
+      "table_name": "rule_location_transfer_lead_time",
+      "row_count": 240
+    },
+    {
+      "table_name": "rule_location_service_lead_time",
+      "row_count": 96
+    },
+    {
+      "table_name": "fact_supply_chain_decision_queue_line",
+      "row_count": 48
+    },
+    {
+      "table_name": "fact_logistics_decision_queue_line",
+      "row_count": 96
+    },
+    {
+      "table_name": "fact_purchase_order_line",
+      "row_count": 24
+    },
+    {
+      "table_name": "fact_purchase_order_status_history",
+      "row_count": 48
+    },
+    {
+      "table_name": "fact_inventory_movement_line",
+      "row_count": 16
+    },
+    {
+      "table_name": "fact_sales_fulfillment_line",
+      "row_count": 23476
+    }
+  ],
+  "supply_chain_decision_queue_summary_rows": 2,
+  "purchase_order_summary_rows": 2,
+  "logistics_decision_queue_summary_rows": 6,
+  "inventory_movement_summary_rows": 2,
+  "sales_fulfillment_summary_rows": 3,
+  "sales_dashboard_summary_rows": 1,
+  "inventory_location_action_summary_rows": 19,
+  "public_safety_note": "Supplier, region, location, and account surfaces remain synthetic and public-safe."
+}

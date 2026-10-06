@@ -1,0 +1,5 @@
+pricing_context_sk,customer_group,account_pattern_class,channel_code,market_region_code,pricing_tier_code,price_context_uplift_pct,bounded_discount_rate_pct,currency_code,foundation_version,publication_safety_flag,load_timestamp_utc
+PRC_SK_3D9DE6181CA0,Channel Support,PARTNER_CHANNEL,PARTNER_RESALE,MX_PUBLIC,CHANNEL_SUPPORT,-0.035,0.07,USD,financial_foundation_r1,publication_safe,2026-04-04T06:46:31.455Z
+PRC_SK_643DCD465B5A,Field Service,RECURRING_SERVICE,DIRECT_SERVICE,MX_PUBLIC,SERVICE_PRIORITY,0.015,0.02,USD,financial_foundation_r1,publication_safe,2026-04-04T06:46:31.455Z
+PRC_SK_8996F8D02186,Legacy Coverage,UNKNOWN,LEGACY_SUPPORT,MX_PUBLIC,LEGACY_MAINTAIN,0,0.01,USD,financial_foundation_r1,publication_safe,2026-04-04T06:46:31.455Z
+PRC_SK_1849B83E9FE8,Project Delivery,PROJECT_BASED,PROJECT_DIRECT,MX_PUBLIC,PROJECT_PROGRAM,-0.015,0.04,USD,financial_foundation_r1,publication_safe,2026-04-04T06:46:31.455Z

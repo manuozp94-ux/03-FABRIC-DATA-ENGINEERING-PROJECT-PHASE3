@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fact_cost_history",
+  "description": "Bounded effective-dated unit-cost history for the financial analytics foundation.",
+  "type": "array",
+  "x-grain": "One row per product, cost context, and effective start date.",
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "cost_history_sk",
+        "product_sk",
+        "cost_context_sk",
+        "currency_code",
+        "unit_cost_amount",
+        "cost_method_code",
+        "effective_start_date",
+        "effective_end_date",
+        "unit_cost_drift_band_code",
+        "derivation_basis_code",
+        "foundation_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "cost_history_sk": {
+          "type": "string",
+          "pattern": "^CST_SK_[A-F0-9]{12}$"
+        },
+        "product_sk": {
+          "type": "string",
+          "pattern": "^PRD_SK_[A-F0-9]{12}$"
+        },
+        "cost_context_sk": {
+          "type": "string",
+          "pattern": "^CCT_SK_[A-F0-9]{12}$"
+        },
+        "currency_code": {
+          "type": "string",
+          "enum": [
+            "USD"
+          ]
+        },
+        "unit_cost_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cost_method_code": {
+          "type": "string",
+          "enum": [
+            "STANDARD"
+          ]
+        },
+        "effective_start_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "effective_end_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "unit_cost_drift_band_code": {
+          "type": "string",
+          "enum": [
+            "COST_DRIFT_04_08",
+            "COST_DRIFT_05_09",
+            "COST_DRIFT_06_10",
+            "COST_DRIFT_07_12",
+            "COST_DRIFT_08_13"
+          ]
+        },
+        "cost_review_cadence_code": {
+          "type": "string",
+          "enum": [
+            "QUARTERLY",
+            "SEMIANNUAL"
+          ]
+        },
+        "derivation_basis_code": {
+          "type": "string",
+          "enum": [
+            "RULE_DERIVED_COST_HISTORY"
+          ]
+        },
+        "foundation_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

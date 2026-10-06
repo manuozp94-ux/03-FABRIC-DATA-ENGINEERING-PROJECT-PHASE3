@@ -1,0 +1,31 @@
+---
+interface LocalizedCopy {
+  en: string;
+  es: string;
+}
+
+interface Props {
+  copy: LocalizedCopy;
+}
+
+const { copy } = Astro.props;
+---
+
+<span class="bilingual-text">
+  <span class="bilingual-text__content bilingual-text__content--en">{copy.en}</span>
+  <span class="bilingual-text__content bilingual-text__content--es">{copy.es}</span>
+</span>
+
+<style>
+  .bilingual-text__content--es {
+    display: none;
+  }
+
+  :global(html[data-lang="es"]) .bilingual-text__content--en {
+    display: none;
+  }
+
+  :global(html[data-lang="es"]) .bilingual-text__content--es {
+    display: inline;
+  }
+</style>

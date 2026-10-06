@@ -1,0 +1,80 @@
+{
+  "release_id": "rls_fab001_20260401t221500z",
+  "captured_at_utc": "2026-04-15T01:44:04.657Z",
+  "contract_reference": "platform/fabric/contracts/release-recovery-contract.md",
+  "source_release_record_path": "_bmad-output/test-artifacts/release-ledger/releases/rls_fab001_20260401t221500z.json",
+  "source_publication_dir": "platform/fabric/publication/current",
+  "source_public_mirror_dir": "apps/public-site/src/data/publication/current",
+  "source_repo_serving_extract_dir": "_bmad-output/test-artifacts/fabric-public-serving-extract/current",
+  "source_site_serving_extract_dir": "apps/public-site/src/data/public-serving/current",
+  "source_site_release_data_dir": "apps/public-site/src/data/release",
+  "snapshot_publication_dir": "_bmad-output/test-artifacts/release-ledger/recoverable-snapshots/rls_fab001_20260401t221500z/publication/current",
+  "snapshot_public_mirror_dir": "_bmad-output/test-artifacts/release-ledger/recoverable-snapshots/rls_fab001_20260401t221500z/site/data/publication/current",
+  "snapshot_repo_serving_extract_dir": "_bmad-output/test-artifacts/release-ledger/recoverable-snapshots/rls_fab001_20260401t221500z/public-serving-extract/current",
+  "snapshot_site_serving_extract_dir": "_bmad-output/test-artifacts/release-ledger/recoverable-snapshots/rls_fab001_20260401t221500z/site/data/public-serving/current",
+  "snapshot_site_release_data_dir": "_bmad-output/test-artifacts/release-ledger/recoverable-snapshots/rls_fab001_20260401t221500z/site/data/release",
+  "recovered_artifacts": {
+    "publication": [
+      "dim_account.json",
+      "dim_inventory_location.json",
+      "dim_product.json",
+      "dim_product_family.json",
+      "fact_demand_line.json",
+      "fact_inventory_inbound.json",
+      "fact_inventory_snapshot.json"
+    ],
+    "public_mirror": [
+      "dim_account.json",
+      "dim_inventory_location.json",
+      "dim_product.json",
+      "dim_product_family.json",
+      "fact_demand_line.json",
+      "fact_inventory_inbound.json",
+      "fact_inventory_snapshot.json"
+    ],
+    "repo_serving_extract": [
+      "action-queue.json",
+      "decision-summary.json",
+      "demand-support-account-pattern.json",
+      "demand-support-product-family.json",
+      "financial-summary.json",
+      "inventory-location-action-summary.json",
+      "inventory-movement-summary.json",
+      "logistics-decision-queue-summary.json",
+      "manifest.json",
+      "monthly-financial-trend.json",
+      "operating-loop-summary.json",
+      "public-policy-reference.json",
+      "purchase-order-summary.json",
+      "sales-dashboard-summary.json",
+      "sales-fulfillment-summary.json",
+      "source-slice-summary.json",
+      "supply-chain-decision-queue-summary.json",
+      "unit-economics-reference.json"
+    ],
+    "site_serving_extract": [
+      "action-queue.json",
+      "decision-summary.json",
+      "demand-support-account-pattern.json",
+      "demand-support-product-family.json",
+      "financial-summary.json",
+      "inventory-location-action-summary.json",
+      "inventory-movement-summary.json",
+      "logistics-decision-queue-summary.json",
+      "manifest.json",
+      "monthly-financial-trend.json",
+      "operating-loop-summary.json",
+      "public-policy-reference.json",
+      "purchase-order-summary.json",
+      "sales-dashboard-summary.json",
+      "sales-fulfillment-summary.json",
+      "source-slice-summary.json",
+      "supply-chain-decision-queue-summary.json",
+      "unit-economics-reference.json"
+    ],
+    "site_release_data": [
+      "current-change-summary.json",
+      "current-operational-status.json"
+    ]
+  }
+}

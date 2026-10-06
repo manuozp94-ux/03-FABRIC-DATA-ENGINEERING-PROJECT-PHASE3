@@ -1,0 +1,16 @@
+.DS_Store
+.env
+.env.*
+node_modules/
+pnpm-debug.log*
+scripts/trello_hybrid_sync.local.env
+scripts/__pycache__/
+scripts/tests/__pycache__/
+_bmad-output/implementation-artifacts/trello-watch.stdout.log
+_bmad-output/implementation-artifacts/trello-watch.stderr.log
+_bmad-output/implementation-artifacts/trello-sync-state.json
+platform/fabric/private-prep/*
+!platform/fabric/private-prep/.gitkeep
+
+# Private interview source screenshots. Keep originals local only.
+docs/99-confidential-dashboard-screenshots/

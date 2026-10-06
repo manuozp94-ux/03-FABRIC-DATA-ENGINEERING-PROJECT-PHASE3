@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fact_purchase_order_line",
+  "description": "Bounded purchase-order execution fact derived from approved supply-chain replenishment decisions.",
+  "type": "array",
+  "x-grain": "One row per purchase-order line, product, supplier, and receiving inventory location.",
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "purchase_order_line_sk",
+        "purchase_order_code",
+        "product_sk",
+        "supplier_sk",
+        "receiving_inventory_location_sk",
+        "order_date",
+        "planned_receipt_date",
+        "ordered_qty",
+        "received_qty",
+        "open_qty",
+        "unit_cost_amount",
+        "purchase_cost_amount_usd",
+        "purchase_order_status_code",
+        "source_file_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "purchase_order_line_sk": {
+          "type": "string",
+          "pattern": "^POL_SK_[A-F0-9]{12}$"
+        },
+        "purchase_order_code": {
+          "type": "string",
+          "pattern": "^PO-[A-F0-9]{8}$"
+        },
+        "supply_chain_decision_line_sk": {
+          "type": "string",
+          "pattern": "^SCQ_SK_[A-F0-9]{12}$"
+        },
+        "product_sk": {
+          "type": "string",
+          "pattern": "^PRD_SK_[A-F0-9]{12}$"
+        },
+        "supplier_sk": {
+          "type": "string",
+          "pattern": "^SUP_SK_[A-F0-9]{12}$"
+        },
+        "receiving_inventory_location_sk": {
+          "type": "string",
+          "pattern": "^LOC_SK_[A-F0-9]{12}$"
+        },
+        "order_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "planned_receipt_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "expected_release_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "actual_receipt_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "ordered_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "received_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "open_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unit_cost_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "purchase_cost_amount_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "purchase_order_status_code": {
+          "type": "string",
+          "enum": [
+            "PLANNED",
+            "ORDERED",
+            "PARTIALLY_RECEIVED",
+            "RECEIVED",
+            "CANCELLED",
+            "UNKNOWN"
+          ]
+        },
+        "currency_code": {
+          "type": "string",
+          "enum": [
+            "USD"
+          ]
+        },
+        "source_file_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
+

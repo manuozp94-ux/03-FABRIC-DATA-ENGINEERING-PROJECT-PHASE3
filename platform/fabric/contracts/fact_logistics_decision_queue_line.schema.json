@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fact_logistics_decision_queue_line",
+  "description": "Recommendation queue for bounded logistics movement and sales-fulfillment decisions before execution.",
+  "type": "array",
+  "x-grain": "One row per logistics recommendation line.",
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "logistics_decision_line_sk",
+        "decision_date",
+        "decision_type_code",
+        "recommendation_status_code",
+        "product_sk",
+        "recommended_qty",
+        "decision_reason_code",
+        "source_file_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "logistics_decision_line_sk": {
+          "type": "string",
+          "pattern": "^LGQ_SK_[A-F0-9]{12}$"
+        },
+        "decision_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "decision_type_code": {
+          "type": "string",
+          "enum": [
+            "INVENTORY_TRANSFER",
+            "FINAL_SALE_FULFILLMENT",
+            "HOLD",
+            "MONITOR",
+            "UNKNOWN"
+          ]
+        },
+        "recommendation_status_code": {
+          "type": "string",
+          "enum": [
+            "RECOMMENDED",
+            "APPROVED",
+            "REJECTED",
+            "DEFERRED",
+            "SUPERSEDED",
+            "UNKNOWN"
+          ]
+        },
+        "product_sk": {
+          "type": "string",
+          "pattern": "^PRD_SK_[A-F0-9]{12}$"
+        },
+        "origin_inventory_location_sk": {
+          "type": "string",
+          "pattern": "^LOC_SK_[A-F0-9]{12}$"
+        },
+        "destination_inventory_location_sk": {
+          "type": "string",
+          "pattern": "^LOC_SK_[A-F0-9]{12}$"
+        },
+        "demand_line_sk": {
+          "type": "string",
+          "pattern": "^DMD_SK_[A-F0-9]{12}$"
+        },
+        "account_sk": {
+          "type": "string",
+          "pattern": "^ACC_SK_[A-F0-9]{12}$"
+        },
+        "recommended_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "approved_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "planned_execution_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "expected_completion_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "cost_amount_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "decision_reason_code": {
+          "type": "string",
+          "enum": [
+            "LOCATION_SHORTFALL",
+            "TRANSFER_BALANCE",
+            "FULFILL_OPEN_DEMAND",
+            "SERVICE_LEAD_TIME_RISK",
+            "MONITOR_ONLY",
+            "UNKNOWN"
+          ]
+        },
+        "source_file_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
+

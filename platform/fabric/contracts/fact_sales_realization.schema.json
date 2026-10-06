@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fact_sales_realization",
+  "description": "Bounded fulfilled-line sales realization derived from effective-dated price and cost history.",
+  "type": "array",
+  "x-grain": "One row per fulfilled public demand-line occurrence.",
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "sales_realization_sk",
+        "demand_line_sk",
+        "product_sk",
+        "account_sk",
+        "pricing_context_sk",
+        "cost_context_sk",
+        "invoice_date",
+        "fulfilled_qty",
+        "unit_price_amount",
+        "gross_revenue_amount",
+        "discount_amount",
+        "net_revenue_amount",
+        "unit_cost_amount",
+        "cogs_amount",
+        "gross_margin_amount",
+        "gross_margin_pct",
+        "price_realization_pct",
+        "currency_code",
+        "derivation_basis_code",
+        "foundation_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sales_realization_sk": {
+          "type": "string",
+          "pattern": "^SLS_SK_[A-F0-9]{12}$"
+        },
+        "demand_line_sk": {
+          "type": "string",
+          "pattern": "^DMD_SK_[A-F0-9]{12}$"
+        },
+        "product_sk": {
+          "type": "string",
+          "pattern": "^PRD_SK_[A-F0-9]{12}$"
+        },
+        "account_sk": {
+          "type": "string",
+          "pattern": "^ACC_SK_[A-F0-9]{12}$"
+        },
+        "pricing_context_sk": {
+          "type": "string",
+          "pattern": "^PRC_SK_[A-F0-9]{12}$"
+        },
+        "cost_context_sk": {
+          "type": "string",
+          "pattern": "^CCT_SK_[A-F0-9]{12}$"
+        },
+        "invoice_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "fulfilled_qty": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "unit_price_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "gross_revenue_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "discount_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "net_revenue_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "unit_cost_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cogs_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "gross_margin_amount": {
+          "type": "number"
+        },
+        "gross_margin_pct": {
+          "type": "number"
+        },
+        "price_realization_pct": {
+          "type": "number"
+        },
+        "currency_code": {
+          "type": "string",
+          "enum": [
+            "USD"
+          ]
+        },
+        "derivation_basis_code": {
+          "type": "string",
+          "enum": [
+            "FULFILLMENT_LINE_RULE_RESOLVED"
+          ]
+        },
+        "foundation_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

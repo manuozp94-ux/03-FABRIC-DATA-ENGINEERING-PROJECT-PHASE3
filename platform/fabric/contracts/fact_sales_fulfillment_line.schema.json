@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fact_sales_fulfillment_line",
+  "description": "Bounded sales-fulfillment execution fact tying demand lines to inventory consumption.",
+  "type": "array",
+  "x-grain": "One row per sales fulfillment event against a demand line, product, account, and fulfillment location.",
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "sales_fulfillment_line_sk",
+        "demand_line_sk",
+        "product_sk",
+        "account_sk",
+        "fulfillment_inventory_location_sk",
+        "ship_date",
+        "planned_delivery_date",
+        "fulfilled_qty",
+        "backordered_qty",
+        "unit_cost_amount",
+        "cogs_amount",
+        "fulfillment_status_code",
+        "source_file_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sales_fulfillment_line_sk": {
+          "type": "string",
+          "pattern": "^FUL_SK_[A-F0-9]{12}$"
+        },
+        "logistics_decision_line_sk": {
+          "type": "string",
+          "pattern": "^LGQ_SK_[A-F0-9]{12}$"
+        },
+        "demand_line_sk": {
+          "type": "string",
+          "pattern": "^DMD_SK_[A-F0-9]{12}$"
+        },
+        "product_sk": {
+          "type": "string",
+          "pattern": "^PRD_SK_[A-F0-9]{12}$"
+        },
+        "account_sk": {
+          "type": "string",
+          "pattern": "^ACC_SK_[A-F0-9]{12}$"
+        },
+        "fulfillment_inventory_location_sk": {
+          "type": "string",
+          "pattern": "^LOC_SK_[A-F0-9]{12}$"
+        },
+        "ship_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "planned_delivery_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "actual_delivery_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "fulfilled_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "backordered_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "service_lead_time_days": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unit_cost_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cogs_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "fulfillment_status_code": {
+          "type": "string",
+          "enum": [
+            "PLANNED",
+            "ALLOCATED",
+            "SHIPPED",
+            "DELIVERED",
+            "BACKORDERED",
+            "CANCELLED",
+            "UNKNOWN"
+          ]
+        },
+        "source_file_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
+

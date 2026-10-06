@@ -1,0 +1,58 @@
+[
+  {
+    "account_sk": "ACC_SK_B2EB9328A375",
+    "account_code": "ACC-18158F",
+    "account_name": "Central Ridge Channel Support 01",
+    "customer_group": "Channel Support",
+    "account_pattern_class": "PARTNER_CHANNEL",
+    "service_network_code": "SERVICE_NETWORK_6C223B",
+    "fulfillment_context_code": "THIRD_PARTY_ROUTED",
+    "record_source_family": "account_reference_domain",
+    "source_file_version": "curated_publication_r2",
+    "record_status": "active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-02T08:28:22.656Z"
+  },
+  {
+    "account_sk": "ACC_SK_292243E9233B",
+    "account_code": "ACC-EC485A",
+    "account_name": "River Bend Project Delivery 01",
+    "customer_group": "Project Delivery",
+    "account_pattern_class": "PROJECT_BASED",
+    "service_network_code": "SERVICE_NETWORK_C38CB4",
+    "fulfillment_context_code": "PARTNER_ROUTED",
+    "record_source_family": "account_reference_domain",
+    "source_file_version": "curated_publication_r2",
+    "record_status": "active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-02T08:28:22.656Z"
+  },
+  {
+    "account_sk": "ACC_SK_C3B16196D437",
+    "account_code": "ACC-639372",
+    "account_name": "South Gate Legacy Coverage 01",
+    "customer_group": "Legacy Coverage",
+    "account_pattern_class": "UNKNOWN",
+    "service_network_code": "UNKNOWN",
+    "fulfillment_context_code": "UNKNOWN",
+    "record_source_family": "account_reference_domain",
+    "source_file_version": "curated_publication_r2",
+    "record_status": "unknown",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-02T08:28:22.656Z"
+  },
+  {
+    "account_sk": "ACC_SK_D6B138DC3D66",
+    "account_code": "ACC-302850",
+    "account_name": "South Gate Field Service 01",
+    "customer_group": "Field Service",
+    "account_pattern_class": "RECURRING_SERVICE",
+    "service_network_code": "SERVICE_NETWORK_6C223B",
+    "fulfillment_context_code": "DIRECT_SERVICE",
+    "record_source_family": "account_reference_domain",
+    "source_file_version": "curated_publication_r2",
+    "record_status": "active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-02T08:28:22.656Z"
+  }
+]

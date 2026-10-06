@@ -1,0 +1,18 @@
+{
+  "run_type": "controlled_candidate_refresh",
+  "approved_dir": "/var/folders/b1/r_3pt7wn1j16f4kc_g2xxm9w0000gn/T/fabric-controlled-repro-C656e0/approved/current",
+  "controls_dir": "/var/folders/b1/r_3pt7wn1j16f4kc_g2xxm9w0000gn/T/fabric-controlled-repro-C656e0/candidate/internal-controls/current",
+  "output_dir": "/var/folders/b1/r_3pt7wn1j16f4kc_g2xxm9w0000gn/T/fabric-controlled-repro-C656e0/candidate-b/current",
+  "report_path": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-candidate/controlled-candidate-refresh-report.json",
+  "load_timestamp_utc": "2026-04-01T20:00:00.000Z",
+  "metadata": {
+    "generated_source_version": "curated_publication_r2__logic_first_controls_r1",
+    "generated_dates": [
+      "2026-04-02",
+      "2026-04-03"
+    ],
+    "new_demand_rows": 10,
+    "new_inbound_rows": 2,
+    "new_snapshot_rows": 14
+  }
+}

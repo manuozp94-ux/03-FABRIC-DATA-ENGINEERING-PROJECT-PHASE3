@@ -1,0 +1,79 @@
+[
+  {
+    "inventory_inbound_id": "inb-2024-0001",
+    "product_id": "sku-internal-1001",
+    "receipt_date": "2024-01-08",
+    "site_code": "SITE-MTY-01",
+    "location_code": "WH-A1",
+    "receipt_qty": 12,
+    "receipt_flow_type": "supplier_receipt",
+    "source_file_version": "inventory-inbound-fixture-v1",
+    "record_status": "active"
+  },
+  {
+    "inventory_inbound_id": "inb-2024-0002",
+    "product_id": "sku-internal-2044",
+    "receipt_date": "2024-01-14",
+    "site_code": "SITE-QRO-3PL",
+    "location_code": "3PL-B7",
+    "receipt_qty": 5,
+    "receipt_flow_type": "transfer_in",
+    "source_file_version": "inventory-inbound-fixture-v1",
+    "record_status": "active"
+  },
+  {
+    "inventory_inbound_id": "inb-2024-0003",
+    "product_id": "sku-internal-3188",
+    "receipt_date": "2024-01-21",
+    "site_code": "SITE-GDL-TRN",
+    "location_code": "TRN-D2",
+    "receipt_qty": 60,
+    "receipt_flow_type": "supplier_receipt",
+    "source_file_version": "inventory-inbound-fixture-v1",
+    "record_status": "active"
+  },
+  {
+    "inventory_inbound_id": "inb-2024-0004",
+    "product_id": "sku-internal-2044",
+    "receipt_date": "2024-01-26",
+    "site_code": "SITE-MTY-01",
+    "location_code": "FLR-S1",
+    "receipt_qty": 6,
+    "receipt_flow_type": "kit_completion",
+    "source_file_version": "inventory-inbound-fixture-v1",
+    "record_status": "active"
+  },
+  {
+    "inventory_inbound_id": "inb-2024-0005",
+    "product_id": "sku-internal-4477",
+    "receipt_date": "2024-01-27",
+    "site_code": "SITE-PUE-RST",
+    "location_code": "RST-Q1",
+    "receipt_qty": 5,
+    "receipt_flow_type": "supplier_receipt",
+    "source_file_version": "inventory-inbound-fixture-v1",
+    "record_status": "active"
+  },
+  {
+    "inventory_inbound_id": "inb-2024-0006",
+    "product_id": "sku-internal-1001",
+    "receipt_date": "2024-01-29",
+    "site_code": "SITE-VER-OVR",
+    "location_code": "OVR-Y2",
+    "receipt_qty": 9,
+    "receipt_flow_type": "transfer_in",
+    "source_file_version": "inventory-inbound-fixture-v1",
+    "record_status": "active"
+  },
+  {
+    "inventory_inbound_id": "inb-2024-0007",
+    "product_id": "sku-internal-5099",
+    "receipt_date": "2024-01-30",
+    "site_code": "",
+    "location_code": "UNK-Z9",
+    "receipt_qty": 1,
+    "receipt_flow_type": "",
+    "source_file_version": "inventory-inbound-fixture-v1",
+    "record_status": "unknown"
+  }
+]

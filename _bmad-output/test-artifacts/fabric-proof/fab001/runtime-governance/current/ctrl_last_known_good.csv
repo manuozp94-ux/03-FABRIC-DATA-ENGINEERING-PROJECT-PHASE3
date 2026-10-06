@@ -1,0 +1,2 @@
+active_release_id,last_known_good_release_id,active_pipeline_run_id,active_pipeline_status,public_source_mode,updated_at_utc,recovery_note
+rls_fab001_20260401t221500z,rls_fab001_20260401t221500z,preview-pipeline-run-id,Completed,fabric_serving_extract,2026-04-15T01:44:04+00:00,Repo-side approval remains authoritative; Fabric runtime governance mirrors the active and last-known-good pointers.

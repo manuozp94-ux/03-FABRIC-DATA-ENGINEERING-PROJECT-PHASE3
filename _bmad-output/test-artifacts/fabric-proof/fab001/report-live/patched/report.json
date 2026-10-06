@@ -1,0 +1,114 @@
+{
+  "config": "{\"version\":\"5.72\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY26SU04\",\"type\":2,\"version\":{\"visual\":\"2.8.0\",\"report\":\"3.2.0\",\"page\":\"2.3.1\"}}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":0,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"useEnhancedTooltips\":true,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY26SU04",
+            "path": "BaseThemes/CY26SU04.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"objects\":{\"outspacePane\":[{\"properties\":{\"width\":{\"expr\":{\"Literal\":{\"Value\":\"191L\"}}}}}]}}",
+      "displayName": "Supply Chain Decision View",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.0,
+      "name": "78745e63c89f597447a9",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"051f4d3c21a040ae1e64\",\"layouts\":[{\"id\":0,\"position\":{\"x\":296,\"y\":168,\"z\":6,\"width\":336,\"height\":312,\"tabOrder\":6}}],\"singleVisual\":{\"visualType\":\"clusteredBarChart\",\"projections\":{\"Category\":[{\"queryRef\":\"slv_demand_line_enriched.account_pattern_class\",\"active\":true}],\"Y\":[{\"queryRef\":\"slv_demand_line_enriched.Open Demand Value Proxy\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"slv_demand_line_enriched\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"account_pattern_class\"},\"Name\":\"slv_demand_line_enriched.account_pattern_class\",\"NativeReferenceName\":\"account_pattern_class\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Open Demand Value Proxy\"},\"Name\":\"slv_demand_line_enriched.Open Demand Value Proxy\",\"NativeReferenceName\":\"Open Demand Value Proxy\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Open Demand Value Proxy\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 312.0,
+          "width": 336.0,
+          "x": 296.0,
+          "y": 168.0,
+          "z": 6.0
+        },
+        {
+          "config": "{\"name\":\"2980ad646817ff40eee2\",\"layouts\":[{\"id\":0,\"position\":{\"x\":320,\"y\":16,\"z\":1,\"width\":280,\"height\":152,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"slv_current_inventory_position.Open-Demand Coverage\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"slv_current_inventory_position\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Open-Demand Coverage\"},\"Name\":\"slv_current_inventory_position.Open-Demand Coverage\",\"NativeReferenceName\":\"Open-Demand Coverage\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Open-Demand Coverage\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 152.0,
+          "width": 280.0,
+          "x": 320.0,
+          "y": 16.0,
+          "z": 1.0
+        },
+        {
+          "config": "{\"name\":\"623e5c9b3c02a469577b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":960,\"y\":192,\"z\":4,\"width\":288,\"height\":152,\"tabOrder\":4}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"slv_current_inventory_position.Active Action Count\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"slv_current_inventory_position\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Active Action Count\"},\"Name\":\"slv_current_inventory_position.Active Action Count\",\"NativeReferenceName\":\"Active Action Count\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Active Action Count\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 152.0,
+          "width": 288.0,
+          "x": 960.0,
+          "y": 192.0,
+          "z": 4.0
+        },
+        {
+          "config": "{\"name\":\"69380353b3feeeb44a4b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":600,\"y\":184,\"z\":8,\"width\":336,\"height\":152,\"tabOrder\":8}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"slv_current_inventory_position.Latest Approved Refresh\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"slv_current_inventory_position\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Latest Approved Refresh\"},\"Name\":\"slv_current_inventory_position.Latest Approved Refresh\",\"NativeReferenceName\":\"Latest Approved Refresh\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Latest Approved Refresh\"}}}]},\"autoSelectVisualType\":false,\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 152.0,
+          "width": 336.0,
+          "x": 600.0,
+          "y": 184.0,
+          "z": 8.0
+        },
+        {
+          "config": "{\"name\":\"99b4c431e15730a14163\",\"layouts\":[{\"id\":0,\"position\":{\"x\":16,\"y\":176,\"z\":5,\"width\":280,\"height\":288,\"tabOrder\":5}}],\"singleVisual\":{\"visualType\":\"clusteredBarChart\",\"projections\":{\"Y\":[{\"queryRef\":\"slv_demand_line_enriched.Open Demand Value Proxy\"}],\"Category\":[{\"queryRef\":\"slv_demand_line_enriched.product_family_name\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"slv_demand_line_enriched\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Open Demand Value Proxy\"},\"Name\":\"slv_demand_line_enriched.Open Demand Value Proxy\",\"NativeReferenceName\":\"Open Demand Value Proxy\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"product_family_name\"},\"Name\":\"slv_demand_line_enriched.product_family_name\",\"NativeReferenceName\":\"product_family_name\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Open Demand Value Proxy\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 288.0,
+          "width": 280.0,
+          "x": 16.0,
+          "y": 176.0,
+          "z": 5.0
+        },
+        {
+          "config": "{\"name\":\"a4b9235e7f16225b1a32\",\"layouts\":[{\"id\":0,\"position\":{\"x\":954.4535276772228,\"y\":20.620909548581977,\"z\":3,\"width\":279.85520101646966,\"height\":151.22000335626782,\"tabOrder\":3}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"slv_current_inventory_position.Inventory Exposure\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"slv_current_inventory_position\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Inventory Exposure\"},\"Name\":\"slv_current_inventory_position.Inventory Exposure\",\"NativeReferenceName\":\"Inventory Exposure\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Inventory Exposure\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 151.22,
+          "width": 279.86,
+          "x": 954.45,
+          "y": 20.62,
+          "z": 3.0
+        },
+        {
+          "config": "{\"name\":\"ce142e0a49c3051c98ce\",\"layouts\":[{\"id\":0,\"position\":{\"x\":16,\"y\":16,\"z\":0,\"width\":280,\"height\":152,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"slv_demand_line_enriched.Open Demand Value Proxy\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"slv_demand_line_enriched\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Open Demand Value Proxy\"},\"Name\":\"slv_demand_line_enriched.Open Demand Value Proxy\",\"NativeReferenceName\":\"Open Demand Value Proxy\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Open Demand Value Proxy\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 152.0,
+          "width": 280.0,
+          "x": 16.0,
+          "y": 16.0,
+          "z": 0.0
+        },
+        {
+          "config": "{\"name\":\"db21fb52e61e927b7e2e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":632,\"y\":32,\"z\":2,\"width\":280,\"height\":152,\"tabOrder\":2}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"slv_current_inventory_position.Service Readiness Rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"slv_current_inventory_position\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Service Readiness Rate\"},\"Name\":\"slv_current_inventory_position.Service Readiness Rate\",\"NativeReferenceName\":\"Service Readiness Rate\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Service Readiness Rate\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 152.0,
+          "width": 280.0,
+          "x": 632.0,
+          "y": 32.0,
+          "z": 2.0
+        },
+        {
+          "config": "{\"name\":\"f5a591dedcc302729d2a\",\"layouts\":[{\"id\":0,\"position\":{\"x\":24,\"y\":456,\"z\":7,\"width\":1208,\"height\":248,\"tabOrder\":7}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"gold_supply_chain_action_queue.product_name\"},{\"queryRef\":\"gold_supply_chain_action_queue.location_name\"},{\"queryRef\":\"gold_supply_chain_action_queue.action_status\"},{\"queryRef\":\"gold_supply_chain_action_queue.readiness_flag\"},{\"queryRef\":\"Sum(gold_supply_chain_action_queue.available_qty)\"},{\"queryRef\":\"Sum(gold_supply_chain_action_queue.inventory_value_proxy)\"},{\"queryRef\":\"Sum(gold_supply_chain_action_queue.network_open_demand_qty)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"gold_supply_chain_action_queue\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"product_name\"},\"Name\":\"gold_supply_chain_action_queue.product_name\",\"NativeReferenceName\":\"product_name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"location_name\"},\"Name\":\"gold_supply_chain_action_queue.location_name\",\"NativeReferenceName\":\"location_name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"action_status\"},\"Name\":\"gold_supply_chain_action_queue.action_status\",\"NativeReferenceName\":\"action_status\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"readiness_flag\"},\"Name\":\"gold_supply_chain_action_queue.readiness_flag\",\"NativeReferenceName\":\"readiness_flag\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"available_qty\"}},\"Function\":0},\"Name\":\"Sum(gold_supply_chain_action_queue.available_qty)\",\"NativeReferenceName\":\"Sum of available_qty\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"inventory_value_proxy\"}},\"Function\":0},\"Name\":\"Sum(gold_supply_chain_action_queue.inventory_value_proxy)\",\"NativeReferenceName\":\"Sum of inventory_value_proxy\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"network_open_demand_qty\"}},\"Function\":0},\"Name\":\"Sum(gold_supply_chain_action_queue.network_open_demand_qty)\",\"NativeReferenceName\":\"Sum of network_open_demand_qty\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 248.0,
+          "width": 1208.0,
+          "x": 24.0,
+          "y": 456.0,
+          "z": 7.0
+        }
+      ],
+      "width": 1280.0
+    }
+  ]
+}

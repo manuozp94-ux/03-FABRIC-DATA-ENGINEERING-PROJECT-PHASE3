@@ -1,0 +1,31 @@
+{
+  "run_type": "representative_coherence_gate",
+  "output_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-representative/current",
+  "internal_dir": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-representative/internal-controls/current",
+  "market_report_path": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-representative/representative-market-report.json",
+  "coherence_rule_version": "representative_coherence_r1",
+  "promotion_status": "coherence_approved",
+  "promotable": true,
+  "validation_passed": true,
+  "blocking_failure_count": 0,
+  "diagnostics": [],
+  "errors": [],
+  "counts": {
+    "dim_account": 96,
+    "dim_product": 140,
+    "dim_inventory_location": 16,
+    "fact_demand_line": 23476,
+    "fact_inventory_inbound": 3696,
+    "fact_inventory_snapshot": 35868,
+    "plan_account_product_eligibility": 640,
+    "plan_product_location_stocking": 196
+  },
+  "identity": {
+    "representative_source_version": "curated_publication_r2__representative_market_r1",
+    "generation_rule_version": "representative_market_controls_r1",
+    "scenario_reference": "platform/fabric/contracts/logic-first-scenario-parameter-sets.md",
+    "controlled_realism_matrix_reference": "platform/fabric/contracts/controlled-realism-test-matrix.md",
+    "coherence_rule_version": "representative_coherence_r1",
+    "market_report_path": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-representative/representative-market-report.json"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fact_inventory_movement_line",
+  "description": "Bounded logistics execution fact for inventory transfers between public-safe locations.",
+  "type": "array",
+  "x-grain": "One row per product movement between origin and destination inventory locations.",
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "inventory_movement_line_sk",
+        "product_sk",
+        "origin_inventory_location_sk",
+        "destination_inventory_location_sk",
+        "ship_date",
+        "expected_arrival_date",
+        "movement_qty",
+        "shipped_qty",
+        "received_qty",
+        "in_transit_qty",
+        "movement_status_code",
+        "source_file_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "inventory_movement_line_sk": {
+          "type": "string",
+          "pattern": "^MOV_SK_[A-F0-9]{12}$"
+        },
+        "logistics_decision_line_sk": {
+          "type": "string",
+          "pattern": "^LGQ_SK_[A-F0-9]{12}$"
+        },
+        "product_sk": {
+          "type": "string",
+          "pattern": "^PRD_SK_[A-F0-9]{12}$"
+        },
+        "origin_inventory_location_sk": {
+          "type": "string",
+          "pattern": "^LOC_SK_[A-F0-9]{12}$"
+        },
+        "destination_inventory_location_sk": {
+          "type": "string",
+          "pattern": "^LOC_SK_[A-F0-9]{12}$"
+        },
+        "ship_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "expected_arrival_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "actual_arrival_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "movement_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "shipped_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "received_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "in_transit_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unit_cost_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "movement_cost_amount_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "movement_status_code": {
+          "type": "string",
+          "enum": [
+            "PLANNED",
+            "SHIPPED",
+            "IN_TRANSIT",
+            "RECEIVED",
+            "CANCELLED",
+            "UNKNOWN"
+          ]
+        },
+        "movement_type_code": {
+          "type": "string",
+          "enum": [
+            "INVENTORY_TRANSFER",
+            "CONTROLLED_TRANSFER",
+            "SERVICE_REBALANCE",
+            "UNKNOWN"
+          ]
+        },
+        "source_file_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
+

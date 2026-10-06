@@ -1,0 +1,67 @@
+[
+  {
+    "product_family_code": "KIT_ASSEMBLY",
+    "product_family_name": "Kit Assemblies",
+    "family_description": "Grouped multi-part items that require coordinated staging and completion handling.",
+    "storage_profile": "bin_and_staging",
+    "handling_profile": "multi_part_pick",
+    "synthetic_margin_band_code": "BAND_M3",
+    "record_source_family": "classification_reference_domain",
+    "source_file_version": "curated_publication_r2",
+    "record_status": "derived-active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-02T08:28:22.656Z"
+  },
+  {
+    "product_family_code": "SMALL_PART",
+    "product_family_name": "Small Parts",
+    "family_description": "High-count compact parts that favor dense storage and count-sensitive replenishment.",
+    "storage_profile": "small_parts_bin",
+    "handling_profile": "count_sensitive_pick",
+    "synthetic_margin_band_code": "BAND_M1",
+    "record_source_family": "classification_reference_domain",
+    "source_file_version": "curated_publication_r2",
+    "record_status": "derived-active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-02T08:28:22.656Z"
+  },
+  {
+    "product_family_code": "BULKY_ITEM",
+    "product_family_name": "Bulky Items",
+    "family_description": "Items whose storage or movement emphasizes space usage and pallet-oriented handling.",
+    "storage_profile": "pallet_forward",
+    "handling_profile": "forklift_assisted",
+    "synthetic_margin_band_code": "BAND_M2",
+    "record_source_family": "classification_reference_domain",
+    "source_file_version": "curated_publication_r2",
+    "record_status": "derived-active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-02T08:28:22.656Z"
+  },
+  {
+    "product_family_code": "CONTROLLED_ITEM",
+    "product_family_name": "Controlled Items",
+    "family_description": "Items governed by controlled planning logic, restricted handling, or exception management.",
+    "storage_profile": "controlled_access",
+    "handling_profile": "exception_managed",
+    "synthetic_margin_band_code": "BAND_M4",
+    "record_source_family": "classification_reference_domain",
+    "source_file_version": "curated_publication_r2",
+    "record_status": "derived-active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-02T08:28:22.656Z"
+  },
+  {
+    "product_family_code": "UNCLASSIFIED",
+    "product_family_name": "Unclassified Items",
+    "family_description": "Fallback family used when bounded source attributes do not support a safe deterministic assignment.",
+    "storage_profile": "unknown",
+    "handling_profile": "unknown",
+    "synthetic_margin_band_code": "BAND_M0",
+    "record_source_family": "classification_reference_domain",
+    "source_file_version": "curated_publication_r2",
+    "record_status": "derived-active",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-02T08:28:22.656Z"
+  }
+]

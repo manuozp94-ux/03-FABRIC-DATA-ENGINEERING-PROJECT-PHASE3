@@ -1,0 +1,3 @@
+execution_type,job_id,parent_job_id,item_id,item_name,status,started_at_utc,ended_at_utc,failure_reason,recorded_at_utc
+pipeline,preview-pipeline-run-id,,preview-pipeline-id,pl_fab001_runtime_orchestration,Completed,2026-04-15T01:44:04+00:00,2026-04-15T01:44:04+00:00,,2026-04-15T01:44:04+00:00
+notebook_activity,preview-activity-run-id,preview-pipeline-run-id,preview-loader-notebook-id,RunFabricProofNotebook,Completed,2026-04-15T01:44:04+00:00,2026-04-15T01:44:04+00:00,,2026-04-15T01:44:04+00:00

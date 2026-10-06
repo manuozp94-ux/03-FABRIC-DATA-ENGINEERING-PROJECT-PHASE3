@@ -1,0 +1,9 @@
+product_code,product_name,product_family_name,location_name,node_type_code,inventory_policy_class,lead_time_band,readiness_flag,action_status,available_qty,inventory_value_proxy,network_open_demand_qty,network_open_demand_value_proxy
+PRD-B93ECD,Guarded Valve Kit 08,Controlled Items,Restricted Area 9D608B,RESTRICTED_AREA,CONTROLLED_STOCK,LONG,AT_RISK,REPLENISH_OR_PRODUCE,0,5143,2577,97606
+PRD-B9D311,Secure Drive Module 16,Controlled Items,Restricted Area 9D608B,RESTRICTED_AREA,CONTROLLED_STOCK,LONG,AT_RISK,REPLENISH_OR_PRODUCE,0,5069,1215,47471
+PRD-748A77,Secure Drive Module 20,Controlled Items,Restricted Area 9D608B,RESTRICTED_AREA,CONTROLLED_STOCK,LONG,AT_RISK,REPLENISH_OR_PRODUCE,0,4440,783,32153
+PRD-78CC19,Protected Relay Unit 24,Controlled Items,Restricted Area 9D608B,RESTRICTED_AREA,CONTROLLED_STOCK,LONG,AT_RISK,REPLENISH_OR_PRODUCE,0,4440,791,31117
+PRD-26C2D0,Secure Drive Module 12,Controlled Items,Restricted Area 9D608B,RESTRICTED_AREA,CONTROLLED_STOCK,LONG,AT_RISK,REPLENISH_OR_PRODUCE,0,4218,1383,54094
+PRD-58887F,Guarded Valve Kit 04,Controlled Items,Restricted Area 9D608B,RESTRICTED_AREA,CONTROLLED_STOCK,LONG,AT_RISK,REPLENISH_OR_PRODUCE,0,4181,0,0
+PRD-C002E0,Restricted Access Assembly 28,Controlled Items,Restricted Area 9D608B,RESTRICTED_AREA,CONTROLLED_STOCK,LONG,AT_RISK,REPLENISH_OR_PRODUCE,0,3811,1705,65453
+PRD-35CC93,Service Junction Kit 15,Kit Assemblies,Internal Warehouse 852F00,INTERNAL_WAREHOUSE,STAGE_AND_COORDINATE,LONG,AT_RISK,REPLENISH_OR_PRODUCE,0,186,374,25296

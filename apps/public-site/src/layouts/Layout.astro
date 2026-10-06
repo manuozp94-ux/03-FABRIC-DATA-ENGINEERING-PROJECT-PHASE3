@@ -1,0 +1,363 @@
+---
+import BilingualText from "../components/content/BilingualText.astro";
+import LanguageToggle from "../components/navigation/LanguageToggle.astro";
+import SiteNavigation from "../components/navigation/SiteNavigation.astro";
+import { localize, type LocalizedCopy } from "../data/localized";
+
+interface Props {
+  title: string | LocalizedCopy;
+  description: string | LocalizedCopy;
+  routeLabel: string | LocalizedCopy;
+  routePurpose: string | LocalizedCopy;
+  pageHeading: string | LocalizedCopy;
+  showRouteIntro?: boolean;
+}
+
+const {
+  title,
+  description,
+  routeLabel,
+  routePurpose,
+  pageHeading,
+  showRouteIntro = true,
+} = Astro.props;
+const currentPath = Astro.url.pathname;
+const titleCopy = localize(title);
+const descriptionCopy = localize(description);
+const routeLabelCopy = localize(routeLabel);
+const routePurposeCopy = localize(routePurpose);
+const pageHeadingCopy = localize(pageHeading);
+---
+
+<!doctype html>
+<html
+  lang="en"
+  data-lang="en"
+  data-title-en={titleCopy.en}
+  data-title-es={titleCopy.es}
+  data-description-en={descriptionCopy.en}
+  data-description-es={descriptionCopy.es}
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={descriptionCopy.en} data-dynamic-description />
+    <title>{titleCopy.en}</title>
+    <script is:inline>
+      (() => {
+        try {
+          const preferredLanguage = localStorage.getItem("site-language");
+          const initialLanguage = preferredLanguage === "es" ? "es" : "en";
+          document.documentElement.dataset.lang = initialLanguage;
+          document.documentElement.lang = initialLanguage;
+        } catch {
+          document.documentElement.dataset.lang = "en";
+          document.documentElement.lang = "en";
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">
+      <BilingualText copy={{ en: "Skip to content", es: "Saltar al contenido" }} />
+    </a>
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="brand-lockup">
+          <p class="brand-kicker">
+            <BilingualText copy={{ en: "Analytics Engineer, BI Lead | Microsoft Fabric & Power Platform", es: "Analytics Engineer, BI Lead | Microsoft Fabric y Power Platform" }} />
+          </p>
+          <a class="brand-title" href="/">
+            <BilingualText copy={{ en: "Manuel A. Orozco", es: "Manuel A. Orozco" }} />
+          </a>
+        </div>
+        <div class="header-controls">
+          <SiteNavigation currentPath={currentPath} />
+          <LanguageToggle />
+        </div>
+      </header>
+
+      <main id="main-content" class="content-frame">
+        {
+          showRouteIntro ? (
+            <section class="route-intro" aria-labelledby="page-heading">
+              <div class="route-copy">
+                <p class="route-label"><BilingualText copy={routeLabelCopy} /></p>
+                <h1 id="page-heading"><BilingualText copy={pageHeadingCopy} /></h1>
+                <p class="route-description"><BilingualText copy={descriptionCopy} /></p>
+              </div>
+              <aside class="purpose-card" aria-label="Route purpose">
+                <p class="purpose-label"><BilingualText copy={{ en: "On this page", es: "En esta página" }} /></p>
+                <p class="purpose-copy"><BilingualText copy={routePurposeCopy} /></p>
+              </aside>
+            </section>
+          ) : null
+        }
+
+        <slot />
+      </main>
+
+      <footer class="site-footer">
+        <p><BilingualText copy={{ en: "Public portfolio case with bounded proof, governed delivery, and a business-first reading experience.", es: "Caso público de portafolio con prueba acotada, delivery gobernado y una lectura orientada primero al negocio." }} /></p>
+        <p><BilingualText copy={{ en: "Business value first, technical depth where it helps.", es: "Valor de negocio primero, profundidad técnica donde ayuda." }} /></p>
+        <nav class="footer-links" aria-label="Support pages">
+          <a href="/contact"><BilingualText copy={{ en: "Contact", es: "Contacto" }} /></a>
+          <a href="/privacy"><BilingualText copy={{ en: "Privacy", es: "Privacidad" }} /></a>
+          <a href="/terms"><BilingualText copy={{ en: "Terms", es: "Términos" }} /></a>
+        </nav>
+      </footer>
+    </div>
+    <script is:inline>
+      (() => {
+        const storageKey = "site-language";
+
+        const updateHead = (lang) => {
+          const root = document.documentElement;
+          const title = lang === "es" ? root.dataset.titleEs : root.dataset.titleEn;
+          const description = lang === "es" ? root.dataset.descriptionEs : root.dataset.descriptionEn;
+          if (title) {
+            document.title = title;
+          }
+          const meta = document.querySelector("meta[data-dynamic-description]");
+          if (meta && description) {
+            meta.setAttribute("content", description);
+          }
+        };
+
+        const updateToggleState = (lang) => {
+          document.querySelectorAll("[data-language-option]").forEach((button) => {
+            const isActive = button.getAttribute("data-language-option") === lang;
+            button.setAttribute("aria-pressed", isActive ? "true" : "false");
+          });
+        };
+
+        const applyLanguage = (lang) => {
+          document.documentElement.dataset.lang = lang;
+          document.documentElement.lang = lang;
+          updateHead(lang);
+          updateToggleState(lang);
+        };
+
+        const initialLanguage = document.documentElement.dataset.lang === "es" ? "es" : "en";
+        applyLanguage(initialLanguage);
+
+        document.addEventListener("click", (event) => {
+          const target = event.target instanceof Element
+            ? event.target.closest("[data-language-option]")
+            : null;
+
+          if (!target) {
+            return;
+          }
+
+          const nextLanguage = target.getAttribute("data-language-option") === "es" ? "es" : "en";
+          localStorage.setItem(storageKey, nextLanguage);
+          applyLanguage(nextLanguage);
+        });
+      })();
+    </script>
+  </body>
+</html>
+
+<style>
+  :root {
+    --page-bg: #f5f1e8;
+    --paper: rgba(255, 251, 243, 0.88);
+    --paper-strong: #fffdf8;
+    --ink: #1e2630;
+    --muted: #5c6a79;
+    --line: rgba(30, 38, 48, 0.12);
+    --accent: #0d7464;
+    --accent-soft: rgba(13, 116, 100, 0.1);
+    --shadow: 0 22px 48px rgba(34, 47, 62, 0.08);
+    --radius: 24px;
+    --max-width: 1120px;
+    --display-font: "Iowan Old Style", "Palatino Linotype", "Book Antiqua",
+      Palatino, "Times New Roman", serif;
+    --body-font: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  }
+
+  html {
+    background:
+      radial-gradient(circle at top left, rgba(13, 116, 100, 0.18), transparent 34%),
+      radial-gradient(circle at bottom right, rgba(175, 111, 54, 0.18), transparent 28%),
+      var(--page-bg);
+    color: var(--ink);
+    font-family: var(--body-font);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -3rem;
+    z-index: 10;
+    padding: 0.75rem 1rem;
+    border-radius: 999px;
+    background: var(--ink);
+    color: white;
+    text-decoration: none;
+  }
+
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  .page-shell {
+    width: min(calc(100% - 2rem), var(--max-width));
+    margin: 0 auto;
+    padding: 1rem 0 2.5rem;
+  }
+
+  .site-header,
+  .content-frame,
+  .site-footer {
+    backdrop-filter: blur(18px);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .site-header {
+    border-radius: var(--radius);
+    padding: 1.2rem 1.25rem;
+    display: grid;
+    gap: 1rem;
+    position: sticky;
+    top: 1rem;
+    z-index: 5;
+  }
+
+  .brand-lockup {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .header-controls {
+    display: grid;
+    gap: 0.75rem;
+    justify-items: start;
+  }
+
+  .brand-kicker,
+  .route-label,
+  .purpose-label {
+    margin: 0;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .brand-title {
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--display-font);
+    font-size: clamp(1.35rem, 2vw, 1.8rem);
+  }
+
+  .content-frame {
+    margin-top: 1rem;
+    border-radius: calc(var(--radius) + 4px);
+    padding: 1.5rem;
+  }
+
+  .route-intro {
+    display: grid;
+    gap: 1rem;
+    align-items: start;
+    margin-bottom: 1.75rem;
+  }
+
+  .route-copy h1 {
+    margin: 0.35rem 0 0.75rem;
+    font-family: var(--display-font);
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 0.97;
+    max-width: 11ch;
+  }
+
+  .route-description,
+  .purpose-copy,
+  .purpose-note {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.65;
+    font-size: 1rem;
+  }
+
+  .route-description {
+    max-width: 60ch;
+  }
+
+  .purpose-card {
+    padding: 1rem 1.1rem;
+    border-radius: 20px;
+    background: var(--paper-strong);
+    border: 1px solid var(--line);
+  }
+
+  .purpose-copy {
+    color: var(--ink);
+    font-weight: 600;
+    margin-top: 0.55rem;
+  }
+
+  .purpose-note {
+    margin-top: 0.75rem;
+  }
+
+  .site-footer {
+    margin-top: 1rem;
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .site-footer p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 0.45rem;
+  }
+
+  .footer-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .footer-links a:hover,
+  .footer-links a:focus-visible {
+    color: var(--accent);
+  }
+
+  @media (min-width: 820px) {
+    .site-header {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+    }
+
+    .route-intro {
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.7fr);
+    }
+
+    .header-controls {
+      justify-items: end;
+    }
+  }
+</style>

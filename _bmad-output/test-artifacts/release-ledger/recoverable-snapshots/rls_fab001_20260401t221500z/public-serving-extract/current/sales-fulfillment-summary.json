@@ -1,0 +1,23 @@
+[
+  {
+    "fulfillment_status_code": "BACKORDERED",
+    "fulfillment_line_count": 18531,
+    "fulfilled_qty": 0,
+    "backordered_qty": 242413,
+    "cogs_amount": 0
+  },
+  {
+    "fulfillment_status_code": "DELIVERED",
+    "fulfillment_line_count": 2755,
+    "fulfilled_qty": 40465,
+    "backordered_qty": 0,
+    "cogs_amount": 627624.4000000015
+  },
+  {
+    "fulfillment_status_code": "SHIPPED",
+    "fulfillment_line_count": 2190,
+    "fulfilled_qty": 17276,
+    "backordered_qty": 16780,
+    "cogs_amount": 326051.52000000176
+  }
+]

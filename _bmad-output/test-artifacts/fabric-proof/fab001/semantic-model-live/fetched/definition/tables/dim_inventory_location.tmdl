@@ -1,0 +1,119 @@
+table dim_inventory_location
+	lineageTag: 11dcf68e-7233-4fc9-b7d4-26c0ccccb87f
+	sourceLineageTag: [dbo].[dim_inventory_location]
+
+	column inventory_location_sk
+		dataType: string
+		lineageTag: 54103f2f-b901-4615-97e2-5b78676b9822
+		sourceLineageTag: inventory_location_sk
+		summarizeBy: none
+		sourceColumn: inventory_location_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_code
+		dataType: string
+		lineageTag: bc122de9-7722-4903-98ae-ce3cf02b0b1b
+		sourceLineageTag: site_code
+		summarizeBy: none
+		sourceColumn: site_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_code
+		dataType: string
+		lineageTag: c7c4be79-2884-4134-86d8-a89a05d25186
+		sourceLineageTag: location_code
+		summarizeBy: none
+		sourceColumn: location_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_name
+		dataType: string
+		lineageTag: 75a95ebb-8c09-4c08-9ea4-bb282b54065a
+		sourceLineageTag: location_name
+		summarizeBy: none
+		sourceColumn: location_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column node_type_code
+		dataType: string
+		lineageTag: da0b7a99-08ba-4f9a-a74d-d26666a19d7b
+		sourceLineageTag: node_type_code
+		summarizeBy: none
+		sourceColumn: node_type_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column logistics_area_code
+		dataType: string
+		lineageTag: 71ce083f-7ded-4c10-94ce-9263879f247b
+		sourceLineageTag: logistics_area_code
+		summarizeBy: none
+		sourceColumn: logistics_area_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_role_description
+		dataType: string
+		lineageTag: 2c8af962-cf54-44ce-9f34-83af852c9335
+		sourceLineageTag: location_role_description
+		summarizeBy: none
+		sourceColumn: location_role_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column record_source_family
+		dataType: string
+		lineageTag: 8fdec4dd-5584-4b58-811d-58ce3802dc71
+		sourceLineageTag: record_source_family
+		summarizeBy: none
+		sourceColumn: record_source_family
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_file_version
+		dataType: string
+		lineageTag: f9c744d9-115d-4dd2-8f86-0078251c8fa3
+		sourceLineageTag: source_file_version
+		summarizeBy: none
+		sourceColumn: source_file_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column record_status
+		dataType: string
+		lineageTag: 9ffac6b4-c0d7-41f3-b164-626d210eaf82
+		sourceLineageTag: record_status
+		summarizeBy: none
+		sourceColumn: record_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column publication_safety_flag
+		dataType: string
+		lineageTag: 4eb4343f-93be-45b0-99c0-c0bbdc6e0b8c
+		sourceLineageTag: publication_safety_flag
+		summarizeBy: none
+		sourceColumn: publication_safety_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column load_timestamp_utc
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8b128c9b-a7db-40b8-aea7-63088dcbb9b7
+		sourceLineageTag: load_timestamp_utc
+		summarizeBy: none
+		sourceColumn: load_timestamp_utc
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_inventory_location = entity
+		mode: directLake
+		source
+			entityName: dim_inventory_location
+			expressionSource: 'DirectLake - lh_fab001_public_proof'
+

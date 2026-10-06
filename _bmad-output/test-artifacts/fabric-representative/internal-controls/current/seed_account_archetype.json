@@ -1,0 +1,54 @@
+[
+  {
+    "archetype_account_sk": "ACC_SK_B2EB9328A375",
+    "archetype_account_code": "ACC-18158F",
+    "customer_group": "Channel Support",
+    "account_pattern_class": "PARTNER_CHANNEL",
+    "service_network_code": "SERVICE_NETWORK_6C223B",
+    "fulfillment_context_code": "THIRD_PARTY_ROUTED",
+    "seasonality_profile_code": "QUARTER_END_PUSH",
+    "baseline_qoq_growth_band_code": "QOQ_02_045",
+    "order_frequency_code": "BATCHED_MONTHLY",
+    "source_file_version": "curated_publication_r2__representative_market_r1",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "archetype_account_sk": "ACC_SK_292243E9233B",
+    "archetype_account_code": "ACC-EC485A",
+    "customer_group": "Project Delivery",
+    "account_pattern_class": "PROJECT_BASED",
+    "service_network_code": "SERVICE_NETWORK_C38CB4",
+    "fulfillment_context_code": "PARTNER_ROUTED",
+    "seasonality_profile_code": "INSTALLATION_SEASON_LIFT",
+    "baseline_qoq_growth_band_code": "QOQ_01_03",
+    "order_frequency_code": "PROJECT_MILESTONE",
+    "source_file_version": "curated_publication_r2__representative_market_r1",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "archetype_account_sk": "ACC_SK_C3B16196D437",
+    "archetype_account_code": "ACC-639372",
+    "customer_group": "Legacy Coverage",
+    "account_pattern_class": "UNKNOWN",
+    "service_network_code": "UNKNOWN",
+    "fulfillment_context_code": "UNKNOWN",
+    "seasonality_profile_code": "FLAT_BASELINE",
+    "baseline_qoq_growth_band_code": "QOQ_00_02",
+    "order_frequency_code": "IRREGULAR",
+    "source_file_version": "curated_publication_r2__representative_market_r1",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "archetype_account_sk": "ACC_SK_D6B138DC3D66",
+    "archetype_account_code": "ACC-302850",
+    "customer_group": "Field Service",
+    "account_pattern_class": "RECURRING_SERVICE",
+    "service_network_code": "SERVICE_NETWORK_6C223B",
+    "fulfillment_context_code": "DIRECT_SERVICE",
+    "seasonality_profile_code": "JANUARY_DIP_SPRING_RECOVERY",
+    "baseline_qoq_growth_band_code": "QOQ_02_04",
+    "order_frequency_code": "WEEKLY_REPLENISH",
+    "source_file_version": "curated_publication_r2__representative_market_r1",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  }
+]

@@ -1,0 +1,162 @@
+table gold_supply_chain_decision_summary
+	lineageTag: 63aac0a1-5381-42c3-86e4-e8fb11d1ec51
+	sourceLineageTag: [dbo].[gold_supply_chain_decision_summary]
+
+	column latest_approved_refresh_utc
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2e4cf7ca-5fca-4194-a531-a432e40f428b
+		sourceLineageTag: latest_approved_refresh_utc
+		summarizeBy: none
+		sourceColumn: latest_approved_refresh_utc
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_demand_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 52f91b20-bddc-4b6d-9f81-bc5807016be4
+		sourceLineageTag: latest_demand_date
+		summarizeBy: none
+		sourceColumn: latest_demand_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_inventory_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e2b318f2-a65c-4403-8607-314b8ee49429
+		sourceLineageTag: latest_inventory_date
+		summarizeBy: none
+		sourceColumn: latest_inventory_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column open_demand_lines
+		dataType: int64
+		formatString: 0
+		lineageTag: 2e8eb4d4-c23e-411d-94a9-a2dd1b9ac536
+		sourceLineageTag: open_demand_lines
+		summarizeBy: sum
+		sourceColumn: open_demand_lines
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_open_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d081e9d-eb7b-49a7-9cf7-fc317f4a5cd4
+		sourceLineageTag: total_open_qty
+		summarizeBy: sum
+		sourceColumn: total_open_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_open_demand_value_proxy
+		dataType: int64
+		formatString: 0
+		lineageTag: 3902b870-2ac8-418c-bd9f-037c2e21b411
+		sourceLineageTag: total_open_demand_value_proxy
+		summarizeBy: sum
+		sourceColumn: total_open_demand_value_proxy
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_available_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 53c51630-7dfe-47e9-a77d-d4f84877801a
+		sourceLineageTag: total_available_qty
+		summarizeBy: sum
+		sourceColumn: total_available_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_inventory_exposure
+		dataType: int64
+		formatString: 0
+		lineageTag: d3dd56eb-7b98-4333-a4a4-7a420930c95b
+		sourceLineageTag: total_inventory_exposure
+		summarizeBy: sum
+		sourceColumn: total_inventory_exposure
+
+		annotation SummarizationSetBy = Automatic
+
+	column ready_positions
+		dataType: int64
+		formatString: 0
+		lineageTag: 09cfd68e-0b9f-4059-9f6e-e615aa5707f3
+		sourceLineageTag: ready_positions
+		summarizeBy: sum
+		sourceColumn: ready_positions
+
+		annotation SummarizationSetBy = Automatic
+
+	column current_positions
+		dataType: int64
+		formatString: 0
+		lineageTag: 2a5b4c21-af79-4e8e-9cda-11377b28fec3
+		sourceLineageTag: current_positions
+		summarizeBy: sum
+		sourceColumn: current_positions
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_readiness_rate
+		dataType: double
+		lineageTag: fd821b3d-c7f9-4b6b-81f6-2ce424e3e74f
+		sourceLineageTag: service_readiness_rate
+		summarizeBy: sum
+		sourceColumn: service_readiness_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column open_demand_coverage_ratio
+		dataType: double
+		lineageTag: 10e6f7d1-dab0-469c-bcc6-f064f8a31d51
+		sourceLineageTag: open_demand_coverage_ratio
+		summarizeBy: sum
+		sourceColumn: open_demand_coverage_ratio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column active_action_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 26667941-f782-4d14-a364-45750b569da5
+		sourceLineageTag: active_action_count
+		summarizeBy: sum
+		sourceColumn: active_action_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_demand_month
+		dataType: string
+		lineageTag: fceae260-4cff-4c04-8d27-42685c4d8977
+		sourceLineageTag: latest_demand_month
+		summarizeBy: none
+		sourceColumn: latest_demand_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_demand_month_share
+		dataType: double
+		lineageTag: 04a36d5a-e3cb-48e6-a39c-c7770f295e98
+		sourceLineageTag: latest_demand_month_share
+		summarizeBy: sum
+		sourceColumn: latest_demand_month_share
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition gold_supply_chain_decision_summary = entity
+		mode: directLake
+		source
+			entityName: gold_supply_chain_decision_summary
+			expressionSource: 'DirectLake - lh_fab001_public_proof'
+

@@ -1,0 +1,20 @@
+[
+  {
+    "purchase_order_status_code": "ORDERED",
+    "supplier_sk": "SUP_SK_CD7C09EF7B7D",
+    "order_line_count": 10,
+    "ordered_qty": 69440,
+    "received_qty": 0,
+    "open_purchase_qty": 69440,
+    "purchase_cost_amount_usd": 849945.6000000002
+  },
+  {
+    "purchase_order_status_code": "ORDERED",
+    "supplier_sk": "SUP_SK_FD8309668EDA",
+    "order_line_count": 14,
+    "ordered_qty": 88870,
+    "received_qty": 0,
+    "open_purchase_qty": 88870,
+    "purchase_cost_amount_usd": 1087768.8
+  }
+]

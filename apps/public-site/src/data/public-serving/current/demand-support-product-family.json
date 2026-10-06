@@ -1,0 +1,30 @@
+[
+  {
+    "product_family_code": "SMALL_PART",
+    "product_family_label": "Small Part",
+    "open_qty": 169984,
+    "open_value": 3265308,
+    "open_value_share": 0.426267117775307
+  },
+  {
+    "product_family_code": "BULKY_ITEM",
+    "product_family_label": "Bulky Item",
+    "open_qty": 34498,
+    "open_value": 1636800,
+    "open_value_share": 0.21367479526422087
+  },
+  {
+    "product_family_code": "KIT_ASSEMBLY",
+    "product_family_label": "Kit Assembly",
+    "open_qty": 23307,
+    "open_value": 1530656,
+    "open_value_share": 0.19981830854102595
+  },
+  {
+    "product_family_code": "CONTROLLED_ITEM",
+    "product_family_label": "Controlled Item",
+    "open_qty": 31404,
+    "open_value": 1227475,
+    "open_value_share": 0.16023977841944617
+  }
+]

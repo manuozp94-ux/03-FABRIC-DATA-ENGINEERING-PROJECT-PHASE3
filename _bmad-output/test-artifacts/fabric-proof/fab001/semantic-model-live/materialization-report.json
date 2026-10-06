@@ -1,0 +1,73 @@
+{
+  "semantic_model": {
+    "id": "5ee1b0dd-daca-4c76-8316-06369d420278",
+    "type": "SemanticModel",
+    "displayName": "sm_fab001_supply_chain_decision",
+    "description": "",
+    "workspaceId": "c11ed225-3ffc-440b-8cdb-88d1f366a91b"
+  },
+  "requested_measure_count": 40,
+  "patched_measure_count": 15,
+  "patched_measures": [
+    "Open Demand Qty",
+    "Open Demand Lines",
+    "Open Demand Value Proxy",
+    "Demand Value Proxy",
+    "Available Qty",
+    "On Hand Qty",
+    "Reserved Qty",
+    "In Transit Qty",
+    "Ready Positions",
+    "Current Positions",
+    "Service Readiness Rate",
+    "Inventory Exposure",
+    "Open-Demand Coverage",
+    "Active Action Count",
+    "Latest Approved Refresh"
+  ],
+  "skipped_measure_count": 25,
+  "skipped_measures": [
+    "Realized Revenue",
+    "Realized COGS",
+    "Realized Gross Margin",
+    "Realized Margin Rate",
+    "Fulfilled Qty",
+    "Average Revenue per Account",
+    "Backordered Qty",
+    "Fulfillment Line Count",
+    "SC Recommended Qty",
+    "SC Approved Qty",
+    "SC Decision Cost Amount",
+    "Approved SC Decisions",
+    "Purchase Ordered Qty",
+    "Purchase Received Qty",
+    "Open Purchase Qty",
+    "Purchase Cost Amount",
+    "Purchase Order Lines",
+    "Executed Purchase Decisions",
+    "Queue-to-PO Traceability Rate",
+    "Logistics Recommended Qty",
+    "Logistics Approved Qty",
+    "Active Logistics Action Count",
+    "Movement Qty",
+    "Movement In Transit Qty",
+    "Movement Cost Amount"
+  ],
+  "skipped_missing_table_parts": [
+    "definition/tables/fact_sales_realization.tmdl",
+    "definition/tables/fact_sales_fulfillment_line.tmdl",
+    "definition/tables/fact_supply_chain_decision_queue_line.tmdl",
+    "definition/tables/fact_purchase_order_line.tmdl",
+    "definition/tables/fact_logistics_decision_queue_line.tmdl",
+    "definition/tables/fact_inventory_movement_line.tmdl"
+  ],
+  "strict_mode": false,
+  "updated_at_utc": "2026-04-15T02:02:22Z",
+  "update_result": {
+    "status": "Succeeded",
+    "createdTimeUtc": "2026-04-15T02:00:16.3661867",
+    "lastUpdatedTimeUtc": "2026-04-15T02:00:18.2926577",
+    "percentComplete": 100,
+    "error": null
+  }
+}

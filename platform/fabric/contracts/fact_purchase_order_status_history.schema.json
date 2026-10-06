@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fact_purchase_order_status_history",
+  "description": "Bounded purchase-order status history for traceability from planned order to receipt or cancellation.",
+  "type": "array",
+  "x-grain": "One row per purchase-order-line status interval.",
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "purchase_order_status_history_sk",
+        "purchase_order_line_sk",
+        "purchase_order_status_code",
+        "status_sequence",
+        "status_start_at_utc",
+        "source_file_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "purchase_order_status_history_sk": {
+          "type": "string",
+          "pattern": "^POH_SK_[A-F0-9]{12}$"
+        },
+        "purchase_order_line_sk": {
+          "type": "string",
+          "pattern": "^POL_SK_[A-F0-9]{12}$"
+        },
+        "purchase_order_status_code": {
+          "type": "string",
+          "enum": [
+            "PLANNED",
+            "ORDERED",
+            "PARTIALLY_RECEIVED",
+            "RECEIVED",
+            "CANCELLED",
+            "UNKNOWN"
+          ]
+        },
+        "status_sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status_start_at_utc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status_end_at_utc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status_reason_code": {
+          "type": "string",
+          "enum": [
+            "ORDER_PLANNED",
+            "ORDER_PLACED",
+            "PARTIAL_RECEIPT",
+            "FULL_RECEIPT",
+            "CANCELLED_BY_POLICY",
+            "UNKNOWN"
+          ]
+        },
+        "source_file_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,21 @@
+{
+  "latest_approved_refresh_utc": "2026-04-14T23:59:00.000Z",
+  "latest_demand_date": "2026-04-01",
+  "latest_inventory_date": "2026-04-01",
+  "open_demand_lines": 20721,
+  "total_open_qty": 259193,
+  "total_open_demand_value_proxy": 7660239,
+  "total_available_qty": 50637,
+  "total_inventory_exposure": 956083,
+  "ready_positions": 71,
+  "current_positions": 196,
+  "service_readiness_rate": 0.362245,
+  "open_demand_coverage_ratio": 0.195364,
+  "active_action_count": 125,
+  "latest_demand_month": "2026-04",
+  "latest_demand_month_share": 0.005341,
+  "total_demand_value_proxy": 8579540,
+  "latest_demand_month_open_qty": 1417,
+  "latest_demand_month_demand_value_proxy": 45826,
+  "current_position_count": 196
+}

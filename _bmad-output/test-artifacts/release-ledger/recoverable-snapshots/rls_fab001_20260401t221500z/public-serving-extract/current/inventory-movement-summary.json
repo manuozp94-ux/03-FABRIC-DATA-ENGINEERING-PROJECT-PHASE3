@@ -1,0 +1,22 @@
+[
+  {
+    "movement_status_code": "IN_TRANSIT",
+    "movement_type_code": "INVENTORY_TRANSFER",
+    "movement_count": 10,
+    "movement_qty": 1727,
+    "shipped_qty": 1727,
+    "received_qty": 0,
+    "in_transit_qty": 1727,
+    "movement_cost_amount_usd": 21138.479999999996
+  },
+  {
+    "movement_status_code": "RECEIVED",
+    "movement_type_code": "INVENTORY_TRANSFER",
+    "movement_count": 6,
+    "movement_qty": 1022,
+    "shipped_qty": 1022,
+    "received_qty": 1022,
+    "in_transit_qty": 0,
+    "movement_cost_amount_usd": 12509.28
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "report_type": "fab001_runtime_governance",
+  "recorded_at_utc": "2026-04-04T07:15:20+00:00",
+  "pipeline_report_path": "/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/test-artifacts/fabric-proof/fab001/runtime-governance/runtime-pipeline-report.json",
+  "runtime_governance_root": "Files/fab001/current/runtime-governance/current",
+  "tables": [
+    "ctrl_asset_refresh_history",
+    "ctrl_last_known_good",
+    "ctrl_release_registry",
+    "ctrl_runtime_job_history"
+  ],
+  "governance_result": {
+    "governance_notebook": {
+      "id": "a08fb1a9-6659-4932-a5b5-29e39776b078",
+      "type": "Notebook",
+      "displayName": "nb_fab001_runtime_governance",
+      "description": "Materialize bounded runtime governance control tables inside the FAB001 Lakehouse.",
+      "workspaceId": "c11ed225-3ffc-440b-8cdb-88d1f366a91b"
+    },
+    "uploaded_files": [
+      "Files/fab001/current/runtime-governance/current/ctrl_asset_refresh_history.csv",
+      "Files/fab001/current/runtime-governance/current/ctrl_last_known_good.csv",
+      "Files/fab001/current/runtime-governance/current/ctrl_release_registry.csv",
+      "Files/fab001/current/runtime-governance/current/ctrl_runtime_job_history.csv"
+    ],
+    "notebook_job": {
+      "id": "61e8dfc3-dd92-42ef-b229-df082c1186af",
+      "itemId": "a08fb1a9-6659-4932-a5b5-29e39776b078",
+      "jobType": "RunNotebook",
+      "invokeType": "Manual",
+      "status": "Completed",
+      "failureReason": null,
+      "rootActivityId": "0db3a086-5ab7-411f-a1c7-1bd29b6ff722",
+      "startTimeUtc": "2026-04-04T07:14:29.5715049",
+      "endTimeUtc": "2026-04-04T07:15:17.9417504"
+    },
+    "visible_runtime_tables": [
+      "ctrl_asset_refresh_history",
+      "ctrl_last_known_good",
+      "ctrl_release_registry",
+      "ctrl_runtime_job_history"
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+asset_type,asset_name,asset_id,status,refresh_record_path,related_release_id,public_source_mode,recorded_at_utc
+semantic_model,sm_fab001_supply_chain_decision,5ee1b0dd-daca-4c76-8316-06369d420278,Succeeded,_bmad-output/test-artifacts/fabric-proof/fab001/semantic-model-live/materialization-report.json,rls_fab001_20260401t221500z,fabric_serving_extract,2026-04-15T01:44:04+00:00
+report_shell,rpt_fab001_supply_chain_decision,29e81270-9ca0-4739-8cd1-5571e935ecdd,Succeeded,_bmad-output/test-artifacts/fabric-proof/fab001/report-live/report-shell-report.json,rls_fab001_20260401t221500z,fabric_serving_extract,2026-04-15T01:44:04+00:00
+public_serving_extract,fab001_public_serving_extract,,produced_from_reference_gold,_bmad-output/test-artifacts/fabric-public-serving-extract/materialization-report.json,rls_fab001_20260401t221500z,fabric_serving_extract,2026-04-15T01:44:04+00:00

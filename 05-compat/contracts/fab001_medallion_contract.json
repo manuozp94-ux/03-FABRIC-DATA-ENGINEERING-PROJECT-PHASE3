@@ -1,0 +1,250 @@
+{
+  "schema_version": "2026-04-02",
+  "proof_id": "fab001",
+  "intent": "Bounded Fabric medallion contract for the Supply Chain Decision View proof surface.",
+  "transport_note": "CSV is the initial loading payload only. Canonical contracts remain schema-first.",
+  "transition_note": "Current implementation still uses the repo-approved package as the Bronze input, while the active public-site source is now a bounded Fabric-derived serving extract mirrored into the site repo. The remaining bounded gap is that the extract is currently materialized from bounded Gold reference outputs rather than from a same-pass fully live Fabric runtime refresh.",
+  "canonical_public_contracts": [
+    "platform/fabric/contracts/dim_product.schema.json",
+    "platform/fabric/contracts/dim_product_family.schema.json",
+    "platform/fabric/contracts/dim_account.schema.json",
+    "platform/fabric/contracts/dim_inventory_location.schema.json",
+    "platform/fabric/contracts/fact_demand_line.schema.json",
+    "platform/fabric/contracts/fact_inventory_inbound.schema.json",
+    "platform/fabric/contracts/fact_inventory_snapshot.schema.json"
+  ],
+  "layers": {
+    "bronze": [
+      {
+        "table": "dim_product",
+        "grain": "one row per approved public product",
+        "contract_ref": "platform/fabric/contracts/dim_product.schema.json",
+        "load_mode": "landed copy",
+        "current_role": "approved repo input landed into Fabric",
+        "target_role": "bounded raw-like Bronze input preserving controlled realism traces"
+      },
+      {
+        "table": "dim_product_family",
+        "grain": "one row per approved public product family",
+        "contract_ref": "platform/fabric/contracts/dim_product_family.schema.json",
+        "load_mode": "landed copy",
+        "current_role": "approved repo input landed into Fabric",
+        "target_role": "bounded raw-like Bronze input preserving controlled realism traces"
+      },
+      {
+        "table": "dim_account",
+        "grain": "one row per approved public account segment",
+        "contract_ref": "platform/fabric/contracts/dim_account.schema.json",
+        "load_mode": "landed copy",
+        "current_role": "approved repo input landed into Fabric",
+        "target_role": "bounded raw-like Bronze input preserving controlled realism traces"
+      },
+      {
+        "table": "dim_inventory_location",
+        "grain": "one row per approved public inventory location",
+        "contract_ref": "platform/fabric/contracts/dim_inventory_location.schema.json",
+        "load_mode": "landed copy",
+        "current_role": "approved repo input landed into Fabric",
+        "target_role": "bounded raw-like Bronze input preserving controlled realism traces"
+      },
+      {
+        "table": "fact_demand_line",
+        "grain": "one row per approved public demand-line occurrence",
+        "contract_ref": "platform/fabric/contracts/fact_demand_line.schema.json",
+        "load_mode": "landed copy",
+        "current_role": "approved repo input landed into Fabric",
+        "target_role": "bounded raw-like Bronze input preserving controlled realism traces"
+      },
+      {
+        "table": "fact_inventory_inbound",
+        "grain": "one row per approved public inbound receipt event",
+        "contract_ref": "platform/fabric/contracts/fact_inventory_inbound.schema.json",
+        "load_mode": "landed copy",
+        "current_role": "approved repo input landed into Fabric",
+        "target_role": "bounded raw-like Bronze input preserving controlled realism traces"
+      },
+      {
+        "table": "fact_inventory_snapshot",
+        "grain": "one row per approved public product-location snapshot",
+        "contract_ref": "platform/fabric/contracts/fact_inventory_snapshot.schema.json",
+        "load_mode": "landed copy",
+        "current_role": "approved repo input landed into Fabric",
+        "target_role": "bounded raw-like Bronze input preserving controlled realism traces"
+      }
+    ],
+    "silver": [
+      {
+        "table": "slv_demand_line_enriched",
+        "grain": "one row per public demand-line occurrence",
+        "execution_mode": "fabric_notebook_derived",
+        "source_tables": [
+          "fact_demand_line",
+          "dim_product",
+          "dim_product_family",
+          "dim_account"
+        ],
+        "current_purpose": "Expose demand-line facts with product, family, and account context for semantic-model measures and support visuals.",
+        "target_purpose": "Own normalization, conformance, cleanup, and analytical enrichment for demand lines before serving.",
+        "derived_columns": [
+          "event_month",
+          "is_open",
+          "product_code",
+          "product_name",
+          "product_family_code",
+          "product_family_name",
+          "inventory_policy_class",
+          "lead_time_band",
+          "criticality_band",
+          "account_code",
+          "account_name",
+          "account_pattern_class",
+          "service_network_code",
+          "fulfillment_context_code"
+        ]
+      },
+      {
+        "table": "slv_inventory_inbound_enriched",
+        "grain": "one row per approved public inbound receipt event",
+        "execution_mode": "fabric_notebook_derived",
+        "source_tables": [
+          "fact_inventory_inbound",
+          "dim_product",
+          "dim_product_family",
+          "dim_inventory_location"
+        ],
+        "current_purpose": "Expose approved inbound receipts with product and location context so the inventory loop can be inspected without expanding into a full procurement model.",
+        "target_purpose": "Own normalization, conformance, cleanup, and analytical enrichment for inbound events before serving.",
+        "derived_columns": [
+          "product_code",
+          "product_name",
+          "product_family_code",
+          "product_family_name",
+          "inventory_policy_class",
+          "lead_time_band",
+          "criticality_band",
+          "service_profile",
+          "site_code",
+          "location_code",
+          "location_name",
+          "node_type_code",
+          "logistics_area_code",
+          "location_role_description"
+        ]
+      },
+      {
+        "table": "slv_inventory_position_enriched",
+        "grain": "one row per public product-location snapshot",
+        "execution_mode": "fabric_notebook_derived",
+        "source_tables": [
+          "fact_inventory_snapshot",
+          "dim_product",
+          "dim_product_family",
+          "dim_inventory_location",
+          "fact_demand_line"
+        ],
+        "current_purpose": "Expose inventory position facts with product and location context plus bounded action and policy signals.",
+        "target_purpose": "Own normalization, conformance, cleanup, and analytical interpretation for inventory position before serving.",
+        "derived_columns": [
+          "is_current_snapshot",
+          "action_status",
+          "target_service_level_band",
+          "coverage_target_band",
+          "product_code",
+          "product_name",
+          "product_family_code",
+          "product_family_name",
+          "inventory_policy_class",
+          "lead_time_band",
+          "criticality_band",
+          "service_profile",
+          "site_code",
+          "location_code",
+          "location_name",
+          "node_type_code",
+          "logistics_area_code",
+          "location_role_description",
+          "network_open_demand_qty",
+          "network_open_demand_value_proxy"
+        ]
+      },
+      {
+        "table": "slv_current_inventory_position",
+        "grain": "one row per product-location position in the latest approved snapshot",
+        "execution_mode": "fabric_notebook_derived",
+        "source_tables": [
+          "slv_inventory_position_enriched"
+        ],
+        "current_purpose": "Serve current-position KPIs and action-oriented visuals in the first bounded proof page.",
+        "target_purpose": "Remain a Silver serving-prep table downstream of the main Silver cleanup layer."
+      }
+    ],
+    "gold": [
+      {
+        "table": "gold_supply_chain_decision_summary",
+        "grain": "one row per approved proof refresh",
+        "execution_mode": "fabric_notebook_derived",
+        "source_tables": [
+          "slv_demand_line_enriched",
+          "slv_current_inventory_position"
+        ],
+        "purpose": "Carry the bounded page-level KPI summary for the Supply Chain Decision View.",
+        "target_role": "Serving output and active bounded source for the current Fabric public-extract materialization path."
+      },
+      {
+        "table": "gold_supply_chain_action_queue",
+        "grain": "one row per current product-location action candidate",
+        "execution_mode": "fabric_notebook_derived",
+        "source_tables": [
+          "slv_current_inventory_position"
+        ],
+        "purpose": "Provide a table visual with the current action queue for the report page.",
+        "target_role": "Serving output and active bounded source for the current Fabric public-extract materialization path."
+      },
+      {
+        "table": "gold_demand_support_account_pattern",
+        "grain": "one row per account pattern class",
+        "execution_mode": "fabric_notebook_derived",
+        "source_tables": [
+          "slv_demand_line_enriched"
+        ],
+        "purpose": "Support account-pattern demand concentration visuals.",
+        "target_role": "Serving output and active bounded source for the current Fabric public-extract materialization path."
+      },
+      {
+        "table": "gold_demand_support_product_family",
+        "grain": "one row per product family",
+        "execution_mode": "fabric_notebook_derived",
+        "source_tables": [
+          "slv_demand_line_enriched"
+        ],
+        "purpose": "Support product-family demand concentration visuals.",
+        "target_role": "Serving output and active bounded source for the current Fabric public-extract materialization path."
+      },
+      {
+        "table": "gold_public_policy_reference",
+        "grain": "one row per approved public product",
+        "execution_mode": "fabric_notebook_derived",
+        "source_tables": [
+          "dim_product"
+        ],
+        "purpose": "Expose bounded policy interpretation signals outside the web layer.",
+        "target_role": "Serving output and active bounded source for the current Fabric public-extract materialization path."
+      }
+    ]
+  },
+  "semantic_proof_boundary": {
+    "authoritative_calculation_layer": "Fabric semantic model and bounded serving tables",
+    "non_authoritative_layer": "Astro case-study presentation",
+    "publication_rule": "Only approved public-safe data may enter the proof path."
+  },
+  "public_source_transition": {
+    "current_state": "fabric_serving_extract",
+    "fallback_state": "repo_mirror_transitional",
+    "target_state": "fabric_serving_extract",
+    "notes": [
+      "The repo-approved package is the approved Bronze input package during transition.",
+      "The active public-site source is now a bounded Fabric-derived serving extract mirrored into the site repo.",
+      "The repo publication mirror remains a fallback boundary only and should not be treated as the active public truth."
+    ]
+  }
+}

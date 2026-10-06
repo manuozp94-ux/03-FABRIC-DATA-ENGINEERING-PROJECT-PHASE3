@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dim_service_region",
+  "description": "Public-safe synthetic service-region dimension for dashboard slicing without exposing real geography.",
+  "type": "array",
+  "x-grain": "One row per public-safe service region used by accounts, suppliers, or inventory locations.",
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "service_region_code",
+        "service_region_label",
+        "service_region_class",
+        "record_source_family",
+        "source_file_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "service_region_code": {
+          "type": "string",
+          "pattern": "^(REGION_[A-F0-9]{6}|UNKNOWN)$"
+        },
+        "service_region_label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "service_region_class": {
+          "type": "string",
+          "enum": [
+            "COMMERCIAL_SERVICE_REGION",
+            "LOGISTICS_SERVICE_REGION",
+            "SUPPLIER_SERVICE_REGION",
+            "UNKNOWN"
+          ]
+        },
+        "record_source_family": {
+          "type": "string",
+          "enum": [
+            "service_region_reference_domain"
+          ]
+        },
+        "source_file_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "unknown"
+          ]
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
+

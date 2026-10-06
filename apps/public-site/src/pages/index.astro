@@ -1,0 +1,376 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BilingualText from "../components/content/BilingualText.astro";
+import portrait from "../assets/profile/manuel-portrait.jpg";
+import { canonicalProductStatement } from "../data/site-message";
+import { homePageCopy } from "../data/copy/home";
+---
+
+<Layout
+  title={homePageCopy.meta.title}
+  description={canonicalProductStatement}
+  routeLabel={homePageCopy.meta.routeLabel}
+  routePurpose={homePageCopy.meta.routePurpose}
+  pageHeading={homePageCopy.meta.pageHeading}
+  showRouteIntro={false}
+>
+  <section class="hero-grid" aria-label="Professional landing">
+    <article class="hero-card hero-card--primary">
+      <p class="eyebrow"><BilingualText copy={homePageCopy.hero.eyebrow} /></p>
+      <h1 class="hero-title">Manuel A. Orozco</h1>
+      <p class="hero-role">
+        <BilingualText copy={homePageCopy.hero.role} />
+      </p>
+      <p class="hero-summary">
+        <BilingualText copy={homePageCopy.hero.summary} />
+      </p>
+      <p class="hero-support">
+        <BilingualText copy={homePageCopy.hero.support} />
+      </p>
+      <div class="cta-guidance-grid">
+        <div class="cta-guidance-card">
+          <a class="cta-link cta-link--primary" href="/case-study"><BilingualText copy={homePageCopy.hero.caseCta.label} /></a>
+          <p><BilingualText copy={homePageCopy.hero.caseCta.helper} /></p>
+        </div>
+        <div class="cta-guidance-card">
+          <a class="cta-link" href="/technical-method"><BilingualText copy={homePageCopy.hero.methodCta.label} /></a>
+          <p><BilingualText copy={homePageCopy.hero.methodCta.helper} /></p>
+        </div>
+      </div>
+    </article>
+    <aside class="profile-card" aria-label="Professional profile preview">
+      <div class="portrait-frame">
+        <img
+          src={portrait.src}
+          width={portrait.width}
+          height={portrait.height}
+          alt="Portrait of Manuel A. Orozco."
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+      <div class="profile-copy">
+        <p class="eyebrow"><BilingualText copy={homePageCopy.profile.eyebrow} /></p>
+        <h2><BilingualText copy={homePageCopy.profile.title} /></h2>
+        <ul class="signal-list">
+          {homePageCopy.capabilityCards.map((item) => <li><BilingualText copy={item.title} /></li>)}
+        </ul>
+      </div>
+    </aside>
+  </section>
+
+  <section class="credibility-strip" aria-label="Credibility signals">
+    {
+      homePageCopy.credibilitySignals.map((item) => (
+        <article class="signal-pill">
+          <BilingualText copy={item} />
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="panel-grid" aria-label="What I do">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={homePageCopy.whatIDo.eyebrow} /></p>
+      <h2><BilingualText copy={homePageCopy.whatIDo.heading} /></h2>
+      <p>
+        <BilingualText copy={homePageCopy.whatIDo.body} />
+      </p>
+    </div>
+
+    <div class="capability-grid">
+      {
+        homePageCopy.capabilityCards.map((card) => (
+          <article class="panel">
+            <h3><BilingualText copy={card.title} /></h3>
+            <p><BilingualText copy={card.body} /></p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="panel-grid panel-grid--split" aria-label="How I work">
+    <article class="panel panel--primary">
+      <p class="eyebrow"><BilingualText copy={homePageCopy.howIWork.eyebrow} /></p>
+      <h2><BilingualText copy={homePageCopy.howIWork.heading} /></h2>
+      <ul class="signal-list">
+        {homePageCopy.howIWork.principles.map((item) => <li><BilingualText copy={item} /></li>)}
+      </ul>
+    </article>
+
+    <article class="panel">
+      <p class="eyebrow"><BilingualText copy={homePageCopy.featuredCase.eyebrow} /></p>
+      <h2><BilingualText copy={homePageCopy.featuredCase.title} /></h2>
+      <p class="panel-intro"><BilingualText copy={homePageCopy.featuredCase.intro} /></p>
+      <ul class="signal-list">
+        {homePageCopy.featuredCase.signals.map((item) => <li><BilingualText copy={item} /></li>)}
+      </ul>
+      <div class="cta-row">
+        <a class="cta-link" href="/case-study"><BilingualText copy={homePageCopy.featuredCase.cta} /></a>
+      </div>
+    </article>
+  </section>
+
+  <section class="panel panel--next-step" aria-label="Want to know more">
+    <p class="eyebrow"><BilingualText copy={homePageCopy.nextStep.eyebrow} /></p>
+    <h2><BilingualText copy={homePageCopy.nextStep.title} /></h2>
+    <p>
+      <BilingualText copy={homePageCopy.nextStep.body} />
+    </p>
+    <div class="cta-guidance-grid cta-guidance-grid--compact">
+      <div class="cta-guidance-card">
+        <a class="cta-link cta-link--primary" href={homePageCopy.nextStep.cards[0].href}><BilingualText copy={homePageCopy.nextStep.cards[0].label} /></a>
+        <p><BilingualText copy={homePageCopy.nextStep.cards[0].helper} /></p>
+      </div>
+      <div class="cta-guidance-card">
+        <a class="cta-link" href={homePageCopy.nextStep.cards[1].href}><BilingualText copy={homePageCopy.nextStep.cards[1].label} /></a>
+        <p><BilingualText copy={homePageCopy.nextStep.cards[1].helper} /></p>
+      </div>
+      <div class="cta-guidance-card">
+        <a class="cta-link" href={homePageCopy.nextStep.cards[2].href}><BilingualText copy={homePageCopy.nextStep.cards[2].label} /></a>
+        <p><BilingualText copy={homePageCopy.nextStep.cards[2].helper} /></p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero-grid,
+  .capability-grid,
+  .panel-grid,
+  .panel-grid--split {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .hero-card,
+  .profile-card,
+  .signal-pill,
+  .panel {
+    padding: 1.15rem;
+    border-radius: 22px;
+    background: rgba(255, 253, 248, 0.92);
+    border: 1px solid rgba(30, 38, 48, 0.1);
+  }
+
+  .hero-card--primary {
+    background:
+      linear-gradient(135deg, rgba(13, 116, 100, 0.12), transparent 70%),
+      rgba(255, 253, 248, 0.96);
+  }
+
+  .eyebrow,
+  .stat-label {
+    margin: 0 0 0.5rem;
+    color: #0d7464;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .hero-title {
+    margin: 0 0 1rem;
+    font-family: var(--display-font);
+    font-size: clamp(2.5rem, 5vw, 4.6rem);
+    line-height: 0.95;
+  }
+
+  .hero-role {
+    margin: 0 0 1.1rem;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: #1e2630;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .hero-card h2,
+  .panel h2 {
+    margin: 0 0 0.65rem;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    line-height: 1.2;
+  }
+
+  .panel h3,
+  .profile-copy h2 {
+    margin: 0 0 0.7rem;
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+    line-height: 1.25;
+  }
+
+  .hero-card p,
+  .profile-copy p,
+  .panel p {
+    margin: 0;
+    color: #5c6a79;
+    line-height: 1.65;
+  }
+
+  .hero-summary,
+  .hero-support {
+    margin-top: 1.15rem;
+    max-width: 62ch;
+  }
+
+  .panel-intro {
+    margin-bottom: 1rem;
+  }
+
+  .profile-card {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+
+  .portrait-frame {
+    overflow: hidden;
+    border-radius: 20px;
+    aspect-ratio: 4 / 4.9;
+    background:
+      linear-gradient(145deg, rgba(13, 116, 100, 0.16), rgba(255, 253, 248, 0.72)),
+      #f7f1e4;
+  }
+
+  .portrait-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+    transform: scale(1.2);
+    transform-origin: center 18%;
+    display: block;
+  }
+
+  .signal-list {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: #5c6a79;
+    line-height: 1.7;
+  }
+
+  .signal-list li + li {
+    margin-top: 0.45rem;
+  }
+
+  .credibility-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin: 1rem 0;
+  }
+
+  .signal-pill {
+    padding: 0.85rem 1rem;
+    font-weight: 700;
+    color: #1e2630;
+    background: rgba(255, 255, 255, 0.78);
+  }
+
+  .section-heading {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .section-heading h2 {
+    margin: 0;
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    line-height: 1.08;
+  }
+
+  .panel-grid {
+    margin-top: 1rem;
+  }
+
+  .capability-grid {
+    margin-top: 0.2rem;
+  }
+
+  .panel--next-step {
+    margin-top: 1rem;
+  }
+
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #1e2630;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 0.9rem 1.05rem;
+    border-radius: 999px;
+    border: 1px solid rgba(30, 38, 48, 0.12);
+    background: rgba(255, 255, 255, 0.72);
+  }
+
+  .cta-link:hover,
+  .cta-link:focus-visible {
+    color: #0d7464;
+  }
+
+  .cta-link--primary {
+    background: #1e2630;
+    border-color: #1e2630;
+    color: white;
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 1.2rem;
+  }
+
+  .cta-guidance-grid {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 1.35rem;
+  }
+
+  .cta-guidance-card {
+    display: grid;
+    gap: 0.55rem;
+    align-content: start;
+  }
+
+  .cta-guidance-card p {
+    margin: 0;
+    max-width: 34ch;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #5c6a79;
+  }
+
+  .cta-guidance-grid--compact .cta-guidance-card p {
+    max-width: 28ch;
+  }
+
+  .panel--next-step,
+  .panel-grid--split .panel--primary {
+    background:
+      linear-gradient(135deg, rgba(13, 116, 100, 0.1), transparent 72%),
+      rgba(255, 253, 248, 0.96);
+  }
+
+  @media (min-width: 760px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.82fr);
+    }
+
+    .capability-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .panel-grid--split {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cta-guidance-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cta-guidance-grid--compact {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

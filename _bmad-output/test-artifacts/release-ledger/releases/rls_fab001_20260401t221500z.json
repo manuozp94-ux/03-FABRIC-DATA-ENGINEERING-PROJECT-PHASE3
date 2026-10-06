@@ -1,0 +1,154 @@
+{
+  "release_id": "rls_fab001_20260401t221500z",
+  "release_family": "fab001_public_proof",
+  "release_state": "published_approved",
+  "recorded_at_utc": "2026-04-15T01:44:04.451Z",
+  "release_contract_reference": "platform/fabric/contracts/release-identity-contract.md",
+  "source_control_state": {
+    "vcs": "git",
+    "repository_detected": true,
+    "head_commit_available": false,
+    "head_commit_sha": null,
+    "branch_name": "main",
+    "head_resolution": "unborn_or_missing",
+    "working_tree_summary": {
+      "tracked_change_count": 0,
+      "untracked_file_count": 1770,
+      "tracked_change_samples": [],
+      "untracked_file_samples": [
+        ".agents/skills/bmad-advanced-elicitation/SKILL.md",
+        ".agents/skills/bmad-advanced-elicitation/bmad-skill-manifest.yaml",
+        ".agents/skills/bmad-advanced-elicitation/methods.csv",
+        ".agents/skills/bmad-advanced-elicitation/workflow.md",
+        ".agents/skills/bmad-analyst/SKILL.md",
+        ".agents/skills/bmad-architect/SKILL.md",
+        ".agents/skills/bmad-brainstorming/SKILL.md",
+        ".agents/skills/bmad-brainstorming/bmad-skill-manifest.yaml",
+        ".agents/skills/bmad-brainstorming/brain-methods.csv",
+        ".agents/skills/bmad-brainstorming/steps/step-01-session-setup.md"
+      ],
+      "porcelain_clean": false
+    },
+    "notes": [
+      "No HEAD commit exists in the current local repository state."
+    ]
+  },
+  "approved_data_state": {
+    "approved_refresh_timestamp_utc": "2026-04-01T22:15:00.000Z",
+    "publication_dir": "_bmad-output/test-artifacts/fabric-representative/current",
+    "repo_input_package_identity": {
+      "package_role": "approved_bronze_input_package",
+      "package_path": "_bmad-output/test-artifacts/fabric-representative/current",
+      "approved_refresh_timestamp_utc": "2026-04-01T22:15:00.000Z"
+    },
+    "coherence_report_path": "_bmad-output/test-artifacts/fabric-representative/representative-coherence-report.json",
+    "representative_source_version": "curated_publication_r2__representative_market_r1",
+    "generation_rule_version": "representative_market_controls_r1",
+    "coherence_rule_version": "representative_coherence_r1",
+    "market_report_path": "_bmad-output/test-artifacts/fabric-representative/representative-market-report.json",
+    "scenario_reference": "platform/fabric/contracts/logic-first-scenario-parameter-sets.md",
+    "controlled_realism_matrix_reference": "platform/fabric/contracts/controlled-realism-test-matrix.md"
+  },
+  "validation_state": {
+    "coherence_promotion_status": "coherence_approved",
+    "coherence_promotable": true,
+    "coherence_validation_passed": true,
+    "coherence_blocking_failure_count": 0,
+    "proof_refresh_status": "live_refresh_completed",
+    "proof_refresh_completed_at_utc": "2026-04-01T20:16:32.516Z",
+    "live_steps_executed": true,
+    "runtime_reconciliation_status": "aligned",
+    "runtime_traceability_complete": true
+  },
+  "public_proof_assets": {
+    "approved_publication_boundary_reference": "docs/automation/public-evidence-boundary-policy.md",
+    "proof_manifest_reference": "_bmad-output/test-artifacts/fabric-proof/fab001/current/manifest.json",
+    "medallion_contract_reference": "05-compat/contracts/fab001_medallion_contract.json",
+    "semantic_model_contract_reference": "05-compat/contracts/fab001_semantic_model_contract.json",
+    "core_visual_contract_reference": "05-compat/contracts/fab001_core_visual_contract.json",
+    "core_visual_runbook_reference": "05-compat/contracts/fab001_fabric_build_runbook.md",
+    "semantic_model_artifact_report_reference": "_bmad-output/test-artifacts/fabric-proof/fab001/semantic-model-live/materialization-report.json",
+    "report_shell_artifact_report_reference": "_bmad-output/test-artifacts/fabric-proof/fab001/report-live/report-shell-report.json",
+    "public_package_reference": "platform/fabric/publication/current",
+    "public_mirror_reference": "apps/public-site/src/data/public-serving/current",
+    "active_public_source_mode": "fabric_serving_extract",
+    "active_public_source_reference": "apps/public-site/src/data/public-serving/current",
+    "target_public_source_mode": "fabric_serving_extract",
+    "target_public_source_reference": "apps/public-site/src/data/public-serving/current",
+    "public_routes": [
+      "/",
+      "/case-study",
+      "/technical-method",
+      "/contact"
+    ],
+    "first_proof_target": {
+      "lakehouse_name": "lh_fab001_public_proof",
+      "semantic_model_name": "sm_fab001_supply_chain_decision",
+      "report_name": "rpt_fab001_supply_chain_decision",
+      "page_name": "Supply Chain Decision View"
+    }
+  },
+  "runtime_execution_state": {
+    "runtime_pipeline_contract_reference": "05-compat/contracts/fab001_runtime_pipeline_contract.json",
+    "runtime_governance_contract_reference": "platform/fabric/contracts/runtime-governance-contract.md",
+    "runtime_pipeline_report_path": "_bmad-output/test-artifacts/fabric-proof/fab001/runtime-governance/runtime-pipeline-report.json",
+    "runtime_governance_report_path": "_bmad-output/test-artifacts/fabric-proof/fab001/runtime-governance/runtime-governance-report.json",
+    "runtime_execution_mode": "pipeline_notebook_activity_preview",
+    "pipeline": {
+      "item_id": "preview-pipeline-id",
+      "item_name": "pl_fab001_runtime_orchestration",
+      "run_id": "preview-pipeline-run-id",
+      "status": "Completed"
+    },
+    "effective_notebook_execution": {
+      "execution_type": "notebook_activity",
+      "item_id": "preview-loader-notebook-id",
+      "item_name": "RunFabricProofNotebook",
+      "run_id": "preview-activity-run-id",
+      "status": "Completed"
+    },
+    "runtime_governance": {
+      "notebook_item_id": "a08fb1a9-6659-4932-a5b5-29e39776b078",
+      "notebook_name": "nb_fab001_runtime_governance",
+      "notebook_run_id": "61e8dfc3-dd92-42ef-b229-df082c1186af",
+      "notebook_run_status": "Completed",
+      "visible_runtime_tables": [
+        "ctrl_asset_refresh_history",
+        "ctrl_last_known_good",
+        "ctrl_release_registry",
+        "ctrl_runtime_job_history"
+      ]
+    },
+    "public_source_state": {
+      "active_mode": "fabric_serving_extract",
+      "target_mode": "fabric_serving_extract",
+      "serving_extract_status": "produced_from_reference_gold",
+      "serving_extract_produced": true,
+      "active_reference": "apps/public-site/src/data/public-serving/current",
+      "target_reference": "apps/public-site/src/data/public-serving/current",
+      "serving_extract_artifact_path": "_bmad-output/test-artifacts/fabric-public-serving-extract/materialization-report.json"
+    }
+  },
+  "recovery_inputs": {
+    "runtime_reconciliation_reference": "_bmad-output/test-artifacts/release-ledger/release-runtime-reconciliation.json",
+    "repo_current_release_id": "rls_fab001_20260401t221500z",
+    "repo_last_known_good_release_id": "rls_fab001_20260401t221500z",
+    "fabric_current_release_id": "rls_fab001_20260401t221500z",
+    "fabric_last_known_good_release_id": "rls_fab001_20260401t221500z",
+    "runtime_execution_mode": "pipeline_notebook_activity_preview",
+    "fabric_pipeline_run_id": "preview-pipeline-run-id",
+    "effective_notebook_run_id": "preview-activity-run-id",
+    "governance_notebook_run_id": "61e8dfc3-dd92-42ef-b229-df082c1186af",
+    "active_public_source_mode": "fabric_serving_extract",
+    "serving_extract_status": "produced_from_reference_gold",
+    "serving_extract_record_path": "_bmad-output/test-artifacts/fabric-public-serving-extract/materialization-report.json",
+    "semantic_refresh_record_path": "_bmad-output/test-artifacts/fabric-proof/fab001/semantic-model-live/materialization-report.json",
+    "report_shell_refresh_record_path": "_bmad-output/test-artifacts/fabric-proof/fab001/report-live/report-shell-report.json",
+    "recoverable_snapshot_reference": "_bmad-output/test-artifacts/release-ledger/recoverable-snapshots/rls_fab001_20260401t221500z/snapshot-manifest.json",
+    "recoverable_snapshot_publication_dir": "_bmad-output/test-artifacts/release-ledger/recoverable-snapshots/rls_fab001_20260401t221500z/publication/current",
+    "recoverable_snapshot_public_mirror_dir": "_bmad-output/test-artifacts/release-ledger/recoverable-snapshots/rls_fab001_20260401t221500z/site/data/publication/current",
+    "recoverable_snapshot_repo_serving_extract_dir": "_bmad-output/test-artifacts/release-ledger/recoverable-snapshots/rls_fab001_20260401t221500z/public-serving-extract/current",
+    "recoverable_snapshot_site_serving_extract_dir": "_bmad-output/test-artifacts/release-ledger/recoverable-snapshots/rls_fab001_20260401t221500z/site/data/public-serving/current",
+    "recoverable_snapshot_site_release_data_dir": "_bmad-output/test-artifacts/release-ledger/recoverable-snapshots/rls_fab001_20260401t221500z/site/data/release"
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "account_id": "acct-private-8472",
+    "account_name": "North Valley Services LLC",
+    "customer_group": "Field Service",
+    "service_network_code": "SVC-WEST-01",
+    "fulfillment_context_code": "Direct Service",
+    "source_file_version": "account-assignments-fixture-v1",
+    "record_status": "active"
+  },
+  {
+    "account_id": "acct-private-3901",
+    "account_name": "Metro Retrofit Partners",
+    "customer_group": "Project Delivery",
+    "service_network_code": "SVC-CENTRAL-02",
+    "fulfillment_context_code": "Partner Routed",
+    "source_file_version": "account-assignments-fixture-v1",
+    "record_status": "active"
+  },
+  {
+    "account_id": "acct-private-1120",
+    "account_name": "Harbor Maintenance Co.",
+    "customer_group": "Maintenance Support",
+    "service_network_code": "SVC-WEST-01",
+    "fulfillment_context_code": "Third Party Routed",
+    "source_file_version": "account-assignments-fixture-v1",
+    "record_status": "active"
+  },
+  {
+    "account_id": "acct-private-7714",
+    "account_name": "Legacy Segment Hold",
+    "customer_group": "",
+    "service_network_code": "",
+    "fulfillment_context_code": "",
+    "source_file_version": "account-assignments-fixture-v1",
+    "record_status": "unknown"
+  }
+]

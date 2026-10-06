@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dim_inventory_location",
+  "description": "Public-safe abstracted inventory location dimension for the bounded MVP slice.",
+  "type": "array",
+  "x-grain": "One row per derived inventory location or node in MVP scope.",
+  "x-allowed_fallbacks": [
+    "UNKNOWN"
+  ],
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "inventory_location_sk",
+        "site_code",
+        "location_code",
+        "location_name",
+        "node_type_code",
+        "logistics_area_code",
+        "location_role_description",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "inventory_location_sk": {
+          "type": "string",
+          "pattern": "^LOC_SK_[A-F0-9]{12}$"
+        },
+        "site_code": {
+          "type": "string",
+          "pattern": "^(SITE-[A-F0-9]{6}|SITE-UNKNOWN)$"
+        },
+        "location_code": {
+          "type": "string",
+          "pattern": "^LOC-[A-F0-9]{6}$"
+        },
+        "location_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "node_type_code": {
+          "type": "string",
+          "enum": [
+            "INTERNAL_WAREHOUSE",
+            "THIRD_PARTY_NODE",
+            "TRANSIT_NODE",
+            "FLOOR_AREA",
+            "RESTRICTED_AREA",
+            "OVERFLOW_AREA",
+            "UNKNOWN"
+          ]
+        },
+        "logistics_area_code": {
+          "type": "string",
+          "pattern": "^(LOG_AREA_[A-F0-9]{6}|UNKNOWN)$"
+        },
+        "location_role_description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_source_family": {
+          "type": "string",
+          "enum": [
+            "location_reference_domain"
+          ]
+        },
+        "source_file_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "unknown"
+          ]
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

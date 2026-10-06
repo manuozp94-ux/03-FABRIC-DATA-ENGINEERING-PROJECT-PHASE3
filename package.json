@@ -1,0 +1,24 @@
+{
+  "name": "fabric-platform-dev-bmad",
+  "private": true,
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev:public-site": "node scripts/run-public-site.mjs dev",
+    "build:public-site": "node scripts/run-public-site.mjs build",
+    "check:public-site": "node scripts/run-public-site.mjs astro check",
+    "build:fabric-dimensions": "node platform/fabric/automation/build-dimensions.mjs",
+    "validate:fabric-dimensions": "node platform/fabric/validation/validate-dimensions.mjs",
+    "validate:fabric-representative-market": "node platform/fabric/validation/validate-representative-market.mjs",
+    "test:fabric-dimensions": "node --test tests/publication/dimension-build.test.mjs tests/publication/publication-sync.test.mjs tests/publication/candidate-refresh.test.mjs",
+    "candidate:fabric-refresh": "node platform/fabric/automation/run-candidate-refresh.mjs",
+    "sync:public-site-publication": "node platform/fabric/automation/sync-current-package-to-public-site.mjs",
+    "materialize:financial-foundation": "node platform/fabric/automation/materialize-financial-analytics-foundation.mjs",
+    "materialize:public-serving-extract": "node platform/fabric/automation/materialize-fabric-public-serving-extract.mjs",
+    "materialize:public-site-state": "node scripts/materialize-public-site-state.mjs",
+    "materialize:release-communications": "node platform/fabric/automation/materialize-release-communications.mjs",
+    "materialize:release-recovery": "node platform/fabric/automation/materialize-release-recovery-state.mjs"
+  }
+}

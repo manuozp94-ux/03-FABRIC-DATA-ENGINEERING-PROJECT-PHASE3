@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dim_product",
+  "description": "Public-safe abstracted product dimension for the bounded MVP slice.",
+  "type": "array",
+  "x-grain": "One row per public-safe product entity in MVP scope.",
+  "x-allowed_fallbacks": [
+    "UNCLASSIFIED",
+    "UNKNOWN"
+  ],
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "product_sk",
+        "product_code",
+        "product_name",
+        "product_family_code",
+        "demand_pattern_class",
+        "planning_constraint_class",
+        "inventory_policy_class",
+        "fulfillment_risk_class",
+        "lead_time_band",
+        "criticality_band",
+        "service_profile",
+        "value_density_band",
+        "unit_economic_band_code",
+        "interchangeability_group_code",
+        "product_category",
+        "weight_value",
+        "box_qty",
+        "pallet_qty",
+        "record_source_family",
+        "source_file_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "product_sk": {
+          "type": "string",
+          "pattern": "^PRD_SK_[A-F0-9]{12}$"
+        },
+        "product_code": {
+          "type": "string",
+          "pattern": "^PRD-[A-F0-9]{6}$"
+        },
+        "product_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "product_family_code": {
+          "type": "string",
+          "enum": [
+            "STANDARD_COMPONENT",
+            "KIT_ASSEMBLY",
+            "SMALL_PART",
+            "BULKY_ITEM",
+            "CONTROLLED_ITEM",
+            "UNCLASSIFIED"
+          ]
+        },
+        "demand_pattern_class": {
+          "type": "string",
+          "enum": [
+            "RECURRING_DEMAND",
+            "PROJECT_DEMAND",
+            "EXCEPTION_DEMAND",
+            "UNKNOWN"
+          ]
+        },
+        "planning_constraint_class": {
+          "type": "string",
+          "enum": [
+            "STANDARD_FLOW",
+            "PROJECT_SCOPED",
+            "CONTROLLED_FLOW",
+            "UNKNOWN"
+          ]
+        },
+        "inventory_policy_class": {
+          "type": "string",
+          "enum": [
+            "GENERAL_STOCK",
+            "STAGE_AND_COORDINATE",
+            "HIGH_DENSITY_BIN",
+            "PALLET_BUFFER",
+            "CONTROLLED_STOCK",
+            "UNKNOWN"
+          ]
+        },
+        "fulfillment_risk_class": {
+          "type": "string",
+          "enum": [
+            "STANDARD_RISK",
+            "COORDINATION_RISK",
+            "PICK_DENSITY_RISK",
+            "SPACE_RISK",
+            "CONTROL_RISK",
+            "UNKNOWN"
+          ]
+        },
+        "lead_time_band": {
+          "type": "string",
+          "enum": [
+            "SHORT",
+            "MEDIUM",
+            "LONG",
+            "UNKNOWN"
+          ]
+        },
+        "criticality_band": {
+          "type": "string",
+          "enum": [
+            "BASELINE",
+            "ELEVATED",
+            "HIGH",
+            "UNKNOWN"
+          ]
+        },
+        "service_profile": {
+          "type": "string",
+          "enum": [
+            "STANDARD_SERVICE",
+            "PROJECT_SERVICE",
+            "DENSE_PICK_SERVICE",
+            "BULK_SERVICE",
+            "CONTROLLED_SERVICE",
+            "UNKNOWN"
+          ]
+        },
+        "value_density_band": {
+          "type": "string",
+          "enum": [
+            "LOW_DENSITY",
+            "MEDIUM_DENSITY",
+            "HIGH_DENSITY",
+            "UNKNOWN"
+          ]
+        },
+        "unit_economic_band_code": {
+          "type": "string",
+          "enum": [
+            "BAND_E0",
+            "BAND_E1",
+            "BAND_E2",
+            "BAND_E3",
+            "BAND_E4"
+          ]
+        },
+        "interchangeability_group_code": {
+          "type": "string",
+          "pattern": "^INTERCHANGE_GROUP_[A-Z]$"
+        },
+        "product_category": {
+          "type": "string",
+          "enum": [
+            "STANDARD_COMPONENT",
+            "KIT_ASSEMBLY",
+            "SMALL_PART",
+            "BULKY_ITEM",
+            "CONTROLLED_ITEM",
+            "UNCLASSIFIED"
+          ]
+        },
+        "weight_value": {
+          "type": "number",
+          "minimum": 0
+        },
+        "box_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "pallet_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "record_source_family": {
+          "type": "string",
+          "enum": [
+            "product_reference_domain"
+          ]
+        },
+        "source_file_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "unknown"
+          ]
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

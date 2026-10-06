@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fact_price_list_history",
+  "description": "Bounded effective-dated list-price history for the financial analytics foundation.",
+  "type": "array",
+  "x-grain": "One row per product, pricing context, and effective start date.",
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "price_history_sk",
+        "product_sk",
+        "pricing_context_sk",
+        "currency_code",
+        "list_price_amount",
+        "price_basis_code",
+        "effective_start_date",
+        "effective_end_date",
+        "price_review_cadence_code",
+        "price_step_band_code",
+        "target_margin_band_code",
+        "derivation_basis_code",
+        "foundation_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "price_history_sk": {
+          "type": "string",
+          "pattern": "^PRH_SK_[A-F0-9]{12}$"
+        },
+        "product_sk": {
+          "type": "string",
+          "pattern": "^PRD_SK_[A-F0-9]{12}$"
+        },
+        "pricing_context_sk": {
+          "type": "string",
+          "pattern": "^PRC_SK_[A-F0-9]{12}$"
+        },
+        "currency_code": {
+          "type": "string",
+          "enum": [
+            "USD"
+          ]
+        },
+        "list_price_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "price_basis_code": {
+          "type": "string",
+          "enum": [
+            "LIST_PRICE"
+          ]
+        },
+        "effective_start_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "effective_end_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "price_review_cadence_code": {
+          "type": "string",
+          "enum": [
+            "QUARTERLY",
+            "SEMIANNUAL"
+          ]
+        },
+        "price_step_band_code": {
+          "type": "string",
+          "enum": [
+            "PRICE_STEP_02_035",
+            "PRICE_STEP_025_04",
+            "PRICE_STEP_03_045",
+            "PRICE_STEP_03_05",
+            "PRICE_STEP_035_055"
+          ]
+        },
+        "target_margin_band_code": {
+          "type": "string",
+          "enum": [
+            "MARGIN_24_29",
+            "MARGIN_26_31",
+            "MARGIN_28_32",
+            "MARGIN_29_33",
+            "MARGIN_32_37"
+          ]
+        },
+        "derivation_basis_code": {
+          "type": "string",
+          "enum": [
+            "RULE_DERIVED_PRICE_HISTORY"
+          ]
+        },
+        "foundation_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

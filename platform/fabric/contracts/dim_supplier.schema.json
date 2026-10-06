@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dim_supplier",
+  "description": "Public-safe supplier dimension for bounded purchase-order and replenishment analysis.",
+  "type": "array",
+  "x-grain": "One row per public-safe supplier entity in the bounded proof.",
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "supplier_sk",
+        "supplier_code",
+        "supplier_name",
+        "supplier_class",
+        "supplier_reliability_band",
+        "service_region_code",
+        "currency_code",
+        "record_source_family",
+        "source_file_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "supplier_sk": {
+          "type": "string",
+          "pattern": "^SUP_SK_[A-F0-9]{12}$"
+        },
+        "supplier_code": {
+          "type": "string",
+          "pattern": "^SUP-[A-F0-9]{6}$"
+        },
+        "supplier_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "supplier_class": {
+          "type": "string",
+          "enum": [
+            "CORE_SUPPLIER",
+            "SPECIALTY_SUPPLIER",
+            "TRANSFER_SOURCE",
+            "BACKUP_SUPPLIER",
+            "UNKNOWN"
+          ]
+        },
+        "supplier_reliability_band": {
+          "type": "string",
+          "enum": [
+            "HIGH",
+            "MEDIUM",
+            "LOW",
+            "UNKNOWN"
+          ]
+        },
+        "service_region_code": {
+          "type": "string",
+          "pattern": "^(REGION_[A-F0-9]{6}|UNKNOWN)$"
+        },
+        "currency_code": {
+          "type": "string",
+          "enum": [
+            "USD"
+          ]
+        },
+        "record_source_family": {
+          "type": "string",
+          "enum": [
+            "supplier_reference_domain"
+          ]
+        },
+        "source_file_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "unknown"
+          ]
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
+

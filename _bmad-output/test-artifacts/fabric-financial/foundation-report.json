@@ -1,0 +1,23 @@
+{
+  "report_type": "fabric_financial_foundation_report",
+  "status": "completed",
+  "foundation_version": "financial_foundation_r1",
+  "recorded_at_utc": "2026-04-14T23:59:00.000Z",
+  "timeline_start_date": "2024-01-01",
+  "timeline_end_date": "2026-04-01",
+  "counts": {
+    "dim_account": 96,
+    "dim_product": 140,
+    "dim_pricing_context": 4,
+    "dim_cost_context": 5,
+    "fact_cost_history": 990,
+    "fact_price_list_history": 3960,
+    "fact_sales_realization": 4945
+  },
+  "current_boundary": {
+    "price_history_status": "effective_dated_rule_derived",
+    "cost_history_status": "effective_dated_rule_derived",
+    "sales_realization_status": "fulfilled_line_effective_dated_rule_resolved",
+    "financial_claim_boundary": "effective-dated price and cost are now resolved into fulfilled-line sales realization, but the layer is still bounded and not raw invoice-source finance"
+  }
+}

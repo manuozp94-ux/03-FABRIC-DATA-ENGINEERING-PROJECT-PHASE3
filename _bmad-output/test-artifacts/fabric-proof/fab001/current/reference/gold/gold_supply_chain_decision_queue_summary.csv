@@ -1,0 +1,3 @@
+queue_domain,decision_type_code,recommendation_status_code,decision_reason_code,recommendation_count,recommended_qty,approved_qty,recommended_cost_amount_usd,approved_cost_amount_usd
+supply_chain,PURCHASE_ORDER,APPROVED,OPEN_DEMAND_PRESSURE,24,158310,158310,1937714.4000000001,1937714.4000000001
+supply_chain,PURCHASE_ORDER,RECOMMENDED,OPEN_DEMAND_PRESSURE,24,90100,0,1102824.0000000002,0.0

@@ -1,0 +1,85 @@
+---
+import BilingualText from "../content/BilingualText.astro";
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+const normalizePath = (value: string) => {
+  if (value === "/") {
+    return "/";
+  }
+  return value.replace(/\/+$/, "");
+};
+
+const normalizedCurrentPath = normalizePath(currentPath);
+const routes = [
+  { href: "/", label: { en: "Home", es: "Inicio" } },
+  { href: "/case-study", label: { en: "Case Study", es: "Caso" } },
+  { href: "/technical-method", label: { en: "Technical Method", es: "Método Técnico" } },
+  { href: "/contact", label: { en: "Contact", es: "Contacto" } },
+];
+---
+
+<nav aria-label="Primary">
+  <ul class="nav-list">
+    {
+      routes.map((route) => {
+        const isCurrent = normalizedCurrentPath === normalizePath(route.href);
+        return (
+          <li>
+            <a
+              href={route.href}
+              aria-current={isCurrent ? "page" : undefined}
+              class:list={[{ current: isCurrent }]}
+            >
+              <BilingualText copy={route.label} />
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>
+
+<style>
+  .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .nav-list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(30, 38, 48, 0.11);
+    color: #1e2630;
+    background: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    font-weight: 600;
+    transition:
+      border-color 180ms ease,
+      background 180ms ease,
+      transform 180ms ease;
+  }
+
+  .nav-list a:hover,
+  .nav-list a:focus-visible {
+    border-color: rgba(13, 116, 100, 0.4);
+    background: rgba(13, 116, 100, 0.12);
+    transform: translateY(-1px);
+  }
+
+  .nav-list a.current {
+    background: #1e2630;
+    border-color: #1e2630;
+    color: white;
+  }
+</style>

@@ -1,0 +1,11 @@
+expression 'DirectLake - lh_fab001_public_proof' =
+		let
+		    Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/c11ed225-3ffc-440b-8cdb-88d1f366a91b/06b073a8-8653-4691-829b-0690e06a9de4", [HierarchicalNavigation=true])
+		in
+		    Source
+	lineageTag: 1f86d504-4324-4317-8d5a-5869c8eb8184
+
+	annotation PBI_IncludeFutureArtifacts = False
+
+	annotation PBI_RemovedChildren = [{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[gold_demand_support_product_family]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[fact_demand_line]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[gold_demand_support_account_pattern]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[fact_inventory_snapshot]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[slv_inventory_position_enriched]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[gold_public_policy_reference]"}},"objectType":"Table"}]
+

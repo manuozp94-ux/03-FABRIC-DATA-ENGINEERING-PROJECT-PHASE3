@@ -1,0 +1,1138 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BilingualText from "../components/content/BilingualText.astro";
+import { caseStudyPageCopy } from "../data/copy/case-study";
+import { canonicalProductStatement } from "../data/site-message";
+import actionQueue from "../data/public-serving/current/action-queue.json";
+import decisionSummary from "../data/public-serving/current/decision-summary.json";
+import demandSupportByPatternExtract from "../data/public-serving/current/demand-support-account-pattern.json";
+import demandSupportByFamilyExtract from "../data/public-serving/current/demand-support-product-family.json";
+import financialSummary from "../data/public-serving/current/financial-summary.json";
+import monthlyFinancialTrendExtract from "../data/public-serving/current/monthly-financial-trend.json";
+import publicPolicyReference from "../data/public-serving/current/public-policy-reference.json";
+import sourceSliceSummary from "../data/public-serving/current/source-slice-summary.json";
+import unitEconomicsReferenceExtract from "../data/public-serving/current/unit-economics-reference.json";
+import releaseStatus from "../data/release/current-operational-status.json";
+
+const l = (en: string, es: string) => ({ en, es });
+
+const formatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+});
+const numberFormatter = new Intl.NumberFormat("en-US");
+const currencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+});
+const percentFormatter = new Intl.NumberFormat("en-US", {
+  style: "percent",
+  maximumFractionDigits: 0,
+});
+const ratioFormatter = new Intl.NumberFormat("en-US", {
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 2,
+});
+const timestampFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  hour: "numeric",
+  minute: "2-digit",
+  timeZone: "UTC",
+  timeZoneName: "short",
+});
+
+const toDateLabel = (value: string) => formatter.format(new Date(`${value}T00:00:00Z`));
+const titleCaseCode = (value: string) =>
+  value
+    .toLowerCase()
+    .split("_")
+    .map((segment) => `${segment.charAt(0).toUpperCase()}${segment.slice(1)}`)
+    .join(" ");
+const uniqueValues = (values: string[]) => [...new Set(values.filter(Boolean))];
+
+const totalPublishedTables = sourceSliceSummary.publication_tables?.length ?? 0;
+const approvedRefreshTimestamp =
+  decisionSummary.latest_approved_refresh_utc
+  ?? sourceSliceSummary.latest_approved_refresh_utc
+  ?? "";
+const approvedRefreshLabel = approvedRefreshTimestamp
+  ? timestampFormatter.format(new Date(approvedRefreshTimestamp))
+  : "Pending";
+const lastSuccessfulRefreshLabel = releaseStatus.last_successful_refresh_utc
+  ? timestampFormatter.format(new Date(releaseStatus.last_successful_refresh_utc))
+  : approvedRefreshLabel;
+const activeRefreshSourceLabel =
+  releaseStatus.refresh_evidence?.active_source_label ?? "Release proof refresh";
+const latestReportedDate = [
+  decisionSummary.latest_demand_date,
+  decisionSummary.latest_inventory_date,
+  sourceSliceSummary.latest_published_reporting_date,
+]
+  .filter((value): value is string => Boolean(value))
+  .sort()
+  .at(-1) ?? "";
+
+const openDemandLines = decisionSummary.open_demand_lines ?? 0;
+const totalOpenQty = decisionSummary.total_open_qty ?? 0;
+const totalDemandValue = decisionSummary.total_demand_value_proxy ?? 0;
+const totalOpenDemandValue = decisionSummary.total_open_demand_value_proxy ?? 0;
+const totalInventoryExposure = decisionSummary.total_inventory_exposure ?? 0;
+const totalAvailableQty = decisionSummary.total_available_qty ?? 0;
+const readySnapshots = decisionSummary.ready_positions ?? 0;
+const currentPositionCount =
+  decisionSummary.current_positions
+  ?? decisionSummary.current_position_count
+  ?? 0;
+const serviceReadinessRate = decisionSummary.service_readiness_rate ?? 0;
+const openDemandCoverageRatio = decisionSummary.open_demand_coverage_ratio ?? 0;
+
+const actionPriority = {
+  REPLENISH_OR_PRODUCE: 0,
+  MONITOR: 1,
+  HOLD: 2,
+} as const;
+
+const actionHighlights = actionQueue
+  .map((row) => ({
+    productName: row.product_name ?? row.product_code,
+    inventoryPolicyClass: row.inventory_policy_class ?? "UNKNOWN",
+    leadTimeBand: row.lead_time_band ?? "UNKNOWN",
+    locationName: row.location_name ?? "Unknown location",
+    locationRole: row.node_type_code ?? "UNKNOWN",
+    readinessFlag: row.readiness_flag ?? "UNKNOWN",
+    actionStatus: row.action_status ?? "HOLD",
+    availableQty: row.available_qty ?? 0,
+    exposureValue: row.inventory_value_proxy ?? 0,
+  }))
+  .sort((left, right) => {
+    const actionGap =
+      actionPriority[left.actionStatus as keyof typeof actionPriority] -
+      actionPriority[right.actionStatus as keyof typeof actionPriority];
+
+    if (actionGap !== 0) {
+      return actionGap;
+    }
+
+    return right.exposureValue - left.exposureValue;
+  })
+  .slice(0, 4);
+
+const activeActionCount = decisionSummary.active_action_count
+  ?? actionQueue.filter((row) => (row.action_status ?? "HOLD") !== "HOLD").length;
+
+const latestDemandMonth = decisionSummary.latest_demand_month ?? "";
+const latestDemandMonthTotals = {
+  openQty: decisionSummary.latest_demand_month_open_qty ?? 0,
+  demandValue: decisionSummary.latest_demand_month_demand_value_proxy ?? 0,
+};
+const latestDemandMonthShare = decisionSummary.latest_demand_month_share ?? 0;
+
+const demandSupportByPattern = demandSupportByPatternExtract.map((row) => ({
+  label: row.customer_group ?? row.account_pattern_label ?? "Unknown group",
+  openQty: row.open_qty ?? 0,
+  openValue: row.open_value ?? 0,
+  share: row.open_value_share ?? 0,
+}));
+
+const demandSupportByFamily = demandSupportByFamilyExtract.map((row) => ({
+  label: row.product_family_label ?? titleCaseCode(row.product_family_code ?? "UNKNOWN"),
+  openQty: row.open_qty ?? 0,
+  openValue: row.open_value ?? 0,
+  share: row.open_value_share ?? 0,
+}));
+
+const economicStats = [
+  {
+    label: l("Bounded realized revenue", "Ingresos realizados acotados"),
+    value: currencyFormatter.format(financialSummary.total_realized_revenue_amount ?? 0),
+    note: l(
+      "Fulfilled-line revenue resolved through the bounded internal financial foundation and published here as a reviewer-safe business reading.",
+      "Ingresos a nivel de líneas cumplidas resueltos mediante la base financiera interna acotada y publicados aquí como lectura de negocio segura para reviewer.",
+    ),
+  },
+  {
+    label: l("Bounded realized COGS", "COGS realizados acotados"),
+    value: currencyFormatter.format(financialSummary.total_realized_cogs_amount ?? 0),
+    note: l(
+      "Effective-dated cost history resolves the cost side of the fulfilled-line story without claiming invoice-source finance truth.",
+      "El historial efectivo de costos resuelve el lado de costo de la historia de líneas cumplidas sin afirmar verdad financiera invoice-source.",
+    ),
+  },
+  {
+    label: l("Bounded realized gross margin", "Margen bruto realizado acotado"),
+    value: currencyFormatter.format(financialSummary.total_realized_gross_margin_amount ?? 0),
+    note: l(
+      `${percentFormatter.format(financialSummary.realized_margin_rate ?? 0)} realized margin rate across the bounded fulfilled-line view.`,
+      `${percentFormatter.format(financialSummary.realized_margin_rate ?? 0)} de tasa realizada de margen sobre la vista acotada de líneas cumplidas.`,
+    ),
+  },
+  {
+    label: l("Inventory vs open demand", "Inventario vs demanda abierta"),
+    value: `${ratioFormatter.format(financialSummary.inventory_to_open_demand_ratio ?? 0)}x`,
+    note: l(
+      "This remains a proxy-context ratio so current inventory exposure can still be read against open-demand pressure inside the approved slice.",
+      "Esto sigue siendo una razón de contexto proxy para que la exposición actual de inventario pueda leerse frente a la presión de demanda abierta dentro del slice aprobado.",
+    ),
+  },
+];
+
+const monthlyFinancialTrend = monthlyFinancialTrendExtract
+  .map((row) => ({
+    month: row.month,
+    realizedRevenue: row.realized_revenue_amount ?? 0,
+    realizedCogs: row.realized_cogs_amount ?? 0,
+    realizedGrossMargin: row.realized_gross_margin_amount ?? 0,
+    realizedMarginRate: row.realized_margin_rate ?? 0,
+    demandValue: row.demand_value_proxy ?? 0,
+    openDemandValue: row.open_demand_value_proxy ?? 0,
+    inventoryExposure: row.month_end_inventory_exposure ?? 0,
+  }))
+  .slice(-6);
+
+const unitEconomicsReference = unitEconomicsReferenceExtract.slice(0, 4).map((row) => ({
+  familyLabel: row.product_family_label ?? titleCaseCode(row.product_family_code ?? "UNKNOWN"),
+  productCount: row.product_count ?? 0,
+  unitCostMin: row.unit_cost_min ?? 0,
+  unitCostMax: row.unit_cost_max ?? 0,
+  standardPriceMin: row.standard_price_min ?? 0,
+  standardPriceMax: row.standard_price_max ?? 0,
+  openDemandValue: row.open_demand_value_proxy ?? 0,
+  inventoryExposure: row.current_inventory_exposure ?? 0,
+  impliedMarginRate: row.implied_margin_rate_proxy ?? 0,
+}));
+
+const decisionStats = [
+  {
+    label: l("Reporting window", "Ventana de reporte"),
+    value:
+      decisionSummary.latest_demand_date
+        ? `Jan 1, 2024 to ${toDateLabel(decisionSummary.latest_demand_date)}`
+        : "Window pending",
+    note: l(
+      "Demand activity starts in early 2024 and carries through the latest approved case window.",
+      "La actividad de demanda empieza a inicios de 2024 y se extiende hasta la ventana aprobada más reciente del caso.",
+    ),
+  },
+  {
+    label: l("Demand signal", "Señal de demanda"),
+    value: `${numberFormatter.format(openDemandLines)} open lines`,
+    note: l(
+      `${numberFormatter.format(totalOpenQty)} units remain open, representing ${currencyFormatter.format(totalDemandValue)} in demand-value proxy.`,
+      `${numberFormatter.format(totalOpenQty)} unidades siguen abiertas y representan ${currencyFormatter.format(totalDemandValue)} en proxy de valor de demanda.`,
+    ),
+  },
+  {
+    label: l("Open-demand coverage", "Cobertura de demanda abierta"),
+    value: percentFormatter.format(openDemandCoverageRatio),
+    note: l(
+      `${numberFormatter.format(totalAvailableQty)} available units are currently covering ${numberFormatter.format(totalOpenQty)} open units in the same published slice.`,
+      `${numberFormatter.format(totalAvailableQty)} unidades disponibles están cubriendo actualmente ${numberFormatter.format(totalOpenQty)} unidades abiertas dentro del mismo slice publicado.`,
+    ),
+  },
+  {
+    label: l("Service readiness", "Preparación de servicio"),
+    value: percentFormatter.format(serviceReadinessRate),
+    note: l(
+      `${readySnapshots} of ${currentPositionCount} current node-product positions read READY in the latest snapshot.`,
+      `${readySnapshots} de ${currentPositionCount} posiciones actuales nodo-producto siguen marcando READY en el último snapshot.`,
+    ),
+  },
+  {
+    label: l("Inventory exposure", "Exposición de inventario"),
+    value: currencyFormatter.format(totalInventoryExposure),
+    note: l(
+      `The current snapshot carries ${currencyFormatter.format(totalInventoryExposure)} against ${currencyFormatter.format(totalOpenDemandValue)} in open demand-value proxy.`,
+      `El snapshot actual carga ${currencyFormatter.format(totalInventoryExposure)} frente a ${currencyFormatter.format(totalOpenDemandValue)} en proxy de valor de demanda abierta.`,
+    ),
+  },
+  {
+    label: l("Recommended action", "Acción recomendada"),
+    value: activeActionCount > 0 ? `${activeActionCount} active actions` : "Hold current posture",
+    note: l(
+      activeActionCount > 0
+        ? "The current package already points to replenishment or closer monitoring in the latest snapshot."
+        : "No current positions require intervention in the latest published snapshot.",
+      activeActionCount > 0
+        ? "El paquete actual ya apunta a reposición o monitoreo más cercano en el último snapshot."
+        : "No hay posiciones actuales que requieran intervención en el último snapshot publicado.",
+    ),
+  },
+];
+
+const policySignalCopy = caseStudyPageCopy.policy.signals;
+const policySignals = [
+  {
+    label: policySignalCopy[0].label,
+    value: uniqueValues(
+      publicPolicyReference.map((row) => titleCaseCode(row.inventory_policy_class)),
+    ).join(", "),
+    note: policySignalCopy[0].note,
+    source: policySignalCopy[0].source,
+  },
+  {
+    label: policySignalCopy[1].label,
+    value: uniqueValues(
+      publicPolicyReference.map((row) => titleCaseCode(row.target_service_level_band)),
+    ).join(", "),
+    note: policySignalCopy[1].note,
+    source: policySignalCopy[1].source,
+  },
+  {
+    label: policySignalCopy[2].label,
+    value: uniqueValues(
+      publicPolicyReference.map((row) => titleCaseCode(row.coverage_target_band)),
+    ).join(", "),
+    note: policySignalCopy[2].note,
+    source: policySignalCopy[2].source,
+  },
+  {
+    label: policySignalCopy[3].label,
+    value: uniqueValues(
+      publicPolicyReference.map((row) => titleCaseCode(row.lead_time_band)),
+    ).join(", "),
+    note: policySignalCopy[3].note,
+    source: policySignalCopy[3].source,
+  },
+  {
+    label: policySignalCopy[4].label,
+    value: uniqueValues(
+      actionQueue.map((row) => titleCaseCode(row.node_type_code ?? "UNKNOWN")),
+    ).join(", "),
+    note: policySignalCopy[4].note,
+    source: policySignalCopy[4].source,
+  },
+];
+
+const proofLadder = caseStudyPageCopy.readingPath.steps.map((step, index) => ({
+  ...step,
+  cue:
+    index === 1
+      ? l(
+          `${totalPublishedTables} published tables support the current case-study slice.`,
+          `${totalPublishedTables} tablas publicadas soportan el slice actual del caso.`,
+        )
+      : step.cue,
+}));
+
+const teamPriorities = caseStudyPageCopy.tension.cards;
+const scopeNow = caseStudyPageCopy.boundaries.current;
+const laterExpansion = caseStudyPageCopy.boundaries.later;
+
+const tableRowCount = (tableName: string) =>
+  sourceSliceSummary.publication_tables?.find((table) => table.table_name === tableName)?.row_count ?? 0;
+
+const publishedContext = [
+  l(`${tableRowCount("dim_product")} products in the governed slice`, `${tableRowCount("dim_product")} productos en el slice gobernado`),
+  l(`${tableRowCount("dim_account")} customer groups contributing demand pressure`, `${tableRowCount("dim_account")} grupos de clientes aportando presión de demanda`),
+  l(`${tableRowCount("dim_inventory_location")} locations carrying current inventory context`, `${tableRowCount("dim_inventory_location")} ubicaciones con contexto actual de inventario`),
+  l(`${tableRowCount("fact_inventory_inbound")} approved inbound receipts supporting the inventory loop`, `${tableRowCount("fact_inventory_inbound")} recibos inbound aprobados soportando el ciclo de inventario`),
+  l(`${totalPublishedTables} approved public tables behind the current case`, `${totalPublishedTables} tablas públicas aprobadas detrás del caso actual`),
+];
+const freshnessStats = [
+  {
+    label: l("Last successful refresh", "Último refresh exitoso"),
+    value: lastSuccessfulRefreshLabel,
+    note: l(
+      releaseStatus.refresh_evidence?.active_source === "latest_live_runtime_refresh"
+        ? `${releaseStatus.freshness.status_label} freshness derived from the latest reconciled Fabric runtime refresh and mirrored into the governed site surface. The page still serves a published artifact, not a request-time live feed.`
+        : `${releaseStatus.freshness.status_label} freshness on the governed release cadence. This reflects approved release evidence, not a request-time live feed.`,
+      releaseStatus.refresh_evidence?.active_source === "latest_live_runtime_refresh"
+        ? `${releaseStatus.freshness.status_label} de frescura derivada del último refresh reconciliado de runtime en Fabric y espejeada en la superficie gobernada del sitio. La página sigue sirviendo un artefacto publicado, no un feed en vivo por request.`
+        : `${releaseStatus.freshness.status_label} de frescura en la cadencia gobernada de release. Esto refleja evidencia de release aprobado, no un feed en vivo por request.`,
+    ),
+  },
+  {
+    label: l("Refresh evidence", "Evidencia de refresh"),
+    value: activeRefreshSourceLabel,
+    note: l(
+      releaseStatus.latest_live_runtime_refresh_utc
+        ? `Release-proof evidence remains recorded separately, while the active freshness timestamp is pinned to the latest live Fabric runtime at ${lastSuccessfulRefreshLabel}.`
+        : "The active freshness timestamp is still pinned to governed release-proof evidence.",
+      releaseStatus.latest_live_runtime_refresh_utc
+        ? `La evidencia de release-proof permanece registrada por separado, mientras que el timestamp activo de frescura queda anclado al último runtime live de Fabric en ${lastSuccessfulRefreshLabel}.`
+        : "El timestamp activo de frescura sigue anclado a la evidencia gobernada de release-proof.",
+    ),
+  },
+  {
+    label: l("Latest published reporting date", "Última fecha publicada de reporte"),
+    value: latestReportedDate ? toDateLabel(latestReportedDate) : "Pending",
+    note: l(
+      "The analytical window is current through the latest approved demand activity or inventory snapshot date, not through a live operational feed.",
+      "La ventana analítica está vigente hasta la última actividad de demanda aprobada o fecha de snapshot de inventario, no a través de un feed operativo en vivo.",
+    ),
+  },
+  {
+    label: l("Release state", "Estado del release"),
+    value: titleCaseCode(releaseStatus.current_release_state),
+    note: l(
+      `Release ${releaseStatus.release_id} is the current governed public state.`,
+      `El release ${releaseStatus.release_id} es el estado público gobernado actual.`,
+    ),
+  },
+  {
+    label: l("Validation status", "Estado de validación"),
+    value: releaseStatus.overall_status_label,
+    note: l(
+      `${titleCaseCode(releaseStatus.validation_status.proof_refresh_status)} proof refresh with ${titleCaseCode(releaseStatus.validation_status.runtime_reconciliation_status)} runtime reconciliation.`,
+      `Refresh de proof ${titleCaseCode(releaseStatus.validation_status.proof_refresh_status)} con reconciliación de runtime ${titleCaseCode(releaseStatus.validation_status.runtime_reconciliation_status)}.`,
+    ),
+  },
+  {
+    label: l("Public source", "Fuente pública"),
+    value: releaseStatus.public_source.active_label,
+    note: l(
+      `${releaseStatus.public_source.note} Serving extract status: ${releaseStatus.public_source.serving_extract_status_label}.`,
+      `${releaseStatus.public_source.note} Estado del serving extract: ${releaseStatus.public_source.serving_extract_status_label}.`,
+    ),
+  },
+];
+---
+
+<Layout
+  title={caseStudyPageCopy.meta.title}
+  description={canonicalProductStatement}
+  routeLabel={caseStudyPageCopy.meta.routeLabel}
+  routePurpose={caseStudyPageCopy.meta.routePurpose}
+  pageHeading={caseStudyPageCopy.meta.pageHeading}
+>
+  <section class="hero-grid" aria-label="Case-study opening">
+    <article class="hero-card hero-card--primary">
+      <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.hero.eyebrow} /></p>
+      <h2><BilingualText copy={caseStudyPageCopy.hero.title} /></h2>
+      <p>
+        <BilingualText copy={caseStudyPageCopy.hero.summary} />
+      </p>
+      <div class="hero-notes">
+        <p>
+          <BilingualText copy={caseStudyPageCopy.hero.support} />
+        </p>
+      </div>
+    </article>
+
+    <aside class="portrait-card" aria-label="Case-study framing">
+      <div class="portrait-copy">
+        <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.whyItMatters.eyebrow} /></p>
+        <h2><BilingualText copy={caseStudyPageCopy.whyItMatters.title} /></h2>
+        <p>
+          <BilingualText copy={caseStudyPageCopy.whyItMatters.body} />
+        </p>
+        <div class="decision-note">
+          {caseStudyPageCopy.whyItMatters.notes.map((note) => <p><BilingualText copy={note} /></p>)}
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="tension-section" aria-labelledby="team-tension-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.tension.eyebrow} /></p>
+      <h2 id="team-tension-heading"><BilingualText copy={caseStudyPageCopy.tension.heading} /></h2>
+      <p>
+        <BilingualText copy={caseStudyPageCopy.tension.intro} />
+      </p>
+    </div>
+
+    <div class="tension-grid">
+      {
+        teamPriorities.map((priority) => (
+          <article class="tension-card">
+            <p class="stat-label"><BilingualText copy={priority.team} /></p>
+            <h3><BilingualText copy={priority.target} /></h3>
+            <p><BilingualText copy={priority.detail} /></p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="decision-section" aria-labelledby="decision-view-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.decision.eyebrow} /></p>
+      <h2 id="decision-view-heading"><BilingualText copy={caseStudyPageCopy.decision.heading} /></h2>
+      <p>
+        <BilingualText copy={caseStudyPageCopy.decision.intro} />
+      </p>
+    </div>
+
+    <div class="decision-grid">
+      <article class="panel panel--primary">
+        <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.decision.currentReadEyebrow} /></p>
+        <h2><BilingualText copy={caseStudyPageCopy.decision.currentReadTitle} /></h2>
+        <p>
+          <BilingualText copy={l(`Open demand currently sits at ${numberFormatter.format(totalOpenQty)} units, while the latest approved snapshot shows ${numberFormatter.format(totalAvailableQty)} units available. That means the current snapshot covers roughly ${percentFormatter.format(openDemandCoverageRatio)} of the open position in the same published slice.`, `La demanda abierta se ubica actualmente en ${numberFormatter.format(totalOpenQty)} unidades, mientras que el último snapshot aprobado muestra ${numberFormatter.format(totalAvailableQty)} unidades disponibles. Eso significa que el snapshot actual cubre aproximadamente ${percentFormatter.format(openDemandCoverageRatio)} de la posición abierta dentro del mismo slice publicado.`)} />
+        </p>
+        <div class="decision-note">
+          <p>
+            <BilingualText copy={l(`${numberFormatter.format(readySnapshots)} of ${numberFormatter.format(currentPositionCount)} current positions still read READY, but ${numberFormatter.format(activeActionCount)} positions already require replenishment or closer monitoring. That is enough to support the case, but not enough to treat the current posture as comfortably covered.`, `${numberFormatter.format(readySnapshots)} de ${numberFormatter.format(currentPositionCount)} posiciones actuales siguen marcando READY, pero ${numberFormatter.format(activeActionCount)} posiciones ya requieren reposición o monitoreo más cercano. Eso alcanza para sostener el caso, pero no para tratar la postura actual como cómodamente cubierta.`)} />
+          </p>
+        </div>
+        <p class="bounded-note">
+          <BilingualText copy={l("This route is built to support a better operating decision through a governed public package. It is not presented as a replacement ERP, WMS, or planning suite.", "Esta ruta está construida para soportar una mejor decisión operativa a través de un paquete público gobernado. No se presenta como reemplazo de ERP, WMS o suite de planeación.")} />
+        </p>
+      </article>
+
+      <article class="panel">
+        <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.decision.approvedPackageEyebrow} /></p>
+        <h2><BilingualText copy={caseStudyPageCopy.decision.approvedPackageTitle} /></h2>
+        <ul class="signal-list signal-list--compact">
+          {publishedContext.map((item) => <li><BilingualText copy={item} /></li>)}
+        </ul>
+        <p class="panel-note">
+          <BilingualText copy={caseStudyPageCopy.decision.approvedPackageNote} />
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="stats-grid" aria-label="Current decision metrics">
+    {
+      decisionStats.map((stat) => (
+        <article class="stat-card">
+          <p class="stat-label"><BilingualText copy={stat.label} /></p>
+          <p class="stat-value">{stat.value}</p>
+          <p class="stat-note"><BilingualText copy={stat.note} /></p>
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="support-section" aria-labelledby="economic-reading-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.economic.eyebrow} /></p>
+      <h2 id="economic-reading-heading"><BilingualText copy={caseStudyPageCopy.economic.heading} /></h2>
+      <p>
+        <BilingualText copy={caseStudyPageCopy.economic.intro} />
+      </p>
+    </div>
+
+    <div class="stats-grid">
+      {
+        economicStats.map((stat) => (
+          <article class="stat-card">
+            <p class="stat-label"><BilingualText copy={stat.label} /></p>
+            <p class="stat-value">{stat.value}</p>
+            <p class="stat-note"><BilingualText copy={stat.note} /></p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="support-grid support-grid--finance">
+      <article class="panel">
+        <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.economic.monthlyTrendEyebrow} /></p>
+        <div class="support-list">
+          {
+            monthlyFinancialTrend.map((item) => (
+              <div class="support-item">
+                <div class="support-item__top">
+                  <h3>{item.month}</h3>
+                  <p>{currencyFormatter.format(item.realizedRevenue)}</p>
+                </div>
+                <p class="support-note">
+                  <BilingualText copy={l(`${currencyFormatter.format(item.realizedGrossMargin)} realized gross margin | ${currencyFormatter.format(item.realizedCogs)} realized COGS | ${percentFormatter.format(item.realizedMarginRate)} realized margin rate`, `${currencyFormatter.format(item.realizedGrossMargin)} de margen bruto realizado | ${currencyFormatter.format(item.realizedCogs)} de COGS realizados | ${percentFormatter.format(item.realizedMarginRate)} de tasa realizada de margen`)} />
+                </p>
+                <p class="support-note">
+                  <BilingualText copy={l(`${currencyFormatter.format(item.demandValue)} demand-value proxy | ${currencyFormatter.format(item.openDemandValue)} open-demand proxy | ${currencyFormatter.format(item.inventoryExposure)} inventory exposure`, `${currencyFormatter.format(item.demandValue)} en proxy de valor de demanda | ${currencyFormatter.format(item.openDemandValue)} en proxy de demanda abierta | ${currencyFormatter.format(item.inventoryExposure)} de exposición de inventario`)} />
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </article>
+
+      <article class="panel">
+        <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.economic.unitEconomicsEyebrow} /></p>
+        <div class="support-list">
+          {
+            unitEconomicsReference.map((item) => (
+              <div class="support-item">
+                <div class="support-item__top">
+                  <h3>{item.familyLabel}</h3>
+                  <p>{numberFormatter.format(item.productCount)}</p>
+                </div>
+                <p class="support-note">
+                  <BilingualText copy={l(`Publication-safe unit cost band ${currencyFormatter.format(item.unitCostMin)} to ${currencyFormatter.format(item.unitCostMax)} | standard price band ${currencyFormatter.format(item.standardPriceMin)} to ${currencyFormatter.format(item.standardPriceMax)}`, `Banda public-safe de costo unitario de ${currencyFormatter.format(item.unitCostMin)} a ${currencyFormatter.format(item.unitCostMax)} | banda de precio estándar de ${currencyFormatter.format(item.standardPriceMin)} a ${currencyFormatter.format(item.standardPriceMax)}`)} />
+                </p>
+                <p class="support-note">
+                  <BilingualText copy={l(`${currencyFormatter.format(item.openDemandValue)} open-demand value proxy | ${currencyFormatter.format(item.inventoryExposure)} current inventory exposure | ${percentFormatter.format(item.impliedMarginRate)} implied margin rate`, `${currencyFormatter.format(item.openDemandValue)} en proxy de demanda abierta | ${currencyFormatter.format(item.inventoryExposure)} de exposición actual de inventario | ${percentFormatter.format(item.impliedMarginRate)} de tasa implícita de margen`)} />
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="policy-section" aria-labelledby="policy-foundation-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.policy.eyebrow} /></p>
+      <h2 id="policy-foundation-heading"><BilingualText copy={caseStudyPageCopy.policy.heading} /></h2>
+      <p>
+        <BilingualText copy={caseStudyPageCopy.policy.intro} />
+      </p>
+    </div>
+
+    <div class="policy-grid">
+      {
+        policySignals.map((signal) => (
+          <article class="policy-card">
+            <p class="stat-label"><BilingualText copy={signal.label} /></p>
+            <h3>{signal.value}</h3>
+            <p class="policy-source"><BilingualText copy={signal.source} /></p>
+            <p><BilingualText copy={signal.note} /></p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="action-section" aria-labelledby="action-queue-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.action.eyebrow} /></p>
+      <h2 id="action-queue-heading"><BilingualText copy={caseStudyPageCopy.action.heading} /></h2>
+      <p>
+        <BilingualText copy={caseStudyPageCopy.action.intro} />
+      </p>
+    </div>
+
+    <div class="action-grid">
+      {
+        actionHighlights.map((item) => (
+          <article class="action-card">
+            <div class="action-card__header">
+              <p class="stat-label">{item.productName}</p>
+              <span class={`action-badge action-badge--${item.actionStatus.toLowerCase()}`}>
+                {titleCaseCode(item.actionStatus)}
+              </span>
+            </div>
+            <h3>{item.locationName}</h3>
+            <p>
+              <BilingualText copy={l(`${titleCaseCode(item.inventoryPolicyClass)} policy, ${titleCaseCode(item.leadTimeBand)} lead time, and a current ${titleCaseCode(item.readinessFlag)} reading.`, `Política ${titleCaseCode(item.inventoryPolicyClass)}, lead time ${titleCaseCode(item.leadTimeBand)} y una lectura actual ${titleCaseCode(item.readinessFlag)}.`)} />
+            </p>
+            <dl class="action-metrics">
+              <div>
+                <dt><BilingualText copy={l("Available qty", "Cantidad disponible")} /></dt>
+                <dd>{numberFormatter.format(item.availableQty)}</dd>
+              </div>
+              <div>
+                <dt><BilingualText copy={l("Value exposure", "Exposición de valor")} /></dt>
+                <dd>{currencyFormatter.format(item.exposureValue)}</dd>
+              </div>
+              <div>
+                <dt><BilingualText copy={l("Location role", "Rol de ubicación")} /></dt>
+                <dd>{titleCaseCode(item.locationRole)}</dd>
+              </div>
+            </dl>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="support-section" aria-labelledby="demand-support-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.demandSupport.eyebrow} /></p>
+      <h2 id="demand-support-heading"><BilingualText copy={caseStudyPageCopy.demandSupport.heading} /></h2>
+      <p>
+        <BilingualText copy={caseStudyPageCopy.demandSupport.intro} />
+      </p>
+    </div>
+
+    <div class="support-grid">
+      <article class="panel panel--muted">
+        <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.demandSupport.monthPressureEyebrow} /></p>
+        <h2>{latestDemandMonth ? latestDemandMonth.replace("-", " / ") : "Current month pending"}</h2>
+        <p>
+          <BilingualText copy={l(`The latest month accounts for ${percentFormatter.format(latestDemandMonthShare)} of the full published demand-value window and carries ${numberFormatter.format(latestDemandMonthTotals.openQty)} open units on its own. That is why the main view should be read as a demand-pressure problem, not just as a static inventory snapshot.`, `El último mes representa ${percentFormatter.format(latestDemandMonthShare)} de toda la ventana publicada de valor de demanda y por sí solo carga ${numberFormatter.format(latestDemandMonthTotals.openQty)} unidades abiertas. Por eso la vista principal debe leerse como un problema de presión de demanda, no solo como un snapshot estático de inventario.`)} />
+        </p>
+      </article>
+
+      <article class="panel">
+        <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.demandSupport.customerGroupEyebrow} /></p>
+        <div class="support-list">
+          {
+            demandSupportByPattern.map((item) => (
+              <div class="support-item">
+                <div class="support-item__top">
+                  <h3>{item.label}</h3>
+                  <p>{percentFormatter.format(item.share)}</p>
+                </div>
+                <div class="support-bar" aria-hidden="true">
+                  <span style={`width: ${Math.max(item.share * 100, 6)}%`}></span>
+                </div>
+                <p class="support-note">
+                  <BilingualText copy={l(`${numberFormatter.format(item.openQty)} open units | ${currencyFormatter.format(item.openValue)} open demand-value proxy`, `${numberFormatter.format(item.openQty)} unidades abiertas | ${currencyFormatter.format(item.openValue)} en proxy de valor de demanda abierta`)} />
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </article>
+
+      <article class="panel">
+        <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.demandSupport.productFamilyEyebrow} /></p>
+        <div class="support-list">
+          {
+            demandSupportByFamily.map((item) => (
+              <div class="support-item">
+                <div class="support-item__top">
+                  <h3>{item.label}</h3>
+                  <p>{percentFormatter.format(item.share)}</p>
+                </div>
+                <div class="support-bar" aria-hidden="true">
+                  <span style={`width: ${Math.max(item.share * 100, 6)}%`}></span>
+                </div>
+                <p class="support-note">
+                  <BilingualText copy={l(`${numberFormatter.format(item.openQty)} open units | ${currencyFormatter.format(item.openValue)} open demand-value proxy`, `${numberFormatter.format(item.openQty)} unidades abiertas | ${currencyFormatter.format(item.openValue)} en proxy de valor de demanda abierta`)} />
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="freshness-section" aria-labelledby="freshness-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.freshness.eyebrow} /></p>
+      <h2 id="freshness-heading"><BilingualText copy={caseStudyPageCopy.freshness.heading} /></h2>
+      <p>
+        <BilingualText copy={caseStudyPageCopy.freshness.intro} />
+      </p>
+    </div>
+
+    <div class="freshness-grid">
+      {
+        freshnessStats.map((stat) => (
+        <article class="stat-card">
+          <p class="stat-label"><BilingualText copy={stat.label} /></p>
+          <p class="stat-value">{stat.value}</p>
+          <p class="stat-note"><BilingualText copy={stat.note} /></p>
+        </article>
+      ))
+    }
+    </div>
+  </section>
+
+  <section class="ladder-section" aria-labelledby="proof-ladder-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={caseStudyPageCopy.readingPath.eyebrow} /></p>
+      <h2 id="proof-ladder-heading"><BilingualText copy={caseStudyPageCopy.readingPath.heading} /></h2>
+      <p>
+        <BilingualText copy={caseStudyPageCopy.readingPath.intro} />
+      </p>
+    </div>
+
+    <div class="ladder-grid">
+      {
+        proofLadder.map((step, index) => (
+          <article class="ladder-card">
+            <p class="ladder-step"><BilingualText copy={l(`Step ${index + 1}`, `Paso ${index + 1}`)} /></p>
+            <h3><BilingualText copy={step.title} /></h3>
+            <p><BilingualText copy={step.summary} /></p>
+            <p class="ladder-cue"><BilingualText copy={step.cue} /></p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="boundary-grid" aria-label="Scope and next steps">
+    <article class="panel">
+      <h2><BilingualText copy={caseStudyPageCopy.boundaries.currentHeading} /></h2>
+      <ul class="signal-list">
+        {scopeNow.map((item) => <li><BilingualText copy={item} /></li>)}
+      </ul>
+    </article>
+
+    <article class="panel panel--muted">
+      <h2><BilingualText copy={caseStudyPageCopy.boundaries.laterHeading} /></h2>
+      <p>
+        <BilingualText copy={l("This version stays deliberately narrow. Once the core decision is clear, the case can grow into deeper sales, supply-chain, and logistics reads without losing coherence.", "Esta versión se mantiene deliberadamente estrecha. Una vez que la decisión central queda clara, el caso puede crecer hacia lecturas más profundas de ventas, supply chain y logística sin perder coherencia.")} />
+      </p>
+      <ul class="signal-list signal-list--compact">
+        {laterExpansion.map((item) => <li><BilingualText copy={item} /></li>)}
+      </ul>
+      <div class="cta-row">
+        <a class="cta-link" href="/technical-method"><BilingualText copy={l("Go to technical method", "Ir al método técnico")} /></a>
+        <a class="cta-link" href="/contact"><BilingualText copy={l("Talk about the project", "Hablar del proyecto")} /></a>
+      </div>
+    </article>
+  </section>
+</Layout>
+
+<style>
+  .hero-grid,
+  .stats-grid,
+  .tension-grid,
+  .ladder-grid,
+  .boundary-grid,
+  .decision-grid,
+  .policy-grid,
+  .action-grid,
+  .support-grid,
+  .freshness-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .hero-card,
+  .portrait-card,
+  .stat-card,
+  .tension-card,
+  .ladder-card,
+  .panel,
+  .policy-card,
+  .action-card {
+    padding: 1.2rem;
+    border-radius: 22px;
+    background: rgba(255, 253, 248, 0.92);
+    border: 1px solid rgba(30, 38, 48, 0.1);
+  }
+
+  .hero-card--primary,
+  .panel--primary {
+    background:
+      linear-gradient(135deg, rgba(13, 116, 100, 0.12), transparent 72%),
+      rgba(255, 253, 248, 0.96);
+  }
+
+  .eyebrow,
+  .stat-label,
+  .ladder-step {
+    margin: 0 0 0.5rem;
+    color: #0d7464;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .hero-card h2,
+  .portrait-copy h2,
+  .section-heading h2,
+  .panel h2,
+  .policy-card h3,
+  .action-card h3 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+    line-height: 1.2;
+    color: #1e2630;
+  }
+
+  .hero-card p,
+  .portrait-copy p,
+  .section-heading p,
+  .stat-note,
+  .tension-card p,
+  .ladder-card p,
+  .panel p,
+  .policy-card p,
+  .action-card p,
+  .signal-list,
+  .panel-note {
+    margin: 0;
+    color: #5c6a79;
+    line-height: 1.65;
+  }
+
+  .policy-source {
+    margin: 0;
+    color: #1e2630;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .hero-notes,
+  .decision-note {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(30, 38, 48, 0.09);
+  }
+
+  .portrait-card {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+
+  .portrait-frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    aspect-ratio: 4 / 4.8;
+    background:
+      linear-gradient(180deg, rgba(13, 116, 100, 0.08), rgba(30, 38, 48, 0.02)),
+      #f3efe8;
+  }
+
+  .portrait-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 16%;
+    transform: scale(1.18);
+    transform-origin: center top;
+  }
+
+  .stat-card,
+  .policy-card,
+  .action-card {
+    display: grid;
+    gap: 0.65rem;
+    align-content: start;
+  }
+
+  .stat-value {
+    margin: 0;
+    color: #1e2630;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  .tension-card h3,
+  .ladder-card h3 {
+    margin: 0 0 0.55rem;
+    font-size: 1.05rem;
+    color: #1e2630;
+  }
+
+  .section-heading {
+    display: grid;
+    gap: 0.55rem;
+    margin-bottom: 1rem;
+  }
+
+  .bounded-note {
+    margin-top: 1rem;
+    color: #1e2630;
+    font-weight: 600;
+  }
+
+  .action-card__header {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .action-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    background: rgba(30, 38, 48, 0.08);
+    color: #1e2630;
+  }
+
+  .action-badge--hold {
+    background: rgba(13, 116, 100, 0.12);
+    color: #0d7464;
+  }
+
+  .action-badge--monitor {
+    background: rgba(175, 111, 54, 0.16);
+    color: #8a521c;
+  }
+
+  .action-badge--replenish_or_produce {
+    background: rgba(173, 46, 46, 0.12);
+    color: #8c1f1f;
+  }
+
+  .action-metrics {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0;
+  }
+
+  .action-metrics div {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .action-metrics dt {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #0d7464;
+    font-weight: 700;
+  }
+
+  .action-metrics dd {
+    margin: 0;
+    color: #1e2630;
+    font-weight: 700;
+  }
+
+  .support-list {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .support-item {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .support-item__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    align-items: baseline;
+  }
+
+  .support-item__top h3,
+  .support-item__top p {
+    margin: 0;
+    color: #1e2630;
+  }
+
+  .support-item__top h3 {
+    font-size: 1rem;
+  }
+
+  .support-item__top p {
+    font-weight: 700;
+  }
+
+  .support-bar {
+    width: 100%;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: rgba(30, 38, 48, 0.08);
+    overflow: hidden;
+  }
+
+  .support-bar span {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(13, 116, 100, 0.95), rgba(175, 111, 54, 0.9));
+  }
+
+  .support-note {
+    margin: 0;
+    color: #5c6a79;
+    line-height: 1.5;
+  }
+
+  .ladder-card {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .ladder-cue {
+    color: #1e2630;
+    font-weight: 600;
+  }
+
+  .signal-list {
+    padding-left: 1.2rem;
+  }
+
+  .signal-list li + li {
+    margin-top: 0.55rem;
+  }
+
+  .signal-list--compact {
+    margin-top: 0.9rem;
+  }
+
+  .panel--muted {
+    background: rgba(13, 116, 100, 0.08);
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 1rem;
+  }
+
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    color: #1e2630;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .cta-link:hover,
+  .cta-link:focus-visible {
+    color: #0d7464;
+  }
+
+  @media (min-width: 760px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.85fr);
+    }
+
+    .tension-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .decision-grid {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .policy-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .action-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .support-grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .support-grid--finance {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .freshness-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .ladder-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .boundary-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .stats-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .policy-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .action-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>

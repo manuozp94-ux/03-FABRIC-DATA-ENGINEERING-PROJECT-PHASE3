@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "command": "node scripts/run-public-site.mjs dev",
+      "name": "Public site development server",
+      "request": "launch",
+      "type": "node-terminal"
+    }
+  ]
+}

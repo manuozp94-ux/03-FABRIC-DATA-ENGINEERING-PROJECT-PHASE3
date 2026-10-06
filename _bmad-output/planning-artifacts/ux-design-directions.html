@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FABRIC_PLATFORM_DEV_BMAD UX Design Directions</title>
+    <style>
+      :root {
+        --page-bg: #f4f1eb;
+        --page-ink: #14202a;
+        --page-muted: #586671;
+        --page-line: rgba(20, 32, 42, 0.12);
+        --page-panel: rgba(255, 255, 255, 0.72);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(16, 108, 124, 0.08), transparent 34%),
+          linear-gradient(180deg, #f8f5ef 0%, var(--page-bg) 100%);
+        color: var(--page-ink);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .shell {
+        display: grid;
+        grid-template-columns: 280px minmax(0, 1fr);
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 0;
+        align-self: start;
+        height: 100vh;
+        padding: 24px;
+        border-right: 1px solid var(--page-line);
+        background: rgba(248, 245, 239, 0.9);
+        backdrop-filter: blur(12px);
+      }
+
+      .sidebar h1 {
+        margin: 0 0 12px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.65rem;
+        line-height: 1.05;
+      }
+
+      .sidebar p {
+        margin: 0 0 18px;
+        color: var(--page-muted);
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      .nav {
+        display: grid;
+        gap: 10px;
+        margin: 22px 0;
+      }
+
+      .nav a {
+        display: block;
+        padding: 12px 14px;
+        border: 1px solid var(--page-line);
+        border-radius: 14px;
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.55);
+      }
+
+      .nav a:hover {
+        border-color: rgba(16, 108, 124, 0.35);
+        transform: translateX(2px);
+      }
+
+      .legend {
+        display: grid;
+        gap: 8px;
+        font-size: 0.86rem;
+        color: var(--page-muted);
+      }
+
+      .legend strong {
+        color: var(--page-ink);
+      }
+
+      .content {
+        padding: 28px;
+      }
+
+      .intro {
+        max-width: 920px;
+        padding: 6px 6px 28px;
+      }
+
+      .intro h2 {
+        margin: 0 0 12px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 2.1rem;
+      }
+
+      .intro p {
+        margin: 0 0 10px;
+        max-width: 70ch;
+        color: var(--page-muted);
+        line-height: 1.65;
+      }
+
+      .direction {
+        margin: 0 0 44px;
+        border: 1px solid var(--page-line);
+        border-radius: 28px;
+        overflow: hidden;
+        background: var(--page-panel);
+        box-shadow: 0 18px 60px rgba(20, 32, 42, 0.08);
+      }
+
+      .direction-header {
+        padding: 22px 24px 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: rgba(255, 255, 255, 0.18);
+      }
+
+      .direction-header h3 {
+        margin: 14px 0 8px;
+        font-size: 1.85rem;
+        line-height: 1.05;
+        font-family: Georgia, "Times New Roman", serif;
+      }
+
+      .direction-header p {
+        margin: 0;
+        max-width: 72ch;
+        color: rgba(255, 255, 255, 0.88);
+        line-height: 1.6;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .tag {
+        padding: 6px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+        font-size: 0.8rem;
+      }
+
+      .direction-body {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.9fr);
+        gap: 0;
+      }
+
+      .mockup {
+        padding: 28px;
+        min-height: 560px;
+      }
+
+      .analysis {
+        padding: 28px;
+        border-left: 1px solid var(--page-line);
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .analysis h4 {
+        margin: 0 0 14px;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .analysis ul {
+        margin: 0 0 18px 18px;
+        padding: 0;
+        line-height: 1.6;
+      }
+
+      .analysis p {
+        margin: 0 0 16px;
+        line-height: 1.65;
+        color: var(--page-muted);
+      }
+
+      .frame {
+        border-radius: 26px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      }
+
+      .frame-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 20px;
+        font-size: 0.92rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .frame-top nav {
+        display: flex;
+        gap: 18px;
+      }
+
+      .hero {
+        padding: 34px 20px 22px;
+      }
+
+      .hero h4 {
+        margin: 0 0 10px;
+        font-size: 2.25rem;
+        line-height: 1;
+      }
+
+      .hero p {
+        margin: 0;
+        max-width: 56ch;
+        line-height: 1.6;
+        opacity: 0.86;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .button {
+        padding: 12px 16px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 0.92rem;
+      }
+
+      .button.primary {
+        background: rgba(255, 255, 255, 0.18);
+      }
+
+      .button.secondary {
+        border: 1px solid rgba(255, 255, 255, 0.22);
+      }
+
+      .grid {
+        display: grid;
+        gap: 16px;
+        padding: 0 20px 24px;
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .card {
+        padding: 18px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.08);
+        min-height: 150px;
+      }
+
+      .card strong {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 0.92rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .card p,
+      .card li {
+        margin: 0;
+        line-height: 1.55;
+      }
+
+      .card ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .meta-strip {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        padding: 0 20px 24px;
+      }
+
+      .meta {
+        padding: 14px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .meta span {
+        display: block;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        opacity: 0.74;
+      }
+
+      .meta strong {
+        display: block;
+        margin-top: 8px;
+        font-size: 1rem;
+      }
+
+      .dir-1 {
+        background: linear-gradient(135deg, #123445 0%, #1f6171 55%, #d99061 100%);
+        color: #f7f1e8;
+      }
+
+      .dir-2 {
+        background: linear-gradient(135deg, #10222e 0%, #1d3341 52%, #466c7a 100%);
+        color: #eff5f7;
+      }
+
+      .dir-3 {
+        background: linear-gradient(135deg, #f6f1e7 0%, #ebe2d1 100%);
+        color: #18242d;
+      }
+
+      .dir-4 {
+        background: linear-gradient(135deg, #2a241f 0%, #5e4333 42%, #c89a60 100%);
+        color: #fcf8f1;
+      }
+
+      .dir-5 {
+        background: linear-gradient(135deg, #11161d 0%, #202c39 48%, #4a5868 100%);
+        color: #eef2f7;
+      }
+
+      .dir-6 {
+        background: linear-gradient(135deg, #eff3f5 0%, #dce6ea 100%);
+        color: #17242d;
+      }
+
+      .dir-3 .analysis,
+      .dir-6 .analysis {
+        background: rgba(255, 255, 255, 0.52);
+      }
+
+      .dir-3 .eyebrow,
+      .dir-6 .eyebrow,
+      .dir-3 .tag,
+      .dir-6 .tag,
+      .dir-3 .frame,
+      .dir-6 .frame {
+        border-color: rgba(23, 36, 45, 0.14);
+      }
+
+      .dir-3 .direction-header p,
+      .dir-6 .direction-header p,
+      .dir-3 .analysis p,
+      .dir-6 .analysis p {
+        color: rgba(23, 36, 45, 0.78);
+      }
+
+      .dir-3 .card,
+      .dir-6 .card,
+      .dir-3 .meta,
+      .dir-6 .meta,
+      .dir-3 .button.primary,
+      .dir-6 .button.primary {
+        background: rgba(23, 36, 45, 0.06);
+      }
+
+      .dir-3 .button.secondary,
+      .dir-6 .button.secondary {
+        border-color: rgba(23, 36, 45, 0.12);
+      }
+
+      @media (max-width: 1080px) {
+        .shell {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          position: static;
+          height: auto;
+          border-right: 0;
+          border-bottom: 1px solid var(--page-line);
+        }
+
+        .direction-body {
+          grid-template-columns: 1fr;
+        }
+
+        .analysis {
+          border-left: 0;
+          border-top: 1px solid var(--page-line);
+        }
+      }
+
+      @media (max-width: 760px) {
+        .content,
+        .sidebar {
+          padding: 18px;
+        }
+
+        .grid.two,
+        .grid.three,
+        .meta-strip {
+          grid-template-columns: 1fr;
+        }
+
+        .hero h4 {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <h1>UX Design Directions</h1>
+        <p>
+          Six visual directions for the public case-study experience, all aligned to the same trust-first,
+          progressive-proof strategy.
+        </p>
+        <div class="nav">
+          <a href="#direction-1">01. Editorial Proof</a>
+          <a href="#direction-2">02. Systems Ledger</a>
+          <a href="#direction-3">03. Calm Proof</a>
+          <a href="#direction-4">04. Warm Intelligence</a>
+          <a href="#direction-5">05. Technical Archive</a>
+          <a href="#direction-6">06. Structured Narrative</a>
+        </div>
+        <div class="legend">
+          <div><strong>Recommended lead:</strong> Direction 03</div>
+          <div><strong>Best for:</strong> mixed audiences, long-form proof, bounded technical credibility</div>
+          <div><strong>Blend option:</strong> 03 base + 01 headline style + 05 evidence panels</div>
+        </div>
+      </aside>
+
+      <main class="content">
+        <section class="intro">
+          <h2>Design Direction Showcase</h2>
+          <p>
+            These directions all preserve the same product logic: business tension first, analytical clarification
+            second, technical credibility third. What changes is the visual weight, rhythm, and framing.
+          </p>
+          <p>
+            Use this file to compare tone, density, navigation feel, and how much “editorial” versus “technical”
+            energy the site should project.
+          </p>
+        </section>
+
+        <section class="direction dir-1" id="direction-1">
+          <div class="direction-header">
+            <span class="eyebrow">Direction 01</span>
+            <h3>Editorial Proof</h3>
+            <p>High-trust, magazine-like framing with strong story cadence and controlled technical reveal.</p>
+            <div class="tags">
+              <span class="tag">Narrative-first</span>
+              <span class="tag">Warm paper palette</span>
+              <span class="tag">Executive readability</span>
+            </div>
+          </div>
+          <div class="direction-body">
+            <div class="mockup">
+              <div class="frame">
+                <div class="frame-top">
+                  <strong>FABRIC_PLATFORM_DEV_BMAD</strong>
+                  <nav><span>Case</span><span>Method</span><span>Contact</span></nav>
+                </div>
+                <div class="hero">
+                  <h4>Turn operational tension into governed analytical proof.</h4>
+                  <p>
+                    A public-safe case study showing how demand, inventory readiness, and cross-functional trade-offs
+                    can be modeled without leaking private structure.
+                  </p>
+                  <div class="cta-row">
+                    <div class="button primary">Enter the case study</div>
+                    <div class="button secondary">Inspect the technical method</div>
+                  </div>
+                </div>
+                <div class="meta-strip">
+                  <div class="meta"><span>Refresh</span><strong>2026-03-28</strong></div>
+                  <div class="meta"><span>Release</span><strong>Proof Package 0.3</strong></div>
+                  <div class="meta"><span>Scope</span><strong>Bounded MVP</strong></div>
+                  <div class="meta"><span>Proof Mode</span><strong>Public-safe</strong></div>
+                </div>
+                <div class="grid two">
+                  <div class="card">
+                    <strong>Business Tension</strong>
+                    <p>Sales favors availability. Supply chain protects exposure. The model clarifies the trade-off.</p>
+                  </div>
+                  <div class="card">
+                    <strong>Why It Matters</strong>
+                    <p>One governed slice helps mixed audiences see the same operational reality without confusion.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="analysis">
+              <h4>Why it works</h4>
+              <ul>
+                <li>Best for recruiter and executive first impression.</li>
+                <li>Strong narrative control for the business-first reading sequence.</li>
+                <li>Feels premium without looking like generic portfolio marketing.</li>
+              </ul>
+              <p><strong>Risk:</strong> can underplay technical sharpness if evidence blocks are too soft.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="direction dir-2" id="direction-2">
+          <div class="direction-header">
+            <span class="eyebrow">Direction 02</span>
+            <h3>Systems Ledger</h3>
+            <p>Sharper, denser framing for users who want more structure, metadata, and “operational system” feel.</p>
+            <div class="tags">
+              <span class="tag">Operational</span>
+              <span class="tag">Metadata-led</span>
+              <span class="tag">Dense signal</span>
+            </div>
+          </div>
+          <div class="direction-body">
+            <div class="mockup">
+              <div class="frame">
+                <div class="frame-top">
+                  <strong>Release Ledger</strong>
+                  <nav><span>Status</span><span>Lineage</span><span>Validation</span></nav>
+                </div>
+                <div class="hero">
+                  <h4>One controlled publication package. No private drift.</h4>
+                  <p>
+                    Evidence, freshness, validation, and route responsibilities are surfaced with higher technical density.
+                  </p>
+                </div>
+                <div class="grid three">
+                  <div class="card"><strong>Package</strong><p>public-proof-v003</p></div>
+                  <div class="card"><strong>Validation</strong><p>All publication gates passed.</p></div>
+                  <div class="card"><strong>Boundary</strong><p>Private prep excluded from web layer.</p></div>
+                </div>
+                <div class="grid two">
+                  <div class="card">
+                    <strong>Route Spine</strong>
+                    <ul>
+                      <li>Orientation</li>
+                      <li>Case proof</li>
+                      <li>Technical method</li>
+                      <li>Next step</li>
+                    </ul>
+                  </div>
+                  <div class="card">
+                    <strong>Evidence Summary</strong>
+                    <ul>
+                      <li>Source slice defined</li>
+                      <li>Masking policy visible</li>
+                      <li>Release traceability linked</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="analysis">
+              <h4>Why it works</h4>
+              <ul>
+                <li>Very strong for skeptical technical reviewers.</li>
+                <li>Makes governance and release discipline legible.</li>
+                <li>Pairs well with public-proof and manifest-based thinking.</li>
+              </ul>
+              <p><strong>Risk:</strong> can feel heavy for recruiters if used as the dominant home-page tone.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="direction dir-3" id="direction-3">
+          <div class="direction-header">
+            <span class="eyebrow">Direction 03 · Recommended</span>
+            <h3>Calm Proof</h3>
+            <p>Balanced editorial clarity and technical credibility. The most complete fit for the current UX strategy.</p>
+            <div class="tags">
+              <span class="tag">Recommended lead</span>
+              <span class="tag">Mixed-audience fit</span>
+              <span class="tag">Progressive proof</span>
+            </div>
+          </div>
+          <div class="direction-body">
+            <div class="mockup">
+              <div class="frame">
+                <div class="frame-top">
+                  <strong>Case Study</strong>
+                  <nav><span>Overview</span><span>Evidence</span><span>Method</span></nav>
+                </div>
+                <div class="hero">
+                  <h4>See the business tension. Then verify the method.</h4>
+                  <p>
+                    Calm narrative blocks, trust-forward metadata, and compact evidence panels create a natural proof ladder.
+                  </p>
+                  <div class="cta-row">
+                    <div class="button primary">Start with the business case</div>
+                    <div class="button secondary">Jump to the technical method</div>
+                  </div>
+                </div>
+                <div class="grid two">
+                  <div class="card">
+                    <strong>What this is</strong>
+                    <p>A publication-safe Microsoft Fabric case study grounded in real operational complexity.</p>
+                  </div>
+                  <div class="card">
+                    <strong>Why trust it</strong>
+                    <p>Bounded scope, explicit masking, governed contracts, and versioned release evidence.</p>
+                  </div>
+                </div>
+                <div class="meta-strip">
+                  <div class="meta"><span>Freshness</span><strong>Last successful refresh</strong></div>
+                  <div class="meta"><span>Masking</span><strong>Public-safe abstraction</strong></div>
+                  <div class="meta"><span>Method</span><strong>Contract-first model</strong></div>
+                  <div class="meta"><span>Next step</span><strong>Role-fit or contact path</strong></div>
+                </div>
+              </div>
+            </div>
+            <div class="analysis">
+              <h4>Why it works</h4>
+              <ul>
+                <li>Strongest overall fit for the PRD, UX goals, and architecture.</li>
+                <li>Handles recruiter, business, and technical audiences without splitting surfaces.</li>
+                <li>Supports long-form reading while keeping proof compact and intentional.</li>
+              </ul>
+              <p><strong>Blend suggestion:</strong> use Direction 01 headline warmth and Direction 05 evidence styling inside this structure.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="direction dir-4" id="direction-4">
+          <div class="direction-header">
+            <span class="eyebrow">Direction 04</span>
+            <h3>Warm Intelligence</h3>
+            <p>Human, advisory, and high-touch. Best if consulting credibility becomes slightly more prominent.</p>
+            <div class="tags">
+              <span class="tag">Advisory tone</span>
+              <span class="tag">Warm contrast</span>
+              <span class="tag">Human-facing</span>
+            </div>
+          </div>
+          <div class="direction-body">
+            <div class="mockup">
+              <div class="frame">
+                <div class="frame-top">
+                  <strong>Operational Analytics Case</strong>
+                  <nav><span>Story</span><span>Outcomes</span><span>Reach Out</span></nav>
+                </div>
+                <div class="hero">
+                  <h4>Complex operations, translated into something teams can actually use.</h4>
+                  <p>
+                    A warmer visual tone emphasizes human judgment, clarity, and working-relationship trust.
+                  </p>
+                </div>
+                <div class="grid two">
+                  <div class="card">
+                    <strong>For Hiring Teams</strong>
+                    <p>Fast role-fit proof with business context and technical depth close behind.</p>
+                  </div>
+                  <div class="card">
+                    <strong>For Sponsors</strong>
+                    <p>Clear operational tension, clear modeled slice, clear reason to continue the conversation.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="analysis">
+              <h4>Why it works</h4>
+              <ul>
+                <li>Good if you want a more personal, advisory posture.</li>
+                <li>Makes the site feel approachable and less austere.</li>
+                <li>Useful for future consulting pathways.</li>
+              </ul>
+              <p><strong>Risk:</strong> can drift too far from technical rigor if not balanced with stronger evidence blocks.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="direction dir-5" id="direction-5">
+          <div class="direction-header">
+            <span class="eyebrow">Direction 05</span>
+            <h3>Technical Archive</h3>
+            <p>Sharper, darker evidence framing with strong archive and inspection cues for rigorous review.</p>
+            <div class="tags">
+              <span class="tag">Rigorous</span>
+              <span class="tag">Archive feel</span>
+              <span class="tag">Inspectability</span>
+            </div>
+          </div>
+          <div class="direction-body">
+            <div class="mockup">
+              <div class="frame">
+                <div class="frame-top">
+                  <strong>Method Archive</strong>
+                  <nav><span>Contracts</span><span>Lineage</span><span>Releases</span></nav>
+                </div>
+                <div class="hero">
+                  <h4>Inspect the bounded proof without exposing the private workshop.</h4>
+                  <p>
+                    This direction leans hardest into repo-visible rigor, release records, and evidence panel depth.
+                  </p>
+                </div>
+                <div class="grid three">
+                  <div class="card"><strong>Source Slice</strong><p>Explicitly bounded and public-safe.</p></div>
+                  <div class="card"><strong>Manifest</strong><p>Approved proof assets only.</p></div>
+                  <div class="card"><strong>Release</strong><p>Traceable to version and validation.</p></div>
+                </div>
+              </div>
+            </div>
+            <div class="analysis">
+              <h4>Why it works</h4>
+              <ul>
+                <li>Excellent style reference for the technical-method route.</li>
+                <li>Fits the new public-evidence boundary story well.</li>
+                <li>Makes bounded transparency feel deliberate.</li>
+              </ul>
+              <p><strong>Risk:</strong> too severe as a full-site direction, but very useful as a subsystem inside Direction 03.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="direction dir-6" id="direction-6">
+          <div class="direction-header">
+            <span class="eyebrow">Direction 06</span>
+            <h3>Structured Narrative</h3>
+            <p>Bright, diagram-friendly framing with strong section rhythm and highly explicit route scaffolding.</p>
+            <div class="tags">
+              <span class="tag">Structured</span>
+              <span class="tag">Diagram-friendly</span>
+              <span class="tag">Teaching mode</span>
+            </div>
+          </div>
+          <div class="direction-body">
+            <div class="mockup">
+              <div class="frame">
+                <div class="frame-top">
+                  <strong>Guided Walkthrough</strong>
+                  <nav><span>Step 1</span><span>Step 2</span><span>Step 3</span></nav>
+                </div>
+                <div class="hero">
+                  <h4>One problem. One governed slice. One explainable proof path.</h4>
+                  <p>
+                    Ideal if the product should feel especially teachable, structured, and easy to present in interviews.
+                  </p>
+                </div>
+                <div class="grid two">
+                  <div class="card"><strong>Business Tension</strong><p>Explain the conflict first.</p></div>
+                  <div class="card"><strong>Analytical Clarification</strong><p>Show the modeled answer next.</p></div>
+                  <div class="card"><strong>Technical Method</strong><p>Expose bounded proof third.</p></div>
+                  <div class="card"><strong>Next Step</strong><p>Convert confidence into action.</p></div>
+                </div>
+              </div>
+            </div>
+            <div class="analysis">
+              <h4>Why it works</h4>
+              <ul>
+                <li>Very clear for interviews, demos, and guided walkthroughs.</li>
+                <li>Supports teaching and explanation nicely.</li>
+                <li>Good secondary reference for page-level rhythm.</li>
+              </ul>
+              <p><strong>Risk:</strong> can feel too instructional if every page uses the same explicit step framing.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

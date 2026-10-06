@@ -1,0 +1,2 @@
+latest_approved_refresh_utc,latest_demand_date,latest_inventory_date,open_demand_lines,total_open_qty,total_open_demand_value_proxy,total_available_qty,total_inventory_exposure,ready_positions,current_positions,service_readiness_rate,open_demand_coverage_ratio,active_action_count,latest_demand_month,latest_demand_month_share
+2026-04-14T23:59:00.000Z,2026-04-01,2026-04-01,20721,259193,7660239,50637,956083,71,196,0.362245,0.195364,125,2026-04,0.005341

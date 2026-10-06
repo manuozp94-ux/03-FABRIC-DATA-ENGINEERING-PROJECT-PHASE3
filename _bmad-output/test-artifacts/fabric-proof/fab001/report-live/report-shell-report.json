@@ -1,0 +1,18 @@
+{
+  "report": {
+    "id": "29e81270-9ca0-4739-8cd1-5571e935ecdd",
+    "type": "Report",
+    "displayName": "rpt_fab001_supply_chain_decision",
+    "description": "",
+    "workspaceId": "c11ed225-3ffc-440b-8cdb-88d1f366a91b"
+  },
+  "page_name": "Supply Chain Decision View",
+  "updated_at_utc": "2026-04-04T07:08:46Z",
+  "update_result": {
+    "status": "Succeeded",
+    "createdTimeUtc": "2026-04-04T07:06:39.3774553",
+    "lastUpdatedTimeUtc": "2026-04-04T07:06:40.0099607",
+    "percentComplete": 100,
+    "error": null
+  }
+}

@@ -1,0 +1,134 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BilingualText from "../components/content/BilingualText.astro";
+
+const l = (en: string, es: string) => ({ en, es });
+
+const usageNotes = [
+  l("The material on this site is provided for professional review and discussion.", "El material de este sitio se ofrece para revisión y conversación profesional."),
+  l("The case is bounded and publication-safe by design, so it should not be read as a complete internal operating record.", "El caso es acotado y publication-safe por diseño, así que no debe leerse como un registro operativo interno completo."),
+  l("Nothing on this site should be treated as legal, financial, or implementation advice for a third party without separate review.", "Nada en este sitio debe tratarse como consejo legal, financiero o de implementación para un tercero sin revisión separada."),
+];
+
+const visitorExpectations = [
+  l("Do not submit confidential client information, raw operational records, or sensitive personal data through public channels tied to this site.", "No envíes información confidencial de clientes, registros operativos raw ni datos personales sensibles a través de canales públicos ligados a este sitio."),
+  l("If you want to discuss the work, use the professional outreach path already associated with the link you received.", "Si quieres discutir el trabajo, usa la vía profesional de outreach ya asociada con el enlace que recibiste."),
+  l("If the site later introduces richer interaction or downloadable evidence bundles, this page should be updated to match that scope.", "Si después el sitio introduce interacción más rica o evidence bundles descargables, esta página deberá actualizarse para corresponder a ese alcance."),
+];
+---
+
+<Layout
+  title={l("Terms | Manuel A. Orozco", "Términos | Manuel A. Orozco")}
+  description={l("A minimal usage notice for the public release of this professional portfolio.", "Un aviso mínimo de uso para el release público de este portafolio profesional.")}
+  routeLabel={l("Terms", "Términos")}
+  routePurpose={l("Set simple expectations for how this public portfolio should be used during the current scope.", "Define expectativas simples sobre cómo debe usarse este portafolio público dentro del alcance actual.")}
+  pageHeading={l("A minimal usage notice for the current public release.", "Un aviso mínimo de uso para el release público actual.")}
+>
+  <section class="panel-grid" aria-label="Terms summary">
+    <article class="panel panel--primary">
+      <p class="eyebrow"><BilingualText copy={l("Usage scope", "Alcance de uso")} /></p>
+      <h2><BilingualText copy={l("This site is meant to support evaluation, discussion, and professional context.", "Este sitio está pensado para apoyar evaluación, conversación y contexto profesional.")} /></h2>
+      <ul class="signal-list">
+        {usageNotes.map((item) => <li><BilingualText copy={item} /></li>)}
+      </ul>
+    </article>
+
+    <article class="panel">
+      <p class="eyebrow"><BilingualText copy={l("Visitor expectations", "Expectativas del visitante")} /></p>
+      <h2><BilingualText copy={l("What to assume when using the site", "Qué asumir al usar el sitio")} /></h2>
+      <ul class="signal-list">
+        {visitorExpectations.map((item) => <li><BilingualText copy={item} /></li>)}
+      </ul>
+    </article>
+  </section>
+
+  <section class="panel panel--muted" aria-label="Support links">
+    <p class="eyebrow"><BilingualText copy={l("Support pages", "Páginas de soporte")} /></p>
+    <h2><BilingualText copy={l("Related pages", "Páginas relacionadas")} /></h2>
+    <p>
+      <BilingualText copy={l("The contact route explains how to continue a conversation, and the privacy route explains the minimal contact-handling posture used in Phase 1.", "La ruta de contacto explica cómo continuar una conversación y la ruta de privacidad explica la postura mínima de manejo de contacto usada en Fase 1.")} />
+    </p>
+    <div class="cta-row">
+      <a class="cta-link" href="/contact"><BilingualText copy={l("Contact", "Contacto")} /></a>
+      <a class="cta-link" href="/privacy"><BilingualText copy={l("Privacy", "Privacidad")} /></a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .panel-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .panel {
+    padding: 1.2rem;
+    border-radius: 22px;
+    background: rgba(255, 253, 248, 0.92);
+    border: 1px solid rgba(30, 38, 48, 0.1);
+  }
+
+  .panel--primary {
+    background:
+      linear-gradient(135deg, rgba(13, 116, 100, 0.12), transparent 72%),
+      rgba(255, 253, 248, 0.96);
+  }
+
+  .panel--muted {
+    background: rgba(13, 116, 100, 0.08);
+  }
+
+  .eyebrow {
+    margin: 0 0 0.5rem;
+    color: #0d7464;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .panel h2 {
+    margin: 0 0 0.7rem;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    line-height: 1.2;
+  }
+
+  .panel p,
+  .signal-list {
+    margin: 0;
+    color: #5c6a79;
+    line-height: 1.65;
+  }
+
+  .signal-list {
+    padding-left: 1.2rem;
+  }
+
+  .signal-list li + li {
+    margin-top: 0.45rem;
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 1rem;
+  }
+
+  .cta-link {
+    color: #1e2630;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .cta-link:hover,
+  .cta-link:focus-visible {
+    color: #0d7464;
+  }
+
+  @media (min-width: 760px) {
+    .panel-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

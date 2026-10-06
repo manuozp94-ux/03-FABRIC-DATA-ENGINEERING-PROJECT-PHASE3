@@ -1,0 +1,222 @@
+table dim_product
+	lineageTag: 2d35b3ef-fbcc-4002-80ae-5fd850f9d88a
+	sourceLineageTag: [dbo].[dim_product]
+
+	column product_sk
+		dataType: string
+		lineageTag: c21750f7-2fb6-46d5-bfa6-288d7ffb6392
+		sourceLineageTag: product_sk
+		summarizeBy: none
+		sourceColumn: product_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_code
+		dataType: string
+		lineageTag: 8468b7d9-41b8-4104-9979-f4a4012f7d05
+		sourceLineageTag: product_code
+		summarizeBy: none
+		sourceColumn: product_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		lineageTag: 0cd1a2cc-699d-41c4-b84c-218ef4925de6
+		sourceLineageTag: product_name
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_family_code
+		dataType: string
+		lineageTag: 87718399-cfe2-4e66-b561-7931034d841f
+		sourceLineageTag: product_family_code
+		summarizeBy: none
+		sourceColumn: product_family_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column demand_pattern_class
+		dataType: string
+		lineageTag: 92ac5911-128f-482a-9baf-db2946790f2d
+		sourceLineageTag: demand_pattern_class
+		summarizeBy: none
+		sourceColumn: demand_pattern_class
+
+		annotation SummarizationSetBy = Automatic
+
+	column planning_constraint_class
+		dataType: string
+		lineageTag: a5548aac-6dc0-4d44-9eb4-0e193d23090d
+		sourceLineageTag: planning_constraint_class
+		summarizeBy: none
+		sourceColumn: planning_constraint_class
+
+		annotation SummarizationSetBy = Automatic
+
+	column inventory_policy_class
+		dataType: string
+		lineageTag: 14285680-aab5-479b-9529-4a21229ff9e8
+		sourceLineageTag: inventory_policy_class
+		summarizeBy: none
+		sourceColumn: inventory_policy_class
+
+		annotation SummarizationSetBy = Automatic
+
+	column fulfillment_risk_class
+		dataType: string
+		lineageTag: 7afd91bf-64d1-43d1-8966-a99cddf20905
+		sourceLineageTag: fulfillment_risk_class
+		summarizeBy: none
+		sourceColumn: fulfillment_risk_class
+
+		annotation SummarizationSetBy = Automatic
+
+	column lead_time_band
+		dataType: string
+		lineageTag: 28823d42-d97c-4e01-80a1-8e9ac6168217
+		sourceLineageTag: lead_time_band
+		summarizeBy: none
+		sourceColumn: lead_time_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column criticality_band
+		dataType: string
+		lineageTag: 0db0b09b-7aef-4f4a-951f-8bc415db09d9
+		sourceLineageTag: criticality_band
+		summarizeBy: none
+		sourceColumn: criticality_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_profile
+		dataType: string
+		lineageTag: 3774603c-de3f-4dc2-a732-26585d7497cd
+		sourceLineageTag: service_profile
+		summarizeBy: none
+		sourceColumn: service_profile
+
+		annotation SummarizationSetBy = Automatic
+
+	column value_density_band
+		dataType: string
+		lineageTag: 5939b3df-262b-45c7-8b16-cd6c3c596d7b
+		sourceLineageTag: value_density_band
+		summarizeBy: none
+		sourceColumn: value_density_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_economic_band_code
+		dataType: string
+		lineageTag: a48606d8-6190-4b0e-87d5-296cc9cf4bf5
+		sourceLineageTag: unit_economic_band_code
+		summarizeBy: none
+		sourceColumn: unit_economic_band_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column interchangeability_group_code
+		dataType: string
+		lineageTag: 9d26f898-34dd-4faa-b5e6-e5605185fc94
+		sourceLineageTag: interchangeability_group_code
+		summarizeBy: none
+		sourceColumn: interchangeability_group_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_category
+		dataType: string
+		lineageTag: 2db3eaf8-76ac-483a-9b50-827afa097120
+		sourceLineageTag: product_category
+		summarizeBy: none
+		sourceColumn: product_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column weight_value
+		dataType: double
+		lineageTag: d031cdc7-a379-4930-9163-59fed78f7c92
+		sourceLineageTag: weight_value
+		summarizeBy: sum
+		sourceColumn: weight_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column box_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 53f40ee3-0abe-4798-9af1-87c6cebaa980
+		sourceLineageTag: box_qty
+		summarizeBy: sum
+		sourceColumn: box_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column pallet_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 984ce1e0-f7e3-4ec4-85ba-9a1e8ebf836c
+		sourceLineageTag: pallet_qty
+		summarizeBy: sum
+		sourceColumn: pallet_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column record_source_family
+		dataType: string
+		lineageTag: 89f7fe51-91a2-4972-a981-1b4d899437c7
+		sourceLineageTag: record_source_family
+		summarizeBy: none
+		sourceColumn: record_source_family
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_file_version
+		dataType: string
+		lineageTag: c74071e8-1b11-4c16-b5ba-f298ea74b157
+		sourceLineageTag: source_file_version
+		summarizeBy: none
+		sourceColumn: source_file_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column record_status
+		dataType: string
+		lineageTag: c1b20178-3554-4f42-b30c-5d01820db307
+		sourceLineageTag: record_status
+		summarizeBy: none
+		sourceColumn: record_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column publication_safety_flag
+		dataType: string
+		lineageTag: ba4221d9-db29-4f96-8390-a8d5f362e64b
+		sourceLineageTag: publication_safety_flag
+		summarizeBy: none
+		sourceColumn: publication_safety_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column load_timestamp_utc
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 90a8aa47-14ea-47fc-b2fe-d9f8813e637b
+		sourceLineageTag: load_timestamp_utc
+		summarizeBy: none
+		sourceColumn: load_timestamp_utc
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_product = entity
+		mode: directLake
+		source
+			entityName: dim_product
+			expressionSource: 'DirectLake - lh_fab001_public_proof'
+

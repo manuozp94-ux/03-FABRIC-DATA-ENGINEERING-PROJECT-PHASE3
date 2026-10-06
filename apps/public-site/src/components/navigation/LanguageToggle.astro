@@ -1,0 +1,48 @@
+<div class="language-toggle" aria-label="Language selector">
+  <div class="language-toggle__controls" role="group" aria-label="Language">
+    <button type="button" class="language-toggle__button" data-language-option="en" aria-pressed="true">
+      EN
+    </button>
+    <button type="button" class="language-toggle__button" data-language-option="es" aria-pressed="false">
+      ES
+    </button>
+  </div>
+</div>
+
+<style>
+  .language-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .language-toggle__controls {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.22rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(30, 38, 48, 0.11);
+  }
+
+  .language-toggle__button {
+    border: 0;
+    background: transparent;
+    color: #1e2630;
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .language-toggle__button[aria-pressed="true"] {
+    background: #1e2630;
+    color: white;
+  }
+  
+  .language-toggle__button:focus-visible {
+    outline: 2px solid rgba(13, 116, 100, 0.45);
+    outline-offset: 2px;
+  }
+</style>

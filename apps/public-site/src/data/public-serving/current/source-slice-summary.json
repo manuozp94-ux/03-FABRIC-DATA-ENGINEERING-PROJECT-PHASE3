@@ -1,0 +1,192 @@
+{
+  "report_type": "fab001_public_serving_source_slice",
+  "generated_from_publication_dir": "platform/fabric/publication/current",
+  "latest_approved_refresh_utc": "2026-04-14T23:59:00.000Z",
+  "latest_published_reporting_date": "2026-04-01",
+  "publication_versions": [
+    "curated_publication_r2__representative_market_r1",
+    "curated_publication_r2__representative_market_r1__operating_loop_v1"
+  ],
+  "total_rows": 87553,
+  "publication_tables": [
+    {
+      "table_name": "dim_product",
+      "row_count": 140,
+      "count_label": "product entities",
+      "domain": "Product reference domain",
+      "purpose": "Carries product classes, policy signals, lead-time bands, and the public product identifiers used by the case.",
+      "source_family_code": "product_reference_domain",
+      "source_family_label": "Product Reference Domain"
+    },
+    {
+      "table_name": "dim_product_family",
+      "row_count": 5,
+      "count_label": "family entities",
+      "domain": "Classification reference domain",
+      "purpose": "Keeps the product-family layer explicit so demand and inventory can still be grouped into interpretable classes.",
+      "source_family_code": "classification_reference_domain",
+      "source_family_label": "Classification Reference Domain"
+    },
+    {
+      "table_name": "dim_account",
+      "row_count": 96,
+      "count_label": "account entities",
+      "domain": "Account reference domain",
+      "purpose": "Carries public-safe customer patterns so the demand view can explain commercial pressure without exposing identities.",
+      "source_family_code": "account_reference_domain",
+      "source_family_label": "Account Reference Domain"
+    },
+    {
+      "table_name": "dim_inventory_location",
+      "row_count": 16,
+      "count_label": "location entities",
+      "domain": "Location reference domain",
+      "purpose": "Keeps site and node-role context visible so the case still reads as multi-location inventory support.",
+      "source_family_code": "location_reference_domain",
+      "source_family_label": "Location Reference Domain"
+    },
+    {
+      "table_name": "fact_demand_line",
+      "row_count": 23476,
+      "count_label": "demand lines",
+      "domain": "Sales activity domain",
+      "purpose": "Supplies the demand-history and open-demand pressure that feed the supporting sales-side read of the case.",
+      "source_family_code": "sales_activity_domain",
+      "source_family_label": "Sales Activity Domain"
+    },
+    {
+      "table_name": "fact_inventory_inbound",
+      "row_count": 3696,
+      "count_label": "approved inbound receipts",
+      "domain": "Inventory receipt domain",
+      "purpose": "Carries approved inbound movement so the public slice can explain how inventory enters the bounded loop.",
+      "source_family_code": "inventory_receipt_domain",
+      "source_family_label": "Inventory Receipt Domain"
+    },
+    {
+      "table_name": "fact_inventory_snapshot",
+      "row_count": 35868,
+      "count_label": "inventory positions",
+      "domain": "Inventory position domain",
+      "purpose": "Supplies the current inventory posture, availability, and readiness state used by the primary decision view.",
+      "source_family_code": "inventory_position_domain",
+      "source_family_label": "Inventory Position Domain"
+    },
+    {
+      "table_name": "dim_service_region",
+      "row_count": 8,
+      "count_label": "service regions",
+      "domain": "Public-safe service-region domain",
+      "purpose": "Supports regional dashboard slicing without exposing real geography.",
+      "source_family_code": "service_region_reference_domain",
+      "source_family_label": "Service Region Reference Domain"
+    },
+    {
+      "table_name": "dim_supplier",
+      "row_count": 8,
+      "count_label": "supplier entities",
+      "domain": "Supplier reference domain",
+      "purpose": "Supports bounded replenishment analysis without exposing real supplier identities.",
+      "source_family_code": "supplier_reference_domain",
+      "source_family_label": "Supplier Reference Domain"
+    },
+    {
+      "table_name": "rule_supplier_product_lead_time",
+      "row_count": 196,
+      "count_label": "supplier-product lead-time rules",
+      "domain": "Supply-chain planning rules",
+      "purpose": "Defines allowed supplier, product, and receiving-location lead-time rules for purchase-order planning.",
+      "source_family_code": "unknown_source_family",
+      "source_family_label": "Unknown Source Family"
+    },
+    {
+      "table_name": "rule_location_transfer_lead_time",
+      "row_count": 240,
+      "count_label": "location transfer rules",
+      "domain": "Logistics planning rules",
+      "purpose": "Defines bounded origin-destination transfer lead times for inventory movement planning.",
+      "source_family_code": "unknown_source_family",
+      "source_family_label": "Unknown Source Family"
+    },
+    {
+      "table_name": "rule_location_service_lead_time",
+      "row_count": 96,
+      "count_label": "service lead-time rules",
+      "domain": "Fulfillment planning rules",
+      "purpose": "Defines bounded fulfillment-location service timing by public-safe service region.",
+      "source_family_code": "unknown_source_family",
+      "source_family_label": "Unknown Source Family"
+    },
+    {
+      "table_name": "fact_supply_chain_decision_queue_line",
+      "row_count": 48,
+      "count_label": "supply-chain decision lines",
+      "domain": "Supply-chain recommendation domain",
+      "purpose": "Carries replenishment recommendations before they become purchase-order execution facts.",
+      "source_family_code": "unknown_source_family",
+      "source_family_label": "Unknown Source Family"
+    },
+    {
+      "table_name": "fact_logistics_decision_queue_line",
+      "row_count": 96,
+      "count_label": "logistics decision lines",
+      "domain": "Logistics recommendation domain",
+      "purpose": "Carries transfer and fulfillment recommendations before they become movement or fulfillment events.",
+      "source_family_code": "unknown_source_family",
+      "source_family_label": "Unknown Source Family"
+    },
+    {
+      "table_name": "fact_purchase_order_line",
+      "row_count": 24,
+      "count_label": "purchase-order lines",
+      "domain": "Purchase-order execution domain",
+      "purpose": "Shows which approved replenishment decisions became bounded purchase-order line events.",
+      "source_family_code": "unknown_source_family",
+      "source_family_label": "Unknown Source Family"
+    },
+    {
+      "table_name": "fact_purchase_order_status_history",
+      "row_count": 48,
+      "count_label": "purchase-order status rows",
+      "domain": "Purchase-order status domain",
+      "purpose": "Keeps traceability between planned, ordered, and received purchase-order states.",
+      "source_family_code": "unknown_source_family",
+      "source_family_label": "Unknown Source Family"
+    },
+    {
+      "table_name": "fact_inventory_movement_line",
+      "row_count": 16,
+      "count_label": "inventory movement lines",
+      "domain": "Inventory movement execution domain",
+      "purpose": "Shows bounded transfer shipments, in-transit quantities, and receipts between public-safe locations.",
+      "source_family_code": "unknown_source_family",
+      "source_family_label": "Unknown Source Family"
+    },
+    {
+      "table_name": "fact_sales_fulfillment_line",
+      "row_count": 23476,
+      "count_label": "sales fulfillment lines",
+      "domain": "Sales fulfillment execution domain",
+      "purpose": "Ties demand lines to inventory consumption, delivered quantity, backorder quantity, and bounded COGS.",
+      "source_family_code": "unknown_source_family",
+      "source_family_label": "Unknown Source Family"
+    }
+  ],
+  "published_source_families": [
+    "Product Reference Domain",
+    "Classification Reference Domain",
+    "Account Reference Domain",
+    "Location Reference Domain",
+    "Sales Activity Domain",
+    "Inventory Receipt Domain",
+    "Inventory Position Domain",
+    "Service Region Reference Domain",
+    "Supplier Reference Domain",
+    "Unknown Source Family"
+  ],
+  "example_transformations": {
+    "account_public_form": "Harbor Line Legacy Coverage 01",
+    "location_public_form": "Third-Party Node B4A426",
+    "product_public_form": "Service Junction Kit 06"
+  }
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.manuel.fabric-bmad.trello-watch</string>
+
+    <key>ProgramArguments</key>
+    <array>
+      <string>/Library/Frameworks/Python.framework/Versions/3.14/bin/python3</string>
+      <string>-u</string>
+      <string>/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/scripts/trello_hybrid_watch.py</string>
+      <string>--env-file</string>
+      <string>/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/scripts/trello_hybrid_sync.local.env</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3</string>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>ThrottleInterval</key>
+    <integer>10</integer>
+
+    <key>StandardOutPath</key>
+    <string>/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/implementation-artifacts/trello-watch.stdout.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/manuel.orozco/Desktop/CODEX PROJECTS/03-FABRIC-DATA-ENGINEERING-PROJECT-PHASE3/_bmad-output/implementation-artifacts/trello-watch.stderr.log</string>
+  </dict>
+</plist>

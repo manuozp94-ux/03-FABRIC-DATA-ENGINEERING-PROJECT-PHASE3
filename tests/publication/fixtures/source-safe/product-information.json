@@ -1,0 +1,67 @@
+[
+  {
+    "product_id": "sku-internal-1001",
+    "product_code": "INT-RAIL-001",
+    "product_name": "Apex Rail Assembly",
+    "forecasting_category": "core",
+    "product_category": "Long Profile",
+    "planning_model": "standard",
+    "weight_value": 18,
+    "box_qty": 8,
+    "pallet_qty": 24,
+    "source_file_version": "product-information-fixture-v1",
+    "record_status": "active"
+  },
+  {
+    "product_id": "sku-internal-2044",
+    "product_code": "INT-KIT-014",
+    "product_name": "Field Retrofit Kit",
+    "forecasting_category": "project",
+    "product_category": "Kit Bundle",
+    "planning_model": "project",
+    "weight_value": 10,
+    "box_qty": 4,
+    "pallet_qty": 12,
+    "source_file_version": "product-information-fixture-v1",
+    "record_status": "active"
+  },
+  {
+    "product_id": "sku-internal-3188",
+    "product_code": "INT-BOLT-932",
+    "product_name": "Anchor Fastener Pack",
+    "forecasting_category": "core",
+    "product_category": "Hardware",
+    "planning_model": "standard",
+    "weight_value": 3,
+    "box_qty": 800,
+    "pallet_qty": 200,
+    "source_file_version": "product-information-fixture-v1",
+    "record_status": "active"
+  },
+  {
+    "product_id": "sku-internal-4477",
+    "product_code": "INT-SAFE-777",
+    "product_name": "Restricted Flow Controller",
+    "forecasting_category": "special",
+    "product_category": "Control Module",
+    "planning_model": "constrained",
+    "weight_value": 35,
+    "box_qty": 2,
+    "pallet_qty": 6,
+    "source_file_version": "product-information-fixture-v1",
+    "record_status": "active"
+  },
+  {
+    "product_id": "sku-internal-5099",
+    "product_code": "INT-MISC-404",
+    "product_name": "Legacy Item Placeholder",
+    "forecasting_category": "",
+    "product_category": "",
+    "planning_model": "",
+    "weight_value": 0,
+    "box_qty": 0,
+    "pallet_qty": 0,
+    "source_file_version": "product-information-fixture-v1",
+    "record_status": "unknown"
+  }
+]

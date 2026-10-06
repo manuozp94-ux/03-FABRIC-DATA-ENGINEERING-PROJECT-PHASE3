@@ -1,0 +1,110 @@
+table dim_product_family
+	lineageTag: 110d58c5-e7c7-4495-a399-8f0d4f26c9f1
+	sourceLineageTag: [dbo].[dim_product_family]
+
+	column product_family_code
+		dataType: string
+		lineageTag: af499100-9c0f-4c3e-b432-5b6f9bdefcc4
+		sourceLineageTag: product_family_code
+		summarizeBy: none
+		sourceColumn: product_family_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_family_name
+		dataType: string
+		lineageTag: c380e122-4308-4af1-b589-e90b04f47972
+		sourceLineageTag: product_family_name
+		summarizeBy: none
+		sourceColumn: product_family_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column family_description
+		dataType: string
+		lineageTag: 29322cda-9c49-480c-abe1-c037dc3f8ad7
+		sourceLineageTag: family_description
+		summarizeBy: none
+		sourceColumn: family_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column storage_profile
+		dataType: string
+		lineageTag: ac33af34-5b49-472c-9469-f355261a2107
+		sourceLineageTag: storage_profile
+		summarizeBy: none
+		sourceColumn: storage_profile
+
+		annotation SummarizationSetBy = Automatic
+
+	column handling_profile
+		dataType: string
+		lineageTag: a2485aea-4b4d-492d-9b79-52fa3c6554fb
+		sourceLineageTag: handling_profile
+		summarizeBy: none
+		sourceColumn: handling_profile
+
+		annotation SummarizationSetBy = Automatic
+
+	column synthetic_margin_band_code
+		dataType: string
+		lineageTag: 38327914-6e73-4731-bcdc-8efe9c1b284b
+		sourceLineageTag: synthetic_margin_band_code
+		summarizeBy: none
+		sourceColumn: synthetic_margin_band_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column record_source_family
+		dataType: string
+		lineageTag: eb02c8e0-87cd-4d58-b3ef-eded08570460
+		sourceLineageTag: record_source_family
+		summarizeBy: none
+		sourceColumn: record_source_family
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_file_version
+		dataType: string
+		lineageTag: ca7f8fa0-5cc3-4493-b92a-8c41f78161cb
+		sourceLineageTag: source_file_version
+		summarizeBy: none
+		sourceColumn: source_file_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column record_status
+		dataType: string
+		lineageTag: a88ee372-522d-47c0-a8a1-e3eda61998af
+		sourceLineageTag: record_status
+		summarizeBy: none
+		sourceColumn: record_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column publication_safety_flag
+		dataType: string
+		lineageTag: 64f9b384-c14e-4353-ac0b-490f0f781726
+		sourceLineageTag: publication_safety_flag
+		summarizeBy: none
+		sourceColumn: publication_safety_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column load_timestamp_utc
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 96a4c4a9-9529-4e02-9761-96c810a0abef
+		sourceLineageTag: load_timestamp_utc
+		summarizeBy: none
+		sourceColumn: load_timestamp_utc
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_product_family = entity
+		mode: directLake
+		source
+			entityName: dim_product_family
+			expressionSource: 'DirectLake - lh_fab001_public_proof'
+

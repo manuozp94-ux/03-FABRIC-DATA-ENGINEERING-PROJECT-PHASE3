@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "rule_supplier_product_lead_time",
+  "description": "Governed supplier-product receiving rule used to plan bounded purchase orders and expected receipts.",
+  "type": "array",
+  "x-grain": "One row per supplier, product, and receiving inventory location rule.",
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "supplier_product_lead_time_rule_sk",
+        "supplier_sk",
+        "product_sk",
+        "receiving_inventory_location_sk",
+        "lead_time_days",
+        "minimum_order_qty",
+        "order_multiple_qty",
+        "preferred_supplier_flag",
+        "effective_start_date",
+        "effective_end_date",
+        "rule_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "supplier_product_lead_time_rule_sk": {
+          "type": "string",
+          "pattern": "^SPLT_RULE_[A-F0-9]{12}$"
+        },
+        "supplier_sk": {
+          "type": "string",
+          "pattern": "^SUP_SK_[A-F0-9]{12}$"
+        },
+        "product_sk": {
+          "type": "string",
+          "pattern": "^PRD_SK_[A-F0-9]{12}$"
+        },
+        "receiving_inventory_location_sk": {
+          "type": "string",
+          "pattern": "^LOC_SK_[A-F0-9]{12}$"
+        },
+        "lead_time_days": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "minimum_order_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "order_multiple_qty": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "preferred_supplier_flag": {
+          "type": "boolean"
+        },
+        "cost_context_sk": {
+          "type": "string",
+          "pattern": "^CCT_SK_[A-F0-9]{12}$"
+        },
+        "effective_start_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "effective_end_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "rule_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
+

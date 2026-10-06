@@ -1,0 +1,970 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BilingualText from "../components/content/BilingualText.astro";
+import BoundedPowerBIProof from "../components/proof/BoundedPowerBIProof.astro";
+import OperatingWorkflowDiagram from "../components/diagrams/OperatingWorkflowDiagram.astro";
+import { technicalMethodPageCopy } from "../data/copy/technical-method";
+import { canonicalProductStatement } from "../data/site-message";
+import { fabricProofAliases } from "../data/fabric-proof-aliases";
+import decisionSummary from "../data/public-serving/current/decision-summary.json";
+import extractManifest from "../data/public-serving/current/manifest.json";
+import publicPolicyReference from "../data/public-serving/current/public-policy-reference.json";
+import sourceSliceSummary from "../data/public-serving/current/source-slice-summary.json";
+import releaseStatus from "../data/release/current-operational-status.json";
+
+const l = (en: string, es: string) => ({ en, es });
+
+const formatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+});
+const timestampFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  hour: "numeric",
+  minute: "2-digit",
+  timeZone: "UTC",
+  timeZoneName: "short",
+});
+const uniqueValues = (values: string[]) => [...new Set(values.filter(Boolean))];
+
+const publicationTables = sourceSliceSummary.publication_tables ?? [];
+const publicationVersions = sourceSliceSummary.publication_versions ?? [];
+const loadTimestamp =
+  decisionSummary.latest_approved_refresh_utc
+  ?? sourceSliceSummary.latest_approved_refresh_utc
+  ?? "";
+const loadLabel = loadTimestamp ? formatter.format(new Date(loadTimestamp)) : "Pending";
+const loadTimestampLabel = loadTimestamp
+  ? timestampFormatter.format(new Date(loadTimestamp))
+  : "Pending";
+const latestReportedDate = sourceSliceSummary.latest_published_reporting_date ?? "";
+const latestReportedLabel = latestReportedDate
+  ? formatter.format(new Date(`${latestReportedDate}T00:00:00Z`))
+  : "Pending";
+const liveRuntimeRefreshLabel = releaseStatus.latest_live_runtime_refresh_utc
+  ? timestampFormatter.format(new Date(releaseStatus.latest_live_runtime_refresh_utc))
+  : null;
+const publicationVersionLabel = publicationVersions.join(", ") || "Pending";
+const totalRows = sourceSliceSummary.total_rows ?? 0;
+const evidenceStats = [
+  {
+    label: l("Published tables", "Tablas publicadas"),
+    value: "7",
+    note: technicalMethodPageCopy.evidenceStats.publishedTablesNote,
+  },
+  {
+    label: l("Published rows", "Filas publicadas"),
+    value: `${totalRows}`,
+    note: technicalMethodPageCopy.evidenceStats.publishedRowsNote,
+  },
+  {
+    label: l("Latest approved refresh", "Último refresh aprobado"),
+    value: loadLabel,
+    note: technicalMethodPageCopy.evidenceStats.latestRefreshNote,
+  },
+  {
+    label: l("Policy profiles", "Perfiles de política"),
+    value: `${publicPolicyReference.length}`,
+    note: technicalMethodPageCopy.evidenceStats.policyProfilesNote,
+  },
+];
+
+const sourceSlice = publicationTables.map((table) => ({
+  domain: table.domain,
+  count: `${table.row_count} ${table.count_label}`,
+  purpose: table.purpose,
+  sourceFamily: table.source_family_label,
+}));
+
+const publishedSourceFamilies =
+  sourceSliceSummary.published_source_families
+  ?? uniqueValues(sourceSlice.map((item) => item.sourceFamily));
+
+const zoneCards = technicalMethodPageCopy.zoneBoundary.cards;
+
+const treatmentCategories = technicalMethodPageCopy.treatment.categories;
+
+const exampleTransformations = [
+  {
+    source: l("Direct customer label", "Etiqueta directa de cliente"),
+    publicForm: sourceSliceSummary.example_transformations?.account_public_form ?? "Harbor Line Field Service 01",
+    preservedMeaning: l(
+      "Account grain and demand behavior stay intact while customer identity is removed.",
+      "El grano de cuenta y el comportamiento de demanda se mantienen intactos mientras se elimina la identidad del cliente.",
+    ),
+  },
+  {
+    source: l("Warehouse or storage label", "Etiqueta de almacén o almacenamiento"),
+    publicForm: sourceSliceSummary.example_transformations?.location_public_form ?? "Transit Node",
+    preservedMeaning: l(
+      "Network role and inventory-location behavior stay visible without exposing real site names or dock labels.",
+      "El rol de red y el comportamiento inventario-ubicación permanecen visibles sin exponer nombres reales de sitios o muelles.",
+    ),
+  },
+  {
+    source: l("Branded product description", "Descripción de producto con marca"),
+    publicForm: sourceSliceSummary.example_transformations?.product_public_form ?? "Service Kit 01",
+    preservedMeaning: l(
+      "Product family and planning behavior stay available without publishing brand vocabulary or source SKU conventions.",
+      "La familia de producto y el comportamiento de planeación se mantienen disponibles sin publicar vocabulario de marca ni convenciones de SKU fuente.",
+    ),
+  },
+];
+
+const simplifications = technicalMethodPageCopy.simplifications.items;
+const grainStatements = technicalMethodPageCopy.grain.statements;
+const modeledEntities = [
+  {
+    name: "dim_product",
+    grain: l("one row per public product", "una fila por producto público"),
+    role: l("Carries product policy, lead-time, risk, and service characteristics.", "Carga política de producto, lead time, riesgo y características de servicio."),
+  },
+  {
+    name: "dim_product_family",
+    grain: l("one row per public product family", "una fila por familia pública de producto"),
+    role: l("Supports grouped interpretation of demand and inventory behavior.", "Soporta interpretación agrupada del comportamiento de demanda e inventario."),
+  },
+  {
+    name: "dim_account",
+    grain: l("one row per public account segment", "una fila por segmento público de cuenta"),
+    role: l("Carries account-pattern and fulfillment context for demand interpretation.", "Carga contexto de account pattern y fulfillment para interpretar la demanda."),
+  },
+  {
+    name: "dim_inventory_location",
+    grain: l("one row per public inventory location", "una fila por ubicación pública de inventario"),
+    role: l("Carries node role, logistics area, and site-safe network context.", "Carga rol del nodo, área logística y contexto de red seguro para sitio."),
+  },
+  {
+    name: "fact_demand_line",
+    grain: l("one row per public demand line event", "una fila por evento público de demand line"),
+    role: l("Supports demand pressure, open quantity, and demand-value proxy analysis.", "Soporta análisis de presión de demanda, cantidad abierta y proxy de valor de demanda."),
+  },
+  {
+    name: "fact_inventory_inbound",
+    grain: l("one row per approved inbound receipt event", "una fila por evento aprobado de receipt inbound"),
+    role: l("Supports the inbound side of the inventory loop, replenishment interpretation, and receipt-flow analysis.", "Soporta el lado inbound del ciclo de inventario, la interpretación de reposición y el análisis de flujo de receipts."),
+  },
+  {
+    name: "fact_inventory_snapshot",
+    grain: l("one row per product-location snapshot position", "una fila por posición de snapshot producto-ubicación"),
+    role: l("Supports inventory posture, availability, readiness, and exposure analysis.", "Soporta análisis de postura de inventario, disponibilidad, readiness y exposición."),
+  },
+];
+const businessQuestionMappings = [
+  {
+    question: l("Can the current inventory posture support expected demand without carrying unnecessary exposure?", "¿Puede la postura actual de inventario soportar la demanda esperada sin cargar exposición innecesaria?"),
+    entities: "fact_inventory_snapshot + fact_demand_line + dim_product + dim_inventory_location",
+    outputs: l("Open-demand coverage, service readiness, inventory exposure, recommended action", "Cobertura de demanda abierta, readiness de servicio, exposición de inventario, acción recomendada"),
+  },
+  {
+    question: l("How does inventory enter the bounded operating loop before it appears in the current snapshot?", "¿Cómo entra el inventario al ciclo operativo acotado antes de aparecer en el snapshot actual?"),
+    entities: "fact_inventory_inbound + dim_product + dim_inventory_location",
+    outputs: l("Approved inbound receipts, receipt-flow mix, replenishment context by family and node role", "Receipts inbound aprobados, mezcla de flujo de receipts, contexto de reposición por familia y rol de nodo"),
+  },
+  {
+    question: l("Where is demand pressure concentrated inside the modeled slice?", "¿Dónde se concentra la presión de demanda dentro del slice modelado?"),
+    entities: "fact_demand_line + dim_account + dim_product + dim_product_family",
+    outputs: l("Current-month pressure, open demand by customer group, open demand by product family", "Presión del mes actual, demanda abierta por grupo de clientes, demanda abierta por familia de producto"),
+  },
+  {
+    question: l("How current and trustworthy is the published case?", "¿Qué tan vigente y confiable es el caso publicado?"),
+    entities: "Fabric-derived serving extract + approved-package provenance across the seven published tables",
+    outputs: l("Last approved refresh, latest published reporting date, and current governed public-source guidance", "Último refresh aprobado, última fecha publicada de reporte y guía actual de fuente pública gobernada"),
+  },
+];
+const technicalEvidenceBundle = [
+  {
+    title: l("Architecture and boundary summary", "Resumen de arquitectura y boundary"),
+    coverage: l("Directly demonstrated", "Demostrado directamente"),
+    summary: l(
+      "The public route already exposes the approved source slice, the three-zone boundary, and the treatment model used to keep the case publishable.",
+      "La ruta pública ya expone el source slice aprobado, el boundary de tres zonas y el modelo de tratamiento usado para mantener publicable el caso.",
+    ),
+    references: [
+      "/technical-method#source-slice-heading",
+      "/technical-method#zone-boundary-heading",
+      "/technical-method#treatment-categories-heading",
+    ],
+  },
+  {
+    title: l("Model and grain summary", "Resumen de modelo y grano"),
+    coverage: l("Directly demonstrated", "Demostrado directamente"),
+    summary: l(
+      "The route names the seven-table analytical slice, states the three fact grains, and ties those entities to the business questions already answered on the case-study route.",
+      "La ruta nombra el slice analítico de siete tablas, declara los tres granos de hechos y conecta esas entidades con las preguntas de negocio ya respondidas en el caso.",
+    ),
+    references: [
+      "/technical-method#grain-heading",
+      "/technical-method#modeled-entities-heading",
+      "/technical-method#question-mapping-heading",
+    ],
+  },
+  {
+    title: l("Validation and promotion controls", "Controles de validación y promoción"),
+    coverage: l("Indirectly supported", "Soportado indirectamente"),
+    summary: l(
+      "The public method explains that candidate refreshes stop before promotion and that the shared surface reflects a bounded validation baseline instead of ad hoc release behavior.",
+      "El método público explica que los refreshes candidatos se detienen antes de la promoción y que la superficie compartida refleja una baseline de validación acotada en vez de comportamiento ad hoc de release.",
+    ),
+    references: [
+      "docs/automation/verification-baseline.md",
+      "docs/automation/publication-validation-flow.md",
+      "platform/fabric/contracts/candidate-validation-contract.md",
+      "platform/fabric/contracts/current-package-sync-contract.md",
+    ],
+  },
+  {
+    title: l("Release and package identity", "Identidad de release y paquete"),
+    coverage: l("Directly demonstrated", "Demostrado directamente"),
+    summary: l(
+      liveRuntimeRefreshLabel
+        ? `The active public source is ${releaseStatus.public_source.active_label}, versioned as ${publicationVersionLabel}, with latest approved input refresh ${loadTimestampLabel}, latest reconciled Fabric runtime refresh ${liveRuntimeRefreshLabel}, and latest published reporting date ${latestReportedLabel}. The extract manifest records derivation mode '${extractManifest.derivation_mode}' while the approved Bronze-input package remains visible as provenance.`
+        : `The active public source is ${releaseStatus.public_source.active_label}, versioned as ${publicationVersionLabel}, with latest approved input refresh ${loadTimestampLabel} and latest published reporting date ${latestReportedLabel}. The extract manifest records derivation mode '${extractManifest.derivation_mode}' while the approved Bronze-input package remains visible as provenance.`,
+      liveRuntimeRefreshLabel
+        ? `La fuente pública activa es ${releaseStatus.public_source.active_label}, versionada como ${publicationVersionLabel}, con último refresh aprobado de input ${loadTimestampLabel}, último refresh reconciliado de runtime en Fabric ${liveRuntimeRefreshLabel} y última fecha publicada de reporte ${latestReportedLabel}. El manifest del extract registra el modo de derivación '${extractManifest.derivation_mode}' mientras el paquete aprobado de input Bronze permanece visible como proveniencia.`
+        : `La fuente pública activa es ${releaseStatus.public_source.active_label}, versionada como ${publicationVersionLabel}, con último refresh aprobado de input ${loadTimestampLabel} y última fecha publicada de reporte ${latestReportedLabel}. El manifest del extract registra el modo de derivación '${extractManifest.derivation_mode}' mientras el paquete aprobado de input Bronze permanece visible como proveniencia.`,
+    ),
+    references: [
+      "apps/public-site/src/data/public-serving/current",
+      "_bmad-output/test-artifacts/fabric-public-serving-extract/current",
+      "platform/fabric/contracts/public-serving-extract-contract.md",
+    ],
+  },
+  {
+    title: l("Bounded Fabric proof surface", "Superficie acotada de prueba en Fabric"),
+    coverage: l("Directly demonstrated", "Demostrado directamente"),
+    summary: l(
+      "A live report shell now exists in Fabric on top of the bounded Lakehouse and semantic model. The embed stays subordinate to the site instead of becoming a separate public BI portal.",
+      "Ahora existe un report shell en vivo en Fabric sobre el Lakehouse acotado y el semantic model. El embed se mantiene subordinado al sitio en vez de convertirse en un portal público de BI separado.",
+    ),
+    references: [
+      "_bmad-output/test-artifacts/fabric-proof/fab001/report-live/report-shell-report.json",
+      "_bmad-output/test-artifacts/fabric-proof/fab001/semantic-model-live/materialization-report.json",
+      "05-compat/contracts/fab001_fabric_build_runbook.md",
+    ],
+  },
+];
+const proofCoverageNotes = [
+  {
+    status: l("Directly demonstrated", "Demostrado directamente"),
+    detail: l(
+      "Approved package boundary, source-slice explanation, public-safe transformations, model grain, entity set, and business-question mapping are all visible on the current public route, together with the current-versus-target architecture distinction.",
+      "El boundary del paquete aprobado, la explicación del source slice, las transformaciones public-safe, el grano del modelo, el set de entidades y el mapeo de preguntas de negocio son visibles en la ruta pública actual, junto con la distinción entre arquitectura actual y objetivo.",
+    ),
+  },
+  {
+    status: l("Indirectly supported", "Soportado indirectamente"),
+    detail: l(
+      "Validation baseline, candidate-to-current promotion discipline, and release-governance posture are supported through governed contracts and automation references rather than a separate public operations console.",
+      "La baseline de validación, la disciplina de promoción candidate-to-current y la postura de gobernanza de release están soportadas mediante contratos gobernados y referencias de automatización, no mediante una consola pública separada de operaciones.",
+    ),
+  },
+  {
+    status: l("Intentionally deferred", "Intencionalmente diferido"),
+    detail: l(
+      "Richer Desktop-authored report layout, fuller release-operations proof, ontology work, and Fabric IQ exploration remain outside the current public proof and are called out as later work rather than implied current evidence.",
+      "Un layout de reporte más rico autorado en Desktop, una prueba más completa de release-operations, trabajo de ontología y exploración de Fabric IQ permanecen fuera de la prueba pública actual y se declaran como trabajo posterior en vez de presentarse como evidencia actual.",
+    ),
+  },
+];
+const evidenceBoundaryPolicy = [
+  {
+    classification: l("Public-proof", "Prueba pública"),
+    placement: l("Allowed directly on the public route or in a bounded public-proof package.", "Permitido directamente en la ruta pública o en un paquete acotado de prueba pública."),
+    examples: [
+      l("Fabric-derived serving extract and current public route data", "Serving extract derivado de Fabric y datos actuales de la ruta pública"),
+      l("Case-study and technical-method sections tied to approved data", "Secciones de caso y método técnico ligadas a datos aprobados"),
+      l("Governed schema, manifest, and contract references used as first-class proof", "Schema, manifest y referencias de contratos gobernados usados como prueba de primera clase"),
+    ],
+  },
+  {
+    classification: l("Public-safe operational", "Operación public-safe"),
+    placement: l("Allowed in repo-visible operational materials and bounded route references, but not treated as the public product itself.", "Permitido en materiales operativos visibles en repo y referencias acotadas de ruta, pero no tratado como el producto público en sí."),
+    examples: [
+      l("Verification baseline and publication-validation flow", "Verification baseline y flujo de validación de publicación"),
+      l("Candidate refresh reports and notebook-based inspection tools", "Reportes de refresh candidato y herramientas de inspección basadas en notebook"),
+      l("Governance notes that explain discipline without exposing delivery leverage", "Notas de gobernanza que explican disciplina sin exponer delivery leverage"),
+    ],
+  },
+  {
+    classification: l("Private-only", "Solo privado"),
+    placement: l("Excluded from the public route and from any public repo-visible package.", "Excluido de la ruta pública y de cualquier paquete público visible en repo."),
+    examples: [
+      l("Private-preparation materials and reconstruction aids", "Materiales de preparación privada y ayudas de reconstrucción"),
+      l("Client-delivery playbooks and reusable internal heuristics", "Playbooks de delivery a cliente y heurísticas internas reutilizables"),
+      l("Sensitive mappings, interpretation helpers, and internal-only leverage", "Mappings sensibles, helpers de interpretación y leverage solo interno"),
+    ],
+  },
+];
+const excludedAssetClasses = [
+  {
+    assetClass: l("Reusable internal playbooks", "Playbooks internos reutilizables"),
+    reason: l(
+      "They explain internal delivery leverage that is not required to prove the public analytical case.",
+      "Explican leverage interno de delivery que no se requiere para probar el caso analítico público.",
+    ),
+  },
+  {
+    assetClass: l("Client-delivery assets", "Activos de delivery a cliente"),
+    reason: l(
+      "They carry context, methods, and execution detail that belong to delivery work rather than public proof.",
+      "Cargan contexto, métodos y detalle de ejecución que pertenecen al trabajo de delivery y no a la prueba pública.",
+    ),
+  },
+  {
+    assetClass: l("Sensitive mappings and non-public working materials", "Mappings sensibles y materiales de trabajo no públicos"),
+    reason: l(
+      "They would reveal source interpretation choices and internal reconstruction logic that the public site is intentionally designed to avoid exposing.",
+      "Revelarían elecciones de interpretación de fuente y lógica interna de reconstrucción que el sitio público está diseñado deliberadamente para no exponer.",
+    ),
+  },
+  {
+    assetClass: l("Internal-only heuristics", "Heurísticas solo internas"),
+    reason: l(
+      "They may be useful in practice, but publishing them would overexpose the operating system behind the case instead of the bounded proof itself.",
+      "Pueden ser útiles en práctica, pero publicarlas sobreexpondría el sistema operativo detrás del caso en vez de la prueba acotada en sí.",
+    ),
+  },
+];
+
+const methodPanels = technicalMethodPageCopy.methodOverview.panels;
+
+const includedItems = [
+  l("Bounded serving-extract outputs and source-slice metadata that support the case-study slice", "Outputs del serving extract acotado y metadata del source slice que soportan el slice del caso"),
+  l("The public/private boundary used to prepare the shareable version", "El boundary público/privado usado para preparar la versión compartible"),
+  l("Validation, candidate, and approved-package discipline at a summary level", "Disciplina de validación, candidato y paquete aprobado a nivel de resumen"),
+  l("A bounded Power BI / Fabric report shell tied to the approved proof workspace", "Un report shell acotado de Power BI / Fabric ligado al workspace aprobado de prueba"),
+  l("A compact explanation of what the public model is trying to prove", "Una explicación compacta de lo que el modelo público intenta probar"),
+];
+
+const excludedItems = [
+  l("Full internal documentation archives", "Archivos completos de documentación interna"),
+  l("Sensitive source logic and raw private identifiers", "Lógica sensible de fuentes e identificadores privados raw"),
+  l("A complete certification-prep or Fabric feature catalog", "Un catálogo completo de preparación de certificación o features de Fabric"),
+  l("Every operational or governance artifact created during development", "Cada artefacto operativo o de gobernanza creado durante el desarrollo"),
+];
+const aliasRows = [
+  fabricProofAliases.workspace,
+  fabricProofAliases.lakehouse,
+  fabricProofAliases.semanticModel,
+  fabricProofAliases.report,
+  fabricProofAliases.notebook,
+];
+const synthesisViews = [
+  {
+    title: l("Boundary view", "Vista de boundary"),
+    prompt: l("What sits where?", "¿Qué se ubica dónde?"),
+    steps: [
+      l("Private preparation", "Preparación privada"),
+      l("Governed analytics", "Analítica gobernada"),
+      l("Public site", "Sitio público"),
+      l("Bounded Fabric proof", "Prueba acotada en Fabric"),
+    ],
+  },
+  {
+    title: l("Operating workflow", "Flujo operativo"),
+    prompt: l("How does the package move?", "¿Cómo se mueve el paquete?"),
+    steps: [
+      l("Seed archetypes", "Arquetipos seed"),
+      l("Generation controls", "Controles de generación"),
+      l("Approved Bronze input", "Input Bronze aprobado"),
+      l("Fabric Bronze", "Fabric Bronze"),
+      l("Fabric Silver", "Fabric Silver"),
+      l("Fabric Gold", "Fabric Gold"),
+      l("Public serving extract", "Extracto público"),
+      l("Semantic model", "Modelo semántico"),
+      l("Report shell", "Report shell"),
+    ],
+  },
+  {
+    title: l("Proof surface", "Superficie de prueba"),
+    prompt: l("Where should a reviewer look?", "¿Dónde debería mirar un reviewer?"),
+    steps: [
+      l("Landing", "Landing"),
+      l("Case study", "Caso"),
+      l("Technical method", "Método técnico"),
+      l("Bounded proof report", "Reporte acotado de prueba"),
+    ],
+  },
+];
+---
+
+<Layout
+  title={technicalMethodPageCopy.meta.title}
+  description={canonicalProductStatement}
+  routeLabel={technicalMethodPageCopy.meta.routeLabel}
+  routePurpose={technicalMethodPageCopy.meta.routePurpose}
+  pageHeading={technicalMethodPageCopy.meta.pageHeading}
+>
+  <section class="hero-grid" aria-label="Technical method overview">
+    <article class="hero-card hero-card--primary">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.hero.eyebrow} /></p>
+      <h2><BilingualText copy={technicalMethodPageCopy.hero.title} /></h2>
+      <p>
+        <BilingualText copy={canonicalProductStatement} />
+      </p>
+      <div class="hero-notes">
+        <p>
+          <BilingualText copy={technicalMethodPageCopy.hero.note} />
+        </p>
+      </div>
+    </article>
+
+    <aside class="hero-card">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.hero.whyItMattersEyebrow} /></p>
+      <p>
+        <BilingualText copy={technicalMethodPageCopy.hero.whyItMattersBody} />
+      </p>
+    </aside>
+  </section>
+
+  <section class="stats-grid" aria-label="Technical evidence snapshot">
+    {
+      evidenceStats.map((stat) => (
+        <article class="stat-card">
+          <p class="stat-label"><BilingualText copy={stat.label} /></p>
+          <p class="stat-value">{stat.value}</p>
+          <p class="stat-note"><BilingualText copy={stat.note} /></p>
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="method-section" aria-labelledby="method-panels-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.methodOverview.eyebrow} /></p>
+      <h2 id="method-panels-heading"><BilingualText copy={technicalMethodPageCopy.methodOverview.heading} /></h2>
+      <p>
+        <BilingualText copy={technicalMethodPageCopy.methodOverview.intro} />
+      </p>
+    </div>
+
+    <div class="panel-grid">
+      {
+        methodPanels.map((panel) => (
+          <article class="panel">
+            <h3><BilingualText copy={panel.title} /></h3>
+            <p><BilingualText copy={panel.body} /></p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="method-section" aria-labelledby="visual-synthesis-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.visualSynthesis.eyebrow} /></p>
+      <h2 id="visual-synthesis-heading"><BilingualText copy={technicalMethodPageCopy.visualSynthesis.heading} /></h2>
+      <p>
+        <BilingualText copy={technicalMethodPageCopy.visualSynthesis.intro} />
+      </p>
+    </div>
+
+    <div class="panel-grid">
+      {
+        synthesisViews.map((view) => (
+          <article class="panel">
+            <p class="stat-label"><BilingualText copy={view.title} /></p>
+            <h3><BilingualText copy={view.prompt} /></h3>
+            <div class="flow-strip" aria-label={view.title.en}>
+              {view.steps.map((step, index) => (
+                <>
+                  <span class="flow-step"><BilingualText copy={step} /></span>
+                  {index < view.steps.length - 1 ? <span class="flow-arrow" aria-hidden="true">→</span> : null}
+                </>
+              ))}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <OperatingWorkflowDiagram />
+  </section>
+
+  <section class="method-section" aria-labelledby="source-slice-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.sourceSlice.eyebrow} /></p>
+      <h2 id="source-slice-heading"><BilingualText copy={technicalMethodPageCopy.sourceSlice.heading} /></h2>
+      <p>
+        <BilingualText copy={technicalMethodPageCopy.sourceSlice.intro} />
+      </p>
+    </div>
+
+    <div class="panel-grid">
+      {
+        sourceSlice.map((item) => (
+          <article class="panel">
+            <p class="stat-label">{item.domain}</p>
+            <h3>{item.count}</h3>
+            <p>{item.purpose}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <article class="panel panel--muted">
+      <h2><BilingualText copy={technicalMethodPageCopy.sourceSlice.boundaryHeading} /></h2>
+      <p>
+        <BilingualText copy={l(`The published source families in this release are ${publishedSourceFamilies.join(", ")}. They are enough to support the current case-study question without implying that every adjacent operational source, exception path, or non-public working asset is exposed publicly.`, `Las familias fuente publicadas en este release son ${publishedSourceFamilies.join(", ")}. Son suficientes para sostener la pregunta actual del caso sin implicar que cada fuente operativa adyacente, exception path o asset de trabajo no público esté expuesto públicamente.`)} />
+      </p>
+    </article>
+  </section>
+
+  <section class="method-section" aria-labelledby="zone-boundary-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.zoneBoundary.eyebrow} /></p>
+      <h2 id="zone-boundary-heading"><BilingualText copy={technicalMethodPageCopy.zoneBoundary.heading} /></h2>
+      <p>
+        <BilingualText copy={technicalMethodPageCopy.zoneBoundary.intro} />
+      </p>
+    </div>
+
+    <div class="panel-grid">
+      {
+        zoneCards.map((card) => (
+          <article class="panel">
+            <h3><BilingualText copy={card.title} /></h3>
+            <p><BilingualText copy={card.detail} /></p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="method-section" aria-labelledby="treatment-categories-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.treatment.eyebrow} /></p>
+      <h2 id="treatment-categories-heading"><BilingualText copy={technicalMethodPageCopy.treatment.heading} /></h2>
+      <p>
+        <BilingualText copy={technicalMethodPageCopy.treatment.intro} />
+      </p>
+    </div>
+
+    <div class="panel-grid">
+      {
+        treatmentCategories.map((item) => (
+          <article class="panel">
+            <p class="stat-label"><BilingualText copy={item.title} /></p>
+            <h3><BilingualText copy={item.summary} /></h3>
+            <p><BilingualText copy={item.detail} /></p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="method-section" aria-labelledby="example-transformations-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.exampleTransformations.eyebrow} /></p>
+      <h2 id="example-transformations-heading"><BilingualText copy={technicalMethodPageCopy.exampleTransformations.heading} /></h2>
+      <p>
+        <BilingualText copy={technicalMethodPageCopy.exampleTransformations.intro} />
+      </p>
+    </div>
+
+    <div class="panel-grid">
+      {
+        exampleTransformations.map((item) => (
+          <article class="panel">
+            <p class="stat-label"><BilingualText copy={item.source} /></p>
+            <h3>{item.publicForm}</h3>
+            <p><BilingualText copy={item.preservedMeaning} /></p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="method-section" aria-labelledby="simplifications-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.simplifications.eyebrow} /></p>
+      <h2 id="simplifications-heading"><BilingualText copy={technicalMethodPageCopy.simplifications.heading} /></h2>
+      <p>
+        <BilingualText copy={technicalMethodPageCopy.simplifications.intro} />
+      </p>
+    </div>
+
+    <article class="panel panel--muted">
+      <ul class="signal-list">
+        {simplifications.map((item) => <li><BilingualText copy={item} /></li>)}
+      </ul>
+    </article>
+  </section>
+
+  <section class="method-section" aria-labelledby="grain-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.grain.eyebrow} /></p>
+      <h2 id="grain-heading"><BilingualText copy={technicalMethodPageCopy.grain.heading} /></h2>
+      <p>
+        <BilingualText copy={technicalMethodPageCopy.grain.intro} />
+      </p>
+    </div>
+
+    <article class="panel panel--muted">
+      <ul class="signal-list">
+        {grainStatements.map((item) => <li><BilingualText copy={item} /></li>)}
+      </ul>
+    </article>
+  </section>
+
+  <section class="method-section" aria-labelledby="modeled-entities-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.modeledEntities.eyebrow} /></p>
+      <h2 id="modeled-entities-heading"><BilingualText copy={technicalMethodPageCopy.modeledEntities.heading} /></h2>
+      <p>
+        <BilingualText copy={technicalMethodPageCopy.modeledEntities.intro} />
+      </p>
+    </div>
+
+    <div class="panel-grid">
+      {
+        modeledEntities.map((item) => (
+          <article class="panel">
+            <p class="stat-label">{item.name}</p>
+            <h3><BilingualText copy={item.grain} /></h3>
+            <p><BilingualText copy={item.role} /></p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="method-section" aria-labelledby="question-mapping-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.questionMapping.eyebrow} /></p>
+      <h2 id="question-mapping-heading"><BilingualText copy={technicalMethodPageCopy.questionMapping.heading} /></h2>
+      <p>
+        <BilingualText copy={technicalMethodPageCopy.questionMapping.intro} />
+      </p>
+    </div>
+
+    <div class="panel-grid">
+      {
+        businessQuestionMappings.map((item) => (
+          <article class="panel">
+            <p class="stat-label"><BilingualText copy={l("Business question", "Pregunta de negocio")} /></p>
+            <h3><BilingualText copy={item.question} /></h3>
+            <p><strong><BilingualText copy={l("Entities:", "Entidades:")} /></strong> {item.entities}</p>
+            <p><strong><BilingualText copy={l("Published outputs:", "Outputs publicados:")} /></strong> <BilingualText copy={item.outputs} /></p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="method-section" aria-labelledby="technical-evidence-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.technicalEvidence.eyebrow} /></p>
+      <h2 id="technical-evidence-heading"><BilingualText copy={technicalMethodPageCopy.technicalEvidence.heading} /></h2>
+      <p>
+        <BilingualText copy={technicalMethodPageCopy.technicalEvidence.intro} />
+      </p>
+    </div>
+
+    <div class="panel-grid">
+      {
+        technicalEvidenceBundle.map((item) => (
+          <article class="panel">
+            <p class="stat-label"><BilingualText copy={item.coverage} /></p>
+            <h3><BilingualText copy={item.title} /></h3>
+            <p><BilingualText copy={item.summary} /></p>
+            <ul class="reference-list">
+              {item.references.map((reference) => <li><code>{reference}</code></li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <article class="panel panel--muted">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.proofCoverage.eyebrow} /></p>
+      <ul class="signal-list">
+        {
+          proofCoverageNotes.map((item) => (
+            <li><strong><BilingualText copy={item.status} /></strong>: <BilingualText copy={item.detail} /></li>
+          ))
+        }
+      </ul>
+    </article>
+  </section>
+
+  <section class="method-section" aria-labelledby="boundary-policy-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.boundedProof.eyebrow} /></p>
+      <h2 id="bounded-proof-heading"><BilingualText copy={technicalMethodPageCopy.boundedProof.heading} /></h2>
+      <p>
+        <BilingualText copy={technicalMethodPageCopy.boundedProof.intro} />
+      </p>
+    </div>
+
+    <BoundedPowerBIProof />
+  </section>
+
+  <section class="method-section" aria-labelledby="proof-naming-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.proofNaming.eyebrow} /></p>
+      <h2 id="proof-naming-heading"><BilingualText copy={technicalMethodPageCopy.proofNaming.heading} /></h2>
+      <p>
+        <BilingualText copy={l("The live technical identifiers remain the source of truth for automation. The aliases below make the proof easier to read in public and interview-facing contexts without renaming the Fabric assets themselves.", "Los identificadores técnicos live siguen siendo la fuente de verdad para la automatización. Los aliases de abajo hacen la prueba más fácil de leer en contextos públicos y de entrevista sin renombrar los assets de Fabric en sí.")} />
+      </p>
+    </div>
+
+    <div class="panel-grid">
+      {
+        aliasRows.map((item) => (
+          <article class="panel">
+            <p class="stat-label">{item.alias}</p>
+            <h3><code>{item.technical}</code></h3>
+            <p>{item.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="method-section" aria-labelledby="boundary-policy-heading">
+    <div class="section-heading">
+      <p class="eyebrow"><BilingualText copy={technicalMethodPageCopy.evidenceBoundary.eyebrow} /></p>
+      <h2 id="boundary-policy-heading"><BilingualText copy={technicalMethodPageCopy.evidenceBoundary.heading} /></h2>
+      <p>
+        <BilingualText copy={l("The public site should show enough to earn trust, not the whole operating system behind the work. This policy keeps the visible proof rigorous while leaving sensitive prep materials, delivery leverage, and internal-only heuristics outside the public boundary.", "El sitio público debe mostrar lo suficiente para ganar confianza, no todo el sistema operativo detrás del trabajo. Esta política mantiene rigurosa la prueba visible y deja fuera del boundary público materiales sensibles de preparación, delivery leverage y heurísticas solo internas.")} />
+      </p>
+    </div>
+
+    <div class="panel-grid">
+      {
+        evidenceBoundaryPolicy.map((item) => (
+          <article class="panel">
+            <p class="stat-label"><BilingualText copy={item.classification} /></p>
+            <h3><BilingualText copy={item.placement} /></h3>
+            <ul class="signal-list">
+              {item.examples.map((example) => <li><BilingualText copy={example} /></li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <article class="panel panel--muted">
+      <p class="eyebrow"><BilingualText copy={l("Intentionally excluded asset classes", "Clases de activos excluidas intencionalmente")} /></p>
+      <ul class="signal-list">
+        {
+          excludedAssetClasses.map((item) => (
+            <li><strong><BilingualText copy={item.assetClass} /></strong>: <BilingualText copy={item.reason} /></li>
+          ))
+        }
+      </ul>
+      <p>
+        <BilingualText copy={l("Canonical policy reference:", "Referencia canónica de política:")} />{" "}
+        <code>docs/automation/public-evidence-boundary-policy.md</code>
+      </p>
+    </article>
+  </section>
+
+  <section class="boundary-grid" aria-label="Included and excluded evidence">
+    <article class="panel">
+      <h2><BilingualText copy={l("Included in Phase 1", "Incluido en Fase 1")} /></h2>
+      <ul class="signal-list">
+        {includedItems.map((item) => <li><BilingualText copy={item} /></li>)}
+      </ul>
+    </article>
+
+    <article class="panel panel--muted">
+      <h2><BilingualText copy={l("Intentionally left out", "Intencionalmente dejado fuera")} /></h2>
+      <ul class="signal-list">
+        {excludedItems.map((item) => <li><BilingualText copy={item} /></li>)}
+      </ul>
+    </article>
+  </section>
+
+  <section class="panel panel--cta" aria-label="Learn more">
+    <h2><BilingualText copy={technicalMethodPageCopy.cta.heading} /></h2>
+    <p>
+      <BilingualText copy={technicalMethodPageCopy.cta.body} />
+    </p>
+    <div class="cta-row">
+      <a class="cta-link" href="/case-study"><BilingualText copy={technicalMethodPageCopy.cta.primary} /></a>
+      <a class="cta-link" href="/contact"><BilingualText copy={technicalMethodPageCopy.cta.secondary} /></a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero-grid,
+  .stats-grid,
+  .panel-grid,
+  .boundary-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .hero-card,
+  .stat-card,
+  .panel {
+    padding: 1.2rem;
+    border-radius: 22px;
+    background: rgba(255, 253, 248, 0.92);
+    border: 1px solid rgba(30, 38, 48, 0.1);
+  }
+
+  .hero-card--primary {
+    background:
+      linear-gradient(135deg, rgba(13, 116, 100, 0.12), transparent 72%),
+      rgba(255, 253, 248, 0.96);
+  }
+
+  .eyebrow,
+  .stat-label {
+    margin: 0 0 0.5rem;
+    color: #0d7464;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .hero-card h2,
+  .section-heading h2,
+  .panel h2,
+  .panel h3 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+    line-height: 1.2;
+  }
+
+  .hero-card p,
+  .section-heading p,
+  .stat-note,
+  .panel p,
+  .signal-list,
+  .reference-list {
+    margin: 0;
+    color: #5c6a79;
+    line-height: 1.65;
+  }
+
+  .hero-notes {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(30, 38, 48, 0.09);
+  }
+
+  .stat-card {
+    display: grid;
+    gap: 0.55rem;
+    align-content: start;
+  }
+
+  .stat-value {
+    margin: 0;
+    color: #1e2630;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  .section-heading {
+    display: grid;
+    gap: 0.55rem;
+    margin-bottom: 1rem;
+  }
+
+  .panel h3 {
+    margin: 0 0 0.6rem;
+    font-size: 1.05rem;
+    color: #1e2630;
+  }
+
+  .signal-list {
+    padding-left: 1.2rem;
+  }
+
+  .signal-list li + li {
+    margin-top: 0.55rem;
+  }
+
+  .reference-list {
+    margin-top: 0.9rem;
+    padding-left: 1.2rem;
+  }
+
+  .reference-list li + li {
+    margin-top: 0.4rem;
+  }
+
+  .reference-list code {
+    font-size: 0.85rem;
+    word-break: break-word;
+  }
+
+  .flow-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    align-items: center;
+  }
+
+  .flow-step {
+    padding: 0.45rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(13, 116, 100, 0.08);
+    color: #1e2630;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .flow-arrow {
+    color: #0d7464;
+    font-weight: 700;
+  }
+
+  .panel--muted {
+    background: rgba(13, 116, 100, 0.08);
+  }
+
+  .panel--cta {
+    margin-top: 1rem;
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 1rem;
+  }
+
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    color: #1e2630;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .cta-link:hover,
+  .cta-link:focus-visible {
+    color: #0d7464;
+  }
+
+  @media (min-width: 760px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.85fr);
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .panel-grid,
+    .boundary-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

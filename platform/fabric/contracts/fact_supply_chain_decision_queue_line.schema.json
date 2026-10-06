@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fact_supply_chain_decision_queue_line",
+  "description": "Recommendation queue for bounded supply-chain replenishment decisions before execution.",
+  "type": "array",
+  "x-grain": "One row per supply-chain recommendation line.",
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "supply_chain_decision_line_sk",
+        "decision_date",
+        "decision_type_code",
+        "recommendation_status_code",
+        "product_sk",
+        "receiving_inventory_location_sk",
+        "recommended_qty",
+        "decision_reason_code",
+        "source_file_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "supply_chain_decision_line_sk": {
+          "type": "string",
+          "pattern": "^SCQ_SK_[A-F0-9]{12}$"
+        },
+        "decision_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "decision_type_code": {
+          "type": "string",
+          "enum": [
+            "PURCHASE_ORDER",
+            "HOLD",
+            "MONITOR",
+            "UNKNOWN"
+          ]
+        },
+        "recommendation_status_code": {
+          "type": "string",
+          "enum": [
+            "RECOMMENDED",
+            "APPROVED",
+            "REJECTED",
+            "DEFERRED",
+            "SUPERSEDED",
+            "UNKNOWN"
+          ]
+        },
+        "product_sk": {
+          "type": "string",
+          "pattern": "^PRD_SK_[A-F0-9]{12}$"
+        },
+        "receiving_inventory_location_sk": {
+          "type": "string",
+          "pattern": "^LOC_SK_[A-F0-9]{12}$"
+        },
+        "supplier_sk": {
+          "type": "string",
+          "pattern": "^SUP_SK_[A-F0-9]{12}$"
+        },
+        "recommended_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "approved_qty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "planned_order_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "expected_receipt_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "cost_amount_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "decision_reason_code": {
+          "type": "string",
+          "enum": [
+            "OPEN_DEMAND_PRESSURE",
+            "READINESS_RISK",
+            "COVERAGE_SHORTFALL",
+            "POLICY_REPLENISHMENT",
+            "MONITOR_ONLY",
+            "UNKNOWN"
+          ]
+        },
+        "source_file_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
+

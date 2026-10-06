@@ -1,0 +1,58 @@
+[
+  {
+    "pricing_context_sk": "PRC_SK_3D9DE6181CA0",
+    "customer_group": "Channel Support",
+    "account_pattern_class": "PARTNER_CHANNEL",
+    "channel_code": "PARTNER_RESALE",
+    "market_region_code": "MX_PUBLIC",
+    "pricing_tier_code": "CHANNEL_SUPPORT",
+    "price_context_uplift_pct": -0.035,
+    "bounded_discount_rate_pct": 0.07,
+    "currency_code": "USD",
+    "foundation_version": "financial_foundation_r1",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "pricing_context_sk": "PRC_SK_643DCD465B5A",
+    "customer_group": "Field Service",
+    "account_pattern_class": "RECURRING_SERVICE",
+    "channel_code": "DIRECT_SERVICE",
+    "market_region_code": "MX_PUBLIC",
+    "pricing_tier_code": "SERVICE_PRIORITY",
+    "price_context_uplift_pct": 0.015,
+    "bounded_discount_rate_pct": 0.02,
+    "currency_code": "USD",
+    "foundation_version": "financial_foundation_r1",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "pricing_context_sk": "PRC_SK_8996F8D02186",
+    "customer_group": "Legacy Coverage",
+    "account_pattern_class": "UNKNOWN",
+    "channel_code": "LEGACY_SUPPORT",
+    "market_region_code": "MX_PUBLIC",
+    "pricing_tier_code": "LEGACY_MAINTAIN",
+    "price_context_uplift_pct": 0,
+    "bounded_discount_rate_pct": 0.01,
+    "currency_code": "USD",
+    "foundation_version": "financial_foundation_r1",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  },
+  {
+    "pricing_context_sk": "PRC_SK_1849B83E9FE8",
+    "customer_group": "Project Delivery",
+    "account_pattern_class": "PROJECT_BASED",
+    "channel_code": "PROJECT_DIRECT",
+    "market_region_code": "MX_PUBLIC",
+    "pricing_tier_code": "PROJECT_PROGRAM",
+    "price_context_uplift_pct": -0.015,
+    "bounded_discount_rate_pct": 0.04,
+    "currency_code": "USD",
+    "foundation_version": "financial_foundation_r1",
+    "publication_safety_flag": "publication_safe",
+    "load_timestamp_utc": "2026-04-14T23:59:00.000Z"
+  }
+]

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dim_pricing_context",
+  "description": "Bounded public-safe pricing context dimension for the financial analytics foundation.",
+  "type": "array",
+  "x-grain": "One row per bounded pricing context used for effective-dated list-price history.",
+  "items": {
+    "$ref": "#/$defs/row"
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": [
+        "pricing_context_sk",
+        "customer_group",
+        "account_pattern_class",
+        "channel_code",
+        "market_region_code",
+        "pricing_tier_code",
+        "currency_code",
+        "foundation_version",
+        "publication_safety_flag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "pricing_context_sk": {
+          "type": "string",
+          "pattern": "^PRC_SK_[A-F0-9]{12}$"
+        },
+        "customer_group": {
+          "type": "string",
+          "minLength": 1
+        },
+        "account_pattern_class": {
+          "type": "string",
+          "enum": [
+            "RECURRING_SERVICE",
+            "PROJECT_BASED",
+            "PARTNER_CHANNEL",
+            "UNKNOWN"
+          ]
+        },
+        "channel_code": {
+          "type": "string",
+          "enum": [
+            "DIRECT_SERVICE",
+            "PROJECT_DIRECT",
+            "PARTNER_RESALE",
+            "LEGACY_SUPPORT",
+            "GENERAL_ACCOUNT"
+          ]
+        },
+        "market_region_code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pricing_tier_code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "price_context_uplift_pct": {
+          "type": "number"
+        },
+        "bounded_discount_rate_pct": {
+          "type": "number",
+          "minimum": 0
+        },
+        "currency_code": {
+          "type": "string",
+          "enum": [
+            "USD"
+          ]
+        },
+        "foundation_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_safety_flag": {
+          "type": "string",
+          "enum": [
+            "publication_safe"
+          ]
+        },
+        "load_timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

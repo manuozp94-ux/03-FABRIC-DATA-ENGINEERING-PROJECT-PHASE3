@@ -1,0 +1,59 @@
+{
+  "pipeline": {
+    "name": "pl_fab001_runtime_orchestration",
+    "description": "Bounded Fabric-native orchestration for the FAB001 proof path. Runs the loader notebook after repo-side approval and keeps runtime governance inside the platform.",
+    "definition_path": "pipeline-content.json",
+    "activity_name": "RunFabricProofNotebook",
+    "session_tag": "fab001-runtime-orchestration"
+  },
+  "runtime_sequence": [
+    {
+      "stage": "approved_bronze_input",
+      "description": "Repo-side approval has already promoted the bounded raw-like Bronze input package."
+    },
+    {
+      "stage": "fabric_bronze_landing",
+      "description": "Fabric lands the approved Bronze input from OneLake Files into Delta tables."
+    },
+    {
+      "stage": "fabric_silver_conformance",
+      "description": "The loader notebook cleans, normalizes, and conforms the Bronze input inside Fabric Silver."
+    },
+    {
+      "stage": "fabric_gold_serving",
+      "description": "The loader notebook derives bounded Gold serving tables downstream of Silver."
+    },
+    {
+      "stage": "public_serving_extract_status",
+      "description": "Runtime governance records whether a bounded Fabric public serving extract was produced."
+    },
+    {
+      "stage": "runtime_governance_capture",
+      "description": "The governance notebook materializes control-table evidence inside the Lakehouse."
+    }
+  ],
+  "loader_notebook": {
+    "name": "nb_fab001_lakehouse_loader"
+  },
+  "public_serving_extract": {
+    "current_state": "fabric_serving_extract",
+    "fallback_state": "repo_mirror_transitional",
+    "target_state": "fabric_serving_extract",
+    "default_status": "not_materialized",
+    "description": "The active public-site source is the bounded Fabric serving extract. Runtime orchestration must still record serving-extract status and retain repo_mirror_transitional only as an honest fallback when no extract evidence is available."
+  },
+  "governance_notebook": {
+    "name": "nb_fab001_runtime_governance",
+    "description": "Materialize bounded runtime governance control tables inside the FAB001 Lakehouse.",
+    "remote_root": "Files/fab001/current/runtime-governance/current"
+  },
+  "runtime_governance": {
+    "remote_root": "Files/fab001/current/runtime-governance/current",
+    "tables": [
+      "ctrl_release_registry",
+      "ctrl_last_known_good",
+      "ctrl_runtime_job_history",
+      "ctrl_asset_refresh_history"
+    ]
+  }
+}

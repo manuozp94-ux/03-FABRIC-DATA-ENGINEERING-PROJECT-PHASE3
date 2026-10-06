@@ -1,0 +1,131 @@
+table gold_supply_chain_action_queue
+	lineageTag: a5abc22c-0ad6-4ff8-9d56-df8d1af01cbf
+	sourceLineageTag: [dbo].[gold_supply_chain_action_queue]
+
+	column product_code
+		dataType: string
+		lineageTag: 6215f5c3-ec58-4197-9355-5a71f7d425cf
+		sourceLineageTag: product_code
+		summarizeBy: none
+		sourceColumn: product_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		lineageTag: 1405e497-5f5e-4eb7-9e53-8db684cf2aab
+		sourceLineageTag: product_name
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_family_name
+		dataType: string
+		lineageTag: f996b5d0-54fb-4180-b41f-a4d637ad5915
+		sourceLineageTag: product_family_name
+		summarizeBy: none
+		sourceColumn: product_family_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_name
+		dataType: string
+		lineageTag: 3fbc150a-3fa3-40e3-813e-672c14130c3e
+		sourceLineageTag: location_name
+		summarizeBy: none
+		sourceColumn: location_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column node_type_code
+		dataType: string
+		lineageTag: 4864fdf2-f351-4515-add1-482da01c85d0
+		sourceLineageTag: node_type_code
+		summarizeBy: none
+		sourceColumn: node_type_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column inventory_policy_class
+		dataType: string
+		lineageTag: 0c0b592b-373f-444b-ade0-684c0c59b4ee
+		sourceLineageTag: inventory_policy_class
+		summarizeBy: none
+		sourceColumn: inventory_policy_class
+
+		annotation SummarizationSetBy = Automatic
+
+	column lead_time_band
+		dataType: string
+		lineageTag: 35a88e81-eb6f-404a-b808-2522b3a11526
+		sourceLineageTag: lead_time_band
+		summarizeBy: none
+		sourceColumn: lead_time_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column readiness_flag
+		dataType: string
+		lineageTag: 574bb75d-59f3-4a67-a848-9bf285311ba3
+		sourceLineageTag: readiness_flag
+		summarizeBy: none
+		sourceColumn: readiness_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_status
+		dataType: string
+		lineageTag: a659467f-197a-4b96-9099-69d45f70d06a
+		sourceLineageTag: action_status
+		summarizeBy: none
+		sourceColumn: action_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column available_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 632a2f9d-de70-47f8-bef2-29e65ec85119
+		sourceLineageTag: available_qty
+		summarizeBy: sum
+		sourceColumn: available_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column inventory_value_proxy
+		dataType: int64
+		formatString: 0
+		lineageTag: b438a3fd-037b-4bb2-a8de-a1b9852c808d
+		sourceLineageTag: inventory_value_proxy
+		summarizeBy: sum
+		sourceColumn: inventory_value_proxy
+
+		annotation SummarizationSetBy = Automatic
+
+	column network_open_demand_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 4291b4ac-eaea-4ebc-b61a-f2340f1b7fe4
+		sourceLineageTag: network_open_demand_qty
+		summarizeBy: sum
+		sourceColumn: network_open_demand_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column network_open_demand_value_proxy
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ac8b437-de5d-4e74-9d33-5cd854bc8456
+		sourceLineageTag: network_open_demand_value_proxy
+		summarizeBy: sum
+		sourceColumn: network_open_demand_value_proxy
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_supply_chain_action_queue = entity
+		mode: directLake
+		source
+			entityName: gold_supply_chain_action_queue
+			expressionSource: 'DirectLake - lh_fab001_public_proof'
+
